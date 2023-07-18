@@ -34,7 +34,6 @@ migrate document SomeDocument to SomeSchema {
     from old_field2 to new_field2;
 };
 
-
 -- 7. INSERT ------------------------------------------------------------------
 insert into table SomeTable
 fields {
