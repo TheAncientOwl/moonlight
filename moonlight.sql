@@ -36,23 +36,19 @@ migrate document SomeDocument to SomeSchema {
 
 -- 7. INSERT ------------------------------------------------------------------
 insert into table SomeTable
-fields {
-    field1, field2, field3
-}
-values {
+fields ( field1, field2, field3 )
+values [
     ("value11", "value12", "value13");
     ("value21", "value22", "value23");
-};
+];
 
 -- --------------------------------------------------
 insert into document SomeDocument
-fields {
-    field1, field2, field3, other_field(String[25])
-}
-values {
+fields ( field1, field2, field3, other_field is String[25] default "some-value" )
+values [
     ("value11", "value12", "value13", "value14");
     ("value21", "value22", "value23", "value24");
-};
+];
 
 -- 8. SCHEMA --------------------------------------------------------------    
 schema SomeSchema inherits SomeOtherSchema {
@@ -60,7 +56,8 @@ schema SomeSchema inherits SomeOtherSchema {
     DateTime date_field;
     Decimal[32, false] decimal_field(46);
     Integer[32, false] integer_field(46);
-    Reference[StructureName] reference_field;
+    Reference[SomeSchema2] reference_field;
+    List[PetSchema] pets;
 
     Check email like "*@*.*";
     Check length(cnp) = 13;
@@ -72,43 +69,29 @@ schema SomeSchema inherits SomeOtherSchema {
 
 -- 9. DELETE ------------------------------------------------------------------
 delete from SomeStructure 
-where {
-    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
-};
+where rid = 11 or (rid >= 2 and 5 <= rid or salary < 5000) or rid = 9 or rid = 120;
 
 -- 10. UPDATE ------------------------------------------------------------------
 update SomeStructure
-set {
-    field1 to field1 * 1.5 + 2;
-    field2 to 3;
-}
-where {
-    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
-};
+set (
+    field1 to field1 * 1.5 + 2,
+    field2 to 3,
+)
+where rid = 11 or (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120;
 
 -- 11. SELECT -----------------------------------------------------------------
-select {
-    s1.field1 as Field1,
-    s2.field2 as Field2,
-    s3.field3
-}
-from {
-    Structure1 s1,
-    Structure2 s2,
-    Structure3 s3
-}
-join {
-    s1 -> s2 on reference_field,
-    s2 -> s3 on reference_field,
-    s3 -> s1 on reference_field,
-}
-where {
-    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
-}
-order by {
+select ( s1.field1 as Field1, s2.field2 as Field2, s3.field3 )
+from ( Structure1 s1, Structure2 s2, Structure3 s3 )
+join (
+    s1 -> s2 on reference_field12,
+    s2 -> s3 on reference_field23,
+    s3 -> s1 on reference_field31,
+)
+where rid = 11 or (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
+order by (
     s1.some_field asc,
     s2.some_field desc,
-};
+);
 
 -- 12. VIEW -------------------------------------------------------------------
 create or replace view SomeView as
