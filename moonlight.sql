@@ -48,7 +48,7 @@ set {
     field2 to 3;
 }
 where {
-    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 ord rid = 120
+    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
 };
 
 -- 7. INSERT ------------------------------------------------------------------
