@@ -1,18 +1,6 @@
--- 1. SCHEMA --------------------------------------------------------------    
-schema SomeSchema inherits SomeOtherSchema {
-    String[30] string_field ("SomeName");
-    DateTime date_field;
-    Decimal[32, false] decimal_field(46);
-    Integer[32, false] integer_field(46);
-    Reference[StructureName] reference_field;
-
-    Check email like "*@*.*";
-    Check length(cnp) = 13;
-
-    Unique cnp;
-
-    Not null cnp;
-};
+-- 1. DROP --------------------------------------------------------------------
+drop SomeStructure;
+drop SomeStructure cascade references;
 
 -- 2. CREATE ------------------------------------------------------------------
 create table SomeTable based on SomeSchema;
@@ -20,11 +8,22 @@ create volatile table SomeVolatileTable based on SomeSchema;
 create document SomeDocument based on SomeSchema;
 create volatile document SomeVolatileDocument based on SomeSchema;
 
--- 3. DROP --------------------------------------------------------------------
-drop SomeStructure;
-drop SomeStructure cascade references;
+-- 3. RENAME ------------------------------------------------------------------
+rename database SomeDatabaseOld to SomeDatabaseNew;
+rename structure SomeStructureOld to SomeStructureNew;
+rename field SomeSchema.some_field_old to SomeSchema.some_field_new;
+rename schema SomeSchemaOld to SomeSchemaNew;
 
--- 4. MIGRATE -----------------------------------------------------------------
+-- 4. DATABASE ----------------------------------------------------------------
+database create SomeDatabase;
+database drop SomeDatabase;
+database backup SomeDatabase to disk "/home/user/lunardb";
+database backup SomeDatabase to disk "/home/user/lunardb" with differential;
+
+-- 5. INDEX -------------------------------------------------------------------
+unique index Field1Field2Index on SomeStructure (field1, field2);
+
+-- 6. MIGRATE -----------------------------------------------------------------
 migrate table SomeTable to SomeSchema {
     from old_field1 to new_field1;
     from old_field2 to new_field2;
@@ -35,21 +34,6 @@ migrate document SomeDocument to SomeSchema {
     from old_field2 to new_field2;
 };
 
--- 5. DELETE ------------------------------------------------------------------
-delete from SomeStructure 
-where {
-    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
-};
-
--- 6. UPDATE ------------------------------------------------------------------
-update SomeStructure
-set {
-    field1 to field1 * 1.5 + 2;
-    field2 to 3;
-}
-where {
-    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
-};
 
 -- 7. INSERT ------------------------------------------------------------------
 insert into table SomeTable
@@ -71,20 +55,37 @@ values {
     ("value21", "value22", "value23", "value24");
 };
 
--- 8. INDEX -------------------------------------------------------------------
-unique index Field1Field2Index on SomeStructure (field1, field2);
+-- 8. SCHEMA --------------------------------------------------------------    
+schema SomeSchema inherits SomeOtherSchema {
+    String[30] string_field ("SomeName");
+    DateTime date_field;
+    Decimal[32, false] decimal_field(46);
+    Integer[32, false] integer_field(46);
+    Reference[StructureName] reference_field;
 
--- 9. DATABASE ----------------------------------------------------------------
-database create SomeDatabase;
-database drop SomeDatabase;
-database backup SomeDatabase to disk "/home/user/lunardb";
-database backup SomeDatabase to disk "/home/user/lunardb" with differential;
+    Check email like "*@*.*";
+    Check length(cnp) = 13;
 
--- 10. RENAME -----------------------------------------------------------------
-rename database SomeDatabaseOld to SomeDatabaseNew;
-rename structure SomeStructureOld to SomeStructureNew;
-rename field SomeSchema.some_field_old to SomeSchema.some_field_new;
-rename schema SomeSchemaOld to SomeSchemaNew;
+    Unique cnp;
+
+    Not null cnp;
+};
+
+-- 9. DELETE ------------------------------------------------------------------
+delete from SomeStructure 
+where {
+    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
+};
+
+-- 10. UPDATE ------------------------------------------------------------------
+update SomeStructure
+set {
+    field1 to field1 * 1.5 + 2;
+    field2 to 3;
+}
+where {
+    (rid >= 2 and 5 >= rid or salary < 5000) or rid = 9 or rid = 120
+};
 
 -- 11. SELECT -----------------------------------------------------------------
 select {
