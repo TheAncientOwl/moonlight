@@ -1,0 +1,52 @@
+#pragma once
+
+#include <string>
+
+#define MOONLIGHT_PRIMITIVE(name, ...) \
+namespace name { \
+    enum class Literal : std::uint8_t \
+    { \
+        __VA_ARGS__ \
+    }; \
+    std::string parse(Literal primitive); \
+    Literal parse(std::string str); \
+} \
+using E ## name = name::Literal;
+
+namespace Moonlight::Primitives {
+
+MOONLIGHT_PRIMITIVE(StructureType,
+    Undefined = 0,
+    Table = 1,
+    Document = 2
+)
+
+MOONLIGHT_PRIMITIVE(StructureRenameType,
+    Undefined = 0,
+    Structure = 1,
+    Field = 2
+)
+
+MOONLIGHT_PRIMITIVE(DatabaseOperationType,
+    Undefined = 0,
+    Create = 1,
+    Drop = 2,
+    Backup = 3
+)
+
+MOONLIGHT_PRIMITIVE(DataType,
+    Undefined = 0,
+    String = 1,
+    Decimal = 2,
+    Integer = 3,
+    DateTime = 4,
+    Reference = 5
+)
+
+MOONLIGHT_PRIMITIVE(SelectSortType,
+    Undefined = 0,
+    Asc = 1,
+    Desc = 2
+)
+
+} // namespace Moonlight::Primitives

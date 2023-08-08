@@ -1,0 +1,109 @@
+#include "Primitives.hpp"
+
+#include <cctype>
+#include <algorithm>
+#include <stdexcept>
+#include <vector>
+
+#define MOONLIGHT_PRIMITIVE_PARSER(name, ...) \
+namespace name { \
+    Helpers::LiteralToStringMap<Literal> map{ { \
+        __VA_ARGS__ \
+    } };\
+    std::string parse(Literal literal) { return map.findByLiteral(literal); } \
+    Literal parse(std::string str) { return map.findByString(str); } \
+}
+
+namespace Moonlight::Primitives {
+
+namespace Helpers {
+
+template<typename Literal>
+class LiteralToStringMap
+{
+public:
+    static_assert(std::is_enum<Literal>());
+
+    using container = std::vector<std::pair<Literal, std::string>>;
+
+public:
+    LiteralToStringMap(container data);
+    std::string findByLiteral(Literal literal);
+    Literal findByString(std::string str);
+
+private:
+    container m_data;
+};
+
+template<typename Literal>
+LiteralToStringMap<Literal>::LiteralToStringMap(LiteralToStringMap<Literal>::container data)
+    : m_data(std::move(data))
+{}
+
+template<typename Literal>
+std::string LiteralToStringMap<Literal>::findByLiteral(Literal literal)
+{
+    const auto it = std::find_if(m_data.begin(), m_data.end(),
+        [literal](const auto& value) {
+            return value.first == literal;
+        });
+
+    if (it == m_data.end())
+        throw std::runtime_error("Cannot parse primitive from literal");
+
+    return it->second;
+}
+
+template<typename Literal>
+Literal LiteralToStringMap<Literal>::findByString(std::string str)
+{
+    std::transform(str.begin(), str.end(), str.begin(), tolower);
+
+    const auto it = std::find_if(m_data.begin(), m_data.end(),
+        [&str](const auto& value) {
+            return value.second == str;
+        });
+
+    if (it == m_data.end())
+        throw std::runtime_error("Cannot parse primitive from string");
+
+    return it->first;
+}
+
+} // namespace Helpers
+
+MOONLIGHT_PRIMITIVE_PARSER(StructureType,
+    std::make_pair(Literal::Undefined, "undefined"),
+    std::make_pair(Literal::Table, "table"),
+    std::make_pair(Literal::Document, "document")
+)
+
+MOONLIGHT_PRIMITIVE_PARSER(StructureRenameType,
+    std::make_pair(Literal::Undefined, "undefined"),
+    std::make_pair(Literal::Structure, "structure"),
+    std::make_pair(Literal::Field, "field")
+)
+
+MOONLIGHT_PRIMITIVE_PARSER(DatabaseOperationType,
+    std::make_pair(Literal::Undefined, "undefined"),
+    std::make_pair(Literal::Create, "create"),
+    std::make_pair(Literal::Drop, "drop"),
+    std::make_pair(Literal::Backup, "backup")
+)
+
+MOONLIGHT_PRIMITIVE_PARSER(DataType,
+    std::make_pair(Literal::Undefined, "undefined"),
+    std::make_pair(Literal::String, "string"),
+    std::make_pair(Literal::Decimal, "decimal"),
+    std::make_pair(Literal::Integer, "integer"),
+    std::make_pair(Literal::DateTime, "datetime"),
+    std::make_pair(Literal::Reference, "reference")
+)
+
+MOONLIGHT_PRIMITIVE_PARSER(SelectSortType,
+    std::make_pair(Literal::Undefined, "undefined"),
+    std::make_pair(Literal::Asc, "asc"),
+    std::make_pair(Literal::Desc, "desc")
+)
+
+} // namespace Moonlight::Primitives
