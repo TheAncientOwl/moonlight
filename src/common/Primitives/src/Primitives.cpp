@@ -5,13 +5,13 @@
 #include <stdexcept>
 #include <vector>
 
-#define MOONLIGHT_PRIMITIVE_PARSER(name, ...) \
+#define MOONLIGHT_PRIMITIVE_CONVERTOR(name, ...) \
 namespace name { \
     Helpers::LiteralToStringMap<Literal> map{ { \
         __VA_ARGS__ \
     } };\
-    std::string parse(Literal literal) { return map.findByLiteral(literal); } \
-    Literal parse(std::string str) { return map.findByString(str); } \
+    std::string to_string(Literal literal) { return map.findByLiteral(literal); } \
+    Literal to_literal(std::string str) { return map.findByString(str); } \
 }
 
 namespace Moonlight::Primitives {
@@ -72,26 +72,26 @@ Literal LiteralToStringMap<Literal>::findByString(std::string str)
 
 } // namespace Helpers
 
-MOONLIGHT_PRIMITIVE_PARSER(StructureType,
+MOONLIGHT_PRIMITIVE_CONVERTOR(StructureType,
     std::make_pair(Literal::Undefined, "undefined"),
     std::make_pair(Literal::Table, "table"),
     std::make_pair(Literal::Document, "document")
 )
 
-MOONLIGHT_PRIMITIVE_PARSER(StructureRenameType,
+MOONLIGHT_PRIMITIVE_CONVERTOR(StructureRenameType,
     std::make_pair(Literal::Undefined, "undefined"),
     std::make_pair(Literal::Structure, "structure"),
     std::make_pair(Literal::Field, "field")
 )
 
-MOONLIGHT_PRIMITIVE_PARSER(DatabaseOperationType,
+MOONLIGHT_PRIMITIVE_CONVERTOR(DatabaseOperationType,
     std::make_pair(Literal::Undefined, "undefined"),
     std::make_pair(Literal::Create, "create"),
     std::make_pair(Literal::Drop, "drop"),
     std::make_pair(Literal::Backup, "backup")
 )
 
-MOONLIGHT_PRIMITIVE_PARSER(DataType,
+MOONLIGHT_PRIMITIVE_CONVERTOR(DataType,
     std::make_pair(Literal::Undefined, "undefined"),
     std::make_pair(Literal::String, "string"),
     std::make_pair(Literal::Decimal, "decimal"),
@@ -100,7 +100,7 @@ MOONLIGHT_PRIMITIVE_PARSER(DataType,
     std::make_pair(Literal::Reference, "reference")
 )
 
-MOONLIGHT_PRIMITIVE_PARSER(SelectSortType,
+MOONLIGHT_PRIMITIVE_CONVERTOR(SelectSortType,
     std::make_pair(Literal::Undefined, "undefined"),
     std::make_pair(Literal::Asc, "asc"),
     std::make_pair(Literal::Desc, "desc")

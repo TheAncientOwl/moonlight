@@ -8,8 +8,8 @@ namespace name { \
     { \
         __VA_ARGS__ \
     }; \
-    std::string parse(Literal primitive); \
-    Literal parse(std::string str); \
+    std::string to_string(Literal primitive); \
+    Literal to_literal(std::string str); \
 } \
 using E ## name = name::Literal;
 
