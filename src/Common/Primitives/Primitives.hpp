@@ -49,4 +49,20 @@ MOONLIGHT_PRIMITIVE(SelectSortType,
     Desc = 2
 )
 
+MOONLIGHT_PRIMITIVE(QueryType,
+    Undefined = 0,
+    Schema = 1,
+    Create = 2,
+    Migrate = 3,
+    Drop = 4,
+    Delete = 5,
+    Update = 6,
+    Database = 7,
+    Rename = 8,
+    Select = 9,
+    Insert = 10,
+    Index = 11,
+    View = 12
+)
+
 } // namespace Moonlight::Primitives

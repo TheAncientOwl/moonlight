@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "Primitives.hpp"
+#include "../Primitives/Primitives.hpp"
 
 namespace Moonlight::Primitives {
 
@@ -23,7 +23,6 @@ TEST(MoonlightPrimitivesTest, StructureRenameType)
     ASSERT_EQ(Literal::Structure, to_literal(to_string(Literal::Structure)));
     ASSERT_EQ(Literal::Field, to_literal(to_string(Literal::Field)));
 }
-
 
 TEST(MoonlightPrimitivesTest, DatabaseOperationType)
 {
@@ -57,6 +56,26 @@ TEST(MoonlightPrimitivesTest, SelectSortType)
     ASSERT_EQ(Literal::Undefined, to_literal(to_string(Literal::Undefined)));
     ASSERT_EQ(Literal::Asc, to_literal(to_string(Literal::Asc)));
     ASSERT_EQ(Literal::Desc, to_literal(to_string(Literal::Desc)));
+}
+
+TEST(MoonlightPrimitivesTest, QueryType)
+{
+    using namespace QueryType;
+    using Literal = QueryType::Literal;
+
+    ASSERT_EQ(Literal::Undefined, to_literal(to_string(Literal::Undefined)));
+    ASSERT_EQ(Literal::Schema, to_literal(to_string(Literal::Schema)));
+    ASSERT_EQ(Literal::Create, to_literal(to_string(Literal::Create)));
+    ASSERT_EQ(Literal::Migrate, to_literal(to_string(Literal::Migrate)));
+    ASSERT_EQ(Literal::Drop, to_literal(to_string(Literal::Drop)));
+    ASSERT_EQ(Literal::Delete, to_literal(to_string(Literal::Delete)));
+    ASSERT_EQ(Literal::Update, to_literal(to_string(Literal::Update)));
+    ASSERT_EQ(Literal::Database, to_literal(to_string(Literal::Database)));
+    ASSERT_EQ(Literal::Rename, to_literal(to_string(Literal::Rename)));
+    ASSERT_EQ(Literal::Select, to_literal(to_string(Literal::Select)));
+    ASSERT_EQ(Literal::Insert, to_literal(to_string(Literal::Insert)));
+    ASSERT_EQ(Literal::Index, to_literal(to_string(Literal::Index)));
+    ASSERT_EQ(Literal::View, to_literal(to_string(Literal::View)));
 }
 
 } // namespace Moonlight::Primitives

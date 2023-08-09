@@ -1,4 +1,3 @@
-include_directories(common)
-include_directories(include)
+include_directories(Common)
 
-add_subdirectory(common)
+add_subdirectory(Common)

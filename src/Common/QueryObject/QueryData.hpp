@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../common/Primitives/src/Primitives.hpp"
+#include "../Primitives/Primitives.hpp"
 
 #include <string>
 #include <optional>
 #include <vector>
 
-namespace Moonlight::QueryObjects {
+namespace Moonlight::QueryData {
 
 struct StructureDrop
 {
@@ -129,4 +129,4 @@ struct View : public StructureSelect
     bool replace{ false };
 };
 
-} // namespace Moonlight::QueryObjects
+} // namespace Moonlight::QueryData

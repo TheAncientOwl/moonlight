@@ -106,4 +106,20 @@ MOONLIGHT_PRIMITIVE_CONVERTOR(SelectSortType,
     std::make_pair(Literal::Desc, "desc")
 )
 
+MOONLIGHT_PRIMITIVE_CONVERTOR(QueryType,
+    std::make_pair(Literal::Undefined, "undefined"),
+    std::make_pair(Literal::Schema, "schena"),
+    std::make_pair(Literal::Create, "create"),
+    std::make_pair(Literal::Migrate, "migrate"),
+    std::make_pair(Literal::Drop, "drop"),
+    std::make_pair(Literal::Delete, "delete"),
+    std::make_pair(Literal::Update, "update"),
+    std::make_pair(Literal::Database, "database"),
+    std::make_pair(Literal::Rename, "rename"),
+    std::make_pair(Literal::Select, "select"),
+    std::make_pair(Literal::Insert, "insert"),
+    std::make_pair(Literal::Index, "index"),
+    std::make_pair(Literal::View, "view")
+)
+
 } // namespace Moonlight::Primitives
