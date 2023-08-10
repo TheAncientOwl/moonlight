@@ -7,7 +7,13 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement StructureCreate regex...
-PARSER_MATCHER(StructureCreate, "");
+PARSER_MATCHER(StructureCreate,
+    "structure[ ]*"
+    ".[ ]*create[ ]*\\([ ]*(table|document)[ ]*\\)[ ]*"
+    ".[ ]*based_on[ ]*\\([ ]*[a-zA-Z0-9_]+[ ]*\\)[ ]*"
+    ".[ ]*named[ ]*\\([ ]*[a-zA-Z0-9_]+[ ]*\\)[ ]*"
+    ".[ ]*volatile[ ]*\\([ ]*(true|false)[ ]*\\)[ ]*;"
+);
 
 PARSER_LOGICS(StructureCreate)
 {
