@@ -6,7 +6,6 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement StructureCreate regex...
 PARSER_MATCHER(StructureCreate,
     "structure[ ]*"
     ".[ ]*create[ ]*\\([ ]*(table|document)[ ]*\\)[ ]*"

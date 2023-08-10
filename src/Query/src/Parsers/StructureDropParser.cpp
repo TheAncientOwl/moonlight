@@ -6,7 +6,6 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement StructureDrop regex...
 PARSER_MATCHER(StructureDrop,
     "Structure[ ]*"
     ".[ ]*drop[ ]*\\([ ]*[a-zA-Z0-9]+[ ]*\\)[ ]*"
