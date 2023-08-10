@@ -8,8 +8,6 @@ project(Moonlight VERSION 0.1.0 LANGUAGES C CXX)
 include(CTest)
 enable_testing()
 
-include_directories(src)
-
 add_subdirectory(src)
 
 file(WRITE src/null.cpp "")

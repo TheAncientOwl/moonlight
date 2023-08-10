@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../QueryObject/QueryObject.hpp"
+#include "QueryObject.hpp"
 
 #define ASSERT_MAKE_QUERY_OBJECT(Type, Enum) \
     ASSERT_EQ(QueryObject::make<Type>().type(), Primitives::EQueryType::Enum);

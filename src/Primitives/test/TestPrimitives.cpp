@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../Primitives/Primitives.hpp"
+#include "Primitives.hpp"
 
 namespace Moonlight::Primitives {
 
