@@ -6,8 +6,18 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement StructureRename regex...
-PARSER_MATCHER(StructureRename, "");
+PARSER_MATCHER(StructureRename,
+    "Structure[ ]*"
+    "(("
+    ".[ ]*rename[ ]*\\([ ]*structure[ ]*\\)[ ]*"
+    ".[ ]*old_name[ ]*\\([ ]*[a-zA-Z0-9_]+[ ]*\\)[ ]*"
+    ".[ ]*new_name[ ]*\\([ ]*[a-zA-Z0-9_]+[ ]*\\)[ ]*;"
+    ")|("
+    ".[ ]*rename[ ]*\\([ ]*field[ ]*\\)[ ]*"
+    ".[ ]*old_name[ ]*\\([ ]*[a-zA-Z0-9_]+\\.[a-zA-Z0-9_]+[ ]*\\)[ ]*"
+    ".[ ]*new_name[ ]*\\([ ]*[a-zA-Z0-9_]+\\.[a-zA-Z0-9_]+[ ]*\\)[ ]*;"
+    "))"
+);
 
 PARSER_LOGICS(StructureRename)
 {
