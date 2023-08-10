@@ -15,4 +15,12 @@ TEST(TestDropMatch, matchSuccess)
     ASSERT_MATCH("Structure     .      drop      (   SomeStructure  )  . cascade ( false )  ;");
 }
 
+TEST(TestDropMatch, matchFail)
+{
+    ASSERT_MATCH("dawda Structure.drop(SomeStructure).cascade(true);");
+    ASSERT_MATCH("Structuresda.drop(SomeStructure).cascade(false);");
+    ASSERT_MATCH("Structure     .      dropsd      (   SomeStructure dda  )  . cascade (  )  ;");
+    ASSERT_MATCH("Structure     .      drop      (   SomeStructure  )  . cascade (  )  ;");
+}
+
 } // namespace Moonlight::QueryParser::Helpers::Test
