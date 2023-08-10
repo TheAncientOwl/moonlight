@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 PARSER_MATCHER(StructureCreate,
-    "structure[ ]*"
+    "Structure[ ]*"
     ".[ ]*create[ ]*\\([ ]*(table|document)[ ]*\\)[ ]*"
     ".[ ]*based_on[ ]*\\([ ]*[a-zA-Z0-9_]+[ ]*\\)[ ]*"
     ".[ ]*named[ ]*\\([ ]*[a-zA-Z0-9_]+[ ]*\\)[ ]*"
