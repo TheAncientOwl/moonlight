@@ -22,10 +22,23 @@ RegexBuilder& RegexBuilder::add(std::string_view str)
     return *this;
 }
 
-RegexBuilder& RegexBuilder::paranthesis(std::string_view str)
+RegexBuilder& RegexBuilder::paranthesis(std::string_view str, std::string_view begin, std::string_view end)
 {
-    add("\\(").blank().add(str).blank().add("\\)");
-    blank();
+    add("\\(").blank();
+
+    if (begin.length() > 0)
+    {
+        add(begin).blank();
+    }
+
+    add(str).blank();
+
+    if (end.length() > 0)
+    {
+        add(end).blank();
+    }
+
+    add("\\)").blank();
 
     return *this;
 }

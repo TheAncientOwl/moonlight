@@ -49,7 +49,7 @@ public:
 
     RegexBuilder& blank();
     RegexBuilder& add(std::string_view str);
-    RegexBuilder& paranthesis(std::string_view str);
+    RegexBuilder& paranthesis(std::string_view str, std::string_view begin = "", std::string_view end = "");
 
     RegexBuilder& beginCase();
     RegexBuilder& orCase();
