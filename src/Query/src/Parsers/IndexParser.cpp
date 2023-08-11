@@ -6,8 +6,26 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Index regex...
-PARSER_REGEX(Index, "");
+PARSER_REGEX(Index,
+    RegexBuilder{}
+    .add("Index")
+    .add(".[ ]*create_on").paranthesis(IDENTIFIER)
+    .add(".[ ]*named").paranthesis(IDENTIFIER)
+    .add(".[ ]*on_fields").paranthesis(
+        RegexBuilder{}
+        .add("(")
+        .add(IDENTIFIER)
+        .add("(,| )*")
+        .add(")+")
+        .build()
+    )
+
+    .beginOptional()
+    .add(".[ ]*unique").paranthesis("(true|false)")
+    .endOptional()
+
+    .add(";").build()
+);
 
 PARSER_LOGICS(Index)
 {
