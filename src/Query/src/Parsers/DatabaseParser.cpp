@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement Database regex...
-PARSER_MATCHER(Database, "");
+PARSER_REGEX(Database, "");
 
 PARSER_LOGICS(Database)
 {

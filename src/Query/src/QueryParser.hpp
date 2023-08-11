@@ -2,8 +2,11 @@
 
 #include "QueryObject.hpp"
 
+#include <sstream>
 #include <string_view>
 #include <regex>
+
+#define IDENTIFIER "[a-zA-Z0-9_]+"
 
 #define PARSER_CLASS(Specialization) \
 class Specialization ## Parser : public IQueryParser { \
@@ -12,7 +15,7 @@ public: \
     QueryObject parse(std::string_view query) const override; \
 };
 
-#define PARSER_MATCHER(Specialization, regex_str) \
+#define PARSER_REGEX(Specialization, regex_str) \
 bool Specialization ## Parser::match(std::string_view query) const \
 { \
     static const std::regex s_pattern(regex_str, std::regex_constants::icase); \
@@ -37,6 +40,22 @@ using QueryObject = QueryData::QueryObject;
 QueryObject parseQuery(std::string_view query);
 
 namespace Helpers {
+
+class RegexBuilder
+{
+public:
+    std::string build() const;
+
+    RegexBuilder& blank();
+    RegexBuilder& add(std::string_view str);
+    RegexBuilder& paranthesis(std::string_view str);
+
+    RegexBuilder& beginCase();
+    RegexBuilder& orCase();
+    RegexBuilder& endCase();
+private:
+    std::stringstream m_ss;
+};
 
 class IQueryParser
 {

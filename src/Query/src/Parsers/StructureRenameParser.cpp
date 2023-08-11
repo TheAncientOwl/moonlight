@@ -6,17 +6,23 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_MATCHER(StructureRename,
-    "Structure[ ]*"
-    "(("
-    ".[ ]*rename[ ]*\\([ ]*structure[ ]*\\)[ ]*"
-    ".[ ]*old_name[ ]*\\([ ]*[a-zA-Z0-9_]+[ ]*\\)[ ]*"
-    ".[ ]*new_name[ ]*\\([ ]*[a-zA-Z0-9_]+[ ]*\\)[ ]*;"
-    ")|("
-    ".[ ]*rename[ ]*\\([ ]*field[ ]*\\)[ ]*"
-    ".[ ]*old_name[ ]*\\([ ]*[a-zA-Z0-9_]+\\.[a-zA-Z0-9_]+[ ]*\\)[ ]*"
-    ".[ ]*new_name[ ]*\\([ ]*[a-zA-Z0-9_]+\\.[a-zA-Z0-9_]+[ ]*\\)[ ]*;"
-    "))"
+PARSER_REGEX(StructureRename,
+    RegexBuilder{}
+    .add("Structure")
+    .add(".[ ]*rename")
+
+    .beginCase()
+    .paranthesis("structure")
+    .add(".[ ]*old_name").paranthesis(IDENTIFIER)
+    .add(".[ ]*new_name").paranthesis(IDENTIFIER)
+
+    .orCase()
+    .paranthesis("field")
+    .add(".[ ]*old_name").paranthesis(IDENTIFIER "\\." IDENTIFIER)
+    .add(".[ ]*new_name").paranthesis(IDENTIFIER "\\." IDENTIFIER)
+
+    .endCase()
+    .add(";").build()
 );
 
 PARSER_LOGICS(StructureRename)

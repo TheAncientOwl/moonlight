@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement StructureDelete regex...
-PARSER_MATCHER(StructureDelete, "");
+PARSER_REGEX(StructureDelete, "");
 
 PARSER_LOGICS(StructureDelete)
 {

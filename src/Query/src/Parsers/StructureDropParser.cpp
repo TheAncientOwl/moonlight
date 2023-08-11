@@ -6,10 +6,12 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_MATCHER(StructureDrop,
-    "Structure[ ]*"
-    ".[ ]*drop[ ]*\\([ ]*[a-zA-Z0-9]+[ ]*\\)[ ]*"
-    ".[ ]*cascade[ ]*\\([ ]*(true|false)[ ]*\\)[ ]*;"
+PARSER_REGEX(StructureDrop,
+    RegexBuilder{}
+    .add("structure")
+    .add(".[ ]*drop").paranthesis(IDENTIFIER)
+    .add(".[ ]*cascade").paranthesis("(true|false)")
+    .add(";").build()
 );
 
 PARSER_LOGICS(StructureDrop)

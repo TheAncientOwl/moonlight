@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement StructureMigrate regex...
-PARSER_MATCHER(StructureMigrate, "");
+PARSER_REGEX(StructureMigrate, "");
 
 PARSER_LOGICS(StructureMigrate)
 {

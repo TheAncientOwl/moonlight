@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement StructureSelect regex...
-PARSER_MATCHER(StructureSelect, "");
+PARSER_REGEX(StructureSelect, "");
 
 PARSER_LOGICS(StructureSelect)
 {

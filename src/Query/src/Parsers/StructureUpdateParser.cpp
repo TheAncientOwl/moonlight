@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement StructureUpdate regex...
-PARSER_MATCHER(StructureUpdate, "");
+PARSER_REGEX(StructureUpdate, "");
 
 PARSER_LOGICS(StructureUpdate)
 {

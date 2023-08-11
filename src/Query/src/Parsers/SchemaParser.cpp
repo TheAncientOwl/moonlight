@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement Schema regex...
-PARSER_MATCHER(Schema, "");
+PARSER_REGEX(Schema, "");
 
 PARSER_LOGICS(Schema)
 {

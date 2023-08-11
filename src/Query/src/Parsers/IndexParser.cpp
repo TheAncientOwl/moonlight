@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement Index regex...
-PARSER_MATCHER(Index, "");
+PARSER_REGEX(Index, "");
 
 PARSER_LOGICS(Index)
 {

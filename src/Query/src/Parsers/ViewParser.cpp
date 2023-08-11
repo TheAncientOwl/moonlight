@@ -7,7 +7,7 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement View regex...
-PARSER_MATCHER(View, "");
+PARSER_REGEX(View, "");
 
 PARSER_LOGICS(View)
 {
