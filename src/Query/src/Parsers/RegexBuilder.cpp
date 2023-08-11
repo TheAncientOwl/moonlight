@@ -51,5 +51,19 @@ RegexBuilder& RegexBuilder::endCase()
     return *this;
 }
 
+RegexBuilder& RegexBuilder::beginOptional()
+{
+    m_ss << "(";
+
+    return *this;
+}
+
+RegexBuilder& RegexBuilder::endOptional()
+{
+    m_ss << ")?";
+
+    return *this;
+}
+
 
 } // namespace Moonlight::QueryParser::Helpers

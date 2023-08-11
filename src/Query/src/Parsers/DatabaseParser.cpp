@@ -6,8 +6,26 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Database regex...
-PARSER_REGEX(Database, "");
+PARSER_REGEX(Database,
+    RegexBuilder{}
+    .add("Database")
+
+    .beginCase()
+    .add(".[ ]*create").paranthesis(IDENTIFIER)
+
+    .orCase()
+    .add(".[ ]*drop").paranthesis(IDENTIFIER)
+
+    .orCase()
+    .add(".[ ]*backup").paranthesis(IDENTIFIER)
+    .add(".[ ]*to_disk").paranthesis(PATH_IDENTIFIER)
+    .beginOptional()
+    .add(".[ ]*with_differential").paranthesis("(true|false)")
+    .endOptional()
+
+    .endCase()
+    .add(";").build()
+);
 
 PARSER_LOGICS(Database)
 {

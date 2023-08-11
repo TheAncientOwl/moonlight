@@ -7,6 +7,7 @@
 #include <regex>
 
 #define IDENTIFIER "[a-zA-Z0-9_]+"
+#define PATH_IDENTIFIER R"("[a-zA-Z0-9_]+")"
 
 #define PARSER_CLASS(Specialization) \
 class Specialization ## Parser : public IQueryParser { \
@@ -53,6 +54,9 @@ public:
     RegexBuilder& beginCase();
     RegexBuilder& orCase();
     RegexBuilder& endCase();
+
+    RegexBuilder& beginOptional();
+    RegexBuilder& endOptional();
 private:
     std::stringstream m_ss;
 };
