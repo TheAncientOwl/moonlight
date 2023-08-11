@@ -29,12 +29,33 @@ TEST(TestDatabaseMatch, matchSuccess)
         R"(.to_disk("somepath"))"
         R"(.with_differential(false);)"
     );
-
 }
 
 TEST(TestDatabaseMatch, matchFail)
 {
-    ASSERT_NO_MATCH("dawda Structure.drop(SomeStructure).cascade(true);");
+    ASSERT_NO_MATCH("Database.create(  );");
+
+    ASSERT_NO_MATCH("Database.drOp(  );");
+
+    ASSERT_NO_MATCH(
+        R"(Database.backup( ))"
+        R"(.to_disk("somepath");)"
+    );
+
+    ASSERT_NO_MATCH(
+        R"(Database.backup(SomeDatabase))"
+    );
+
+    ASSERT_NO_MATCH(
+        R"(Database.backup(SomeDatabase))"
+        R"(.to_disk("somepath"))"
+        R"(.with_differential( );)"
+    );
+
+    ASSERT_NO_MATCH(
+        R"(Database.backup(SomeDatabase))"
+        R"(.with_differential(false);)"
+    );
 }
 
 } // namespace Moonlight::QueryParser::Helpers::Test
