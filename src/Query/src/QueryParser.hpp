@@ -1,13 +1,9 @@
 #pragma once
 
 #include "QueryObject.hpp"
+#include "RegexBuilder.hpp"
 
-#include <sstream>
-#include <string_view>
 #include <regex>
-
-#define IDENTIFIER "[a-zA-Z0-9_]+"
-#define PATH_IDENTIFIER R"("[a-zA-Z0-9_]+")"
 
 #define PARSER_CLASS(Specialization) \
 class Specialization ## Parser : public IQueryParser { \
@@ -37,29 +33,10 @@ QueryObject Specialization ## Parser::parse(std::string_view query) const
 namespace Moonlight::QueryParser {
 
 using QueryObject = QueryData::QueryObject;
-
 QueryObject parseQuery(std::string_view query);
 
+using namespace Helpers::Regex;
 namespace Helpers {
-
-class RegexBuilder
-{
-public:
-    std::string build() const;
-
-    RegexBuilder& blank();
-    RegexBuilder& add(std::string_view str);
-    RegexBuilder& paranthesis(std::string_view str, std::string_view begin = "", std::string_view end = "");
-
-    RegexBuilder& beginCase();
-    RegexBuilder& orCase();
-    RegexBuilder& endCase();
-
-    RegexBuilder& beginOptional();
-    RegexBuilder& endOptional();
-private:
-    std::stringstream m_ss;
-};
 
 class IQueryParser
 {

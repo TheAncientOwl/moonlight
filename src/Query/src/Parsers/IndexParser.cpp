@@ -6,26 +6,14 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_REGEX(Index,
-    RegexBuilder{}
-    .add("Index")
-    .add(".[ ]*create_on").paranthesis(IDENTIFIER)
-    .add(".[ ]*named").paranthesis(IDENTIFIER)
-    .add(".[ ]*on_fields").paranthesis(
-        RegexBuilder{}
-        .add("(")
-        .add(IDENTIFIER)
-        .add("(,| )*")
-        .add(")+")
-        .build()
-    )
-
-    .beginOptional()
-    .add(".[ ]*unique").paranthesis("(true|false)")
-    .endOptional()
-
-    .add(";").build()
-);
+PARSER_REGEX(Index, regex(
+    "index",
+    ".[ ]*create_on", functionArgs(IDENTIFIER),
+    ".[ ]*named", functionArgs(IDENTIFIER),
+    ".[ ]*on_fields", functionArgs(listOf(IDENTIFIER)),
+    optional(".[ ]*unique", functionArgs(BOOLEAN)),
+    ";"
+));
 
 PARSER_LOGICS(Index)
 {

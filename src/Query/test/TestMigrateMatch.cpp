@@ -19,30 +19,30 @@ TEST(TestMigrateMatch, matchSuccess)
         "Structure"
         ".migrate(StructureName)"
         ".to(NewSchemaName)"
-        ".migrate_dictionary({"
+        ".migrate_dictionary("
         "    old_field1 => new_field1"
-        "    });"
+        "    );"
     );
 
     ASSERT_MATCH(
         "Structure"
         ".migrate(StructureName)"
         ".to(NewSchemaName)"
-        ".migrate_dictionary({"
+        ".migrate_dictionary("
         "    old_field1 => new_field1,"
         "    old_field2 => new_field2"
-        "    });"
+        "    );"
     );
 
     ASSERT_MATCH(
         "Structure"
         ".migrate(StructureName)"
         ".to(NewSchemaName)"
-        ".migrate_dictionary({"
+        ".migrate_dictionary("
         "    old_field1 => new_field1,"
         "    old_field2 => new_field2,"
         "    old_field3 => new_field3"
-        "    });"
+        "    );"
     );
 }
 
@@ -57,17 +57,7 @@ TEST(TestMigrateMatch, matchFail)
         "Structure"
         ".migrate(StructureName)"
         ".to(NewSchemaName)"
-        ".migrate_dictionary({"
-        "    });"
-    );
-
-    ASSERT_NO_MATCH(
-        "Structure"
-        ".migrate(StructureName)"
-        ".to(NewSchemaName)"
         ".migrate_dictionary("
-        "    old_field1 => new_field1,"
-        "    old_field2 => new_field2"
         "    );"
     );
 
@@ -75,6 +65,15 @@ TEST(TestMigrateMatch, matchFail)
         "Structure"
         ".migrate(StructureName)"
         ".to(NewSchemaName)"
+        ".migrate_dictionary("
+        "    old_field1  new_field1,"
+        "    old_field2 => new_field2"
+        "    );"
+    );
+
+    ASSERT_NO_MATCH(
+        "Structure"
+        ".migrate(StructureName)"
         ".migrate_dictionary{"
         "    old_field1 => new_field1,"
         "    old_field2 => new_field2,"

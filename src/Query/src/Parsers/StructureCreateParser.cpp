@@ -6,15 +6,14 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_REGEX(StructureCreate,
-    RegexBuilder{}
-    .add("Structure")
-    .add(".[ ]*create").paranthesis("(table|document)")
-    .add(".[ ]*based_on").paranthesis(IDENTIFIER)
-    .add(".[ ]*named").paranthesis(IDENTIFIER)
-    .add(".[ ]*volatile").paranthesis("(true|false)")
-    .add(";").build()
-);
+PARSER_REGEX(StructureCreate, regex(
+    "structure",
+    ".[ ]*create", functionArgs("(table|document)"),
+    ".[ ]*based_on", functionArgs(IDENTIFIER),
+    ".[ ]*named", functionArgs(IDENTIFIER),
+    optional(".[ ]*volatile", functionArgs(BOOLEAN)),
+    ";"
+));
 
 PARSER_LOGICS(StructureCreate)
 {
