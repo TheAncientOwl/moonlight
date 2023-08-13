@@ -6,8 +6,14 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Schema regex...
-PARSER_REGEX(Migrate, "");
+// ?Regex: https://regex101.com/r/1WeJpP/1
+PARSER_REGEX(Migrate,
+    R"(migrate\s*\{)"
+    R"(\s*structure:\s*\w+\s*;)"
+    R"(\s*to:\s*\w+\s*;)"
+    R"((?:\s*mappings:\s*\[\s*(?:\w+\s*=>\s*\w+(?:,|\s)+)+\]\s*;)?)"
+    R"(\s*\})"
+);
 
 PARSER_LOGICS(Migrate)
 {
