@@ -7,13 +7,13 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement Schema regex...
-PARSER_REGEX(StructureMigrate, "");
+PARSER_REGEX(Rename, "");
 
-PARSER_LOGICS(StructureMigrate)
+PARSER_LOGICS(Rename)
 {
-    QUERY_OBJECT(obj, StructureMigrate);
+    QUERY_OBJECT(obj, Rename);
 
-    // TODO: implement StructureMigrate parser...
+    // TODO: implement Rename parser...
 
     RETURN_QUERY_OBJECT;
 }

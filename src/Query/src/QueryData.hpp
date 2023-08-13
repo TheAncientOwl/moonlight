@@ -8,13 +8,13 @@
 
 namespace Moonlight::QueryData {
 
-struct StructureDrop
+struct Drop
 {
     std::string name;
     bool cascade{ false };
 };
 
-struct StructureCreate
+struct Create
 {
     Primitives::EStructureType type;
     std::string name{ "" };
@@ -22,7 +22,7 @@ struct StructureCreate
     bool is_volatile{ false };
 };
 
-struct StructureRename
+struct Rename
 {
     Primitives::EStructureRenameType type;
     std::string old_name;
@@ -51,7 +51,7 @@ struct Index
     bool unique{ false };
 };
 
-struct StructureMigrate
+struct Migrate
 {
     std::string structure_name;
     std::string new_schema;
@@ -78,7 +78,7 @@ struct WhereClause
     // TODO: implement
 };
 
-struct StructureDelete
+struct Delete
 {
     std::string name;
     WhereClause where;
@@ -89,7 +89,7 @@ struct SetClause
     // TODO: implement
 };
 
-struct StructureUpdate
+struct Update
 {
     std::string name;
     SetClause set;
@@ -115,7 +115,7 @@ struct OrderBy
     Primitives::ESelectSortType type;
 };
 
-struct StructureSelect
+struct Select
 {
     std::vector<Alias> fields;
     std::vector<Alias> from;
@@ -124,7 +124,7 @@ struct StructureSelect
     std::vector<OrderBy> order_by;
 };
 
-struct View : public StructureSelect
+struct View : public Select
 {
     bool replace{ false };
 };

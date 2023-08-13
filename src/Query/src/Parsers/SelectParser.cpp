@@ -6,14 +6,14 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Schema regex...
-PARSER_REGEX(StructureDrop, "");
+// TODO: implement Select regex...
+PARSER_REGEX(Select, "");
 
-PARSER_LOGICS(StructureDrop)
+PARSER_LOGICS(Select)
 {
-    QUERY_OBJECT(obj, StructureDrop);
+    QUERY_OBJECT(obj, Select);
 
-    // TODO: implement StructureDrop parser...
+    // TODO: implement Select parser...
 
     RETURN_QUERY_OBJECT;
 }

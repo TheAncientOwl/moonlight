@@ -56,16 +56,16 @@ public: // constructors
     virtual ~IQueryParser();
 };
 
-PARSER_CLASS(StructureDrop)
-PARSER_CLASS(StructureCreate)
-PARSER_CLASS(StructureRename)
+PARSER_CLASS(Drop)
+PARSER_CLASS(Create)
+PARSER_CLASS(Rename)
 PARSER_CLASS(Database)
 PARSER_CLASS(Index)
-PARSER_CLASS(StructureMigrate)
+PARSER_CLASS(Migrate)
 PARSER_CLASS(Schema)
-PARSER_CLASS(StructureDelete)
-PARSER_CLASS(StructureUpdate)
-PARSER_CLASS(StructureSelect)
+PARSER_CLASS(Delete)
+PARSER_CLASS(Update)
+PARSER_CLASS(Select)
 PARSER_CLASS(View)
 
 } // namespace Helpers

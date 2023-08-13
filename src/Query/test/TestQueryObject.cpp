@@ -9,16 +9,16 @@ namespace Moonlight::QueryData {
 
 TEST(MoonlightQueryDataTest, MakeObjects)
 {
-    ASSERT_MAKE_QUERY_OBJECT(StructureDrop, Drop);
-    ASSERT_MAKE_QUERY_OBJECT(StructureCreate, Create);
-    ASSERT_MAKE_QUERY_OBJECT(StructureRename, Rename);
+    ASSERT_MAKE_QUERY_OBJECT(Drop, Drop);
+    ASSERT_MAKE_QUERY_OBJECT(Create, Create);
+    ASSERT_MAKE_QUERY_OBJECT(Rename, Rename);
     ASSERT_MAKE_QUERY_OBJECT(Database, Database);
     ASSERT_MAKE_QUERY_OBJECT(Index, Index);
-    ASSERT_MAKE_QUERY_OBJECT(StructureMigrate, Migrate);
+    ASSERT_MAKE_QUERY_OBJECT(Migrate, Migrate);
     ASSERT_MAKE_QUERY_OBJECT(Schema, Schema);
-    ASSERT_MAKE_QUERY_OBJECT(StructureDelete, Delete);
-    ASSERT_MAKE_QUERY_OBJECT(StructureUpdate, Update);
-    ASSERT_MAKE_QUERY_OBJECT(StructureSelect, Select);
+    ASSERT_MAKE_QUERY_OBJECT(Delete, Delete);
+    ASSERT_MAKE_QUERY_OBJECT(Update, Update);
+    ASSERT_MAKE_QUERY_OBJECT(Select, Select);
     ASSERT_MAKE_QUERY_OBJECT(View, View);
 }
 

@@ -10,16 +10,16 @@ QueryObject parseQuery(std::string_view query)
     PLAIN_QUERY_OBJECT;
 
     static const std::array<std::unique_ptr<Helpers::IQueryParser>, 11> s_parsers{
-        std::make_unique<Helpers::StructureDropParser>(),
-        std::make_unique<Helpers::StructureCreateParser>(),
-        std::make_unique<Helpers::StructureRenameParser>(),
+        std::make_unique<Helpers::DropParser>(),
+        std::make_unique<Helpers::CreateParser>(),
+        std::make_unique<Helpers::RenameParser>(),
         std::make_unique<Helpers::DatabaseParser>(),
         std::make_unique<Helpers::IndexParser>(),
-        std::make_unique<Helpers::StructureMigrateParser>(),
+        std::make_unique<Helpers::MigrateParser>(),
         std::make_unique<Helpers::SchemaParser>(),
-        std::make_unique<Helpers::StructureDeleteParser>(),
-        std::make_unique<Helpers::StructureUpdateParser>(),
-        std::make_unique<Helpers::StructureSelectParser>(),
+        std::make_unique<Helpers::DeleteParser>(),
+        std::make_unique<Helpers::UpdateParser>(),
+        std::make_unique<Helpers::SelectParser>(),
         std::make_unique<Helpers::ViewParser>()
     };
     static const auto s_parsers_end = s_parsers.end();

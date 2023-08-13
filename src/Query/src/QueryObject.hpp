@@ -25,16 +25,16 @@ private: // fields
     Primitives::EQueryType m_type;
 
     std::variant <
-        StructureDrop,
-        StructureCreate,
-        StructureRename,
+        Drop,
+        Create,
+        Rename,
         Database,
         Index,
-        StructureMigrate,
+        Migrate,
         Schema,
-        StructureDelete,
-        StructureUpdate,
-        StructureSelect,
+        Delete,
+        Update,
+        Select,
         View
     > m_data;
 

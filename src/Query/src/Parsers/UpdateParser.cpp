@@ -6,14 +6,14 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Schema regex...
-PARSER_REGEX(StructureRename, "");
+// TODO: implement Update regex...
+PARSER_REGEX(Update, "");
 
-PARSER_LOGICS(StructureRename)
+PARSER_LOGICS(Update)
 {
-    QUERY_OBJECT(obj, StructureRename);
+    QUERY_OBJECT(obj, Update);
 
-    // TODO: implement StructureRename parser...
+    // TODO: implement Update parser...
 
     RETURN_QUERY_OBJECT;
 }
