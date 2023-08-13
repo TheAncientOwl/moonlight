@@ -7,7 +7,12 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement Schema regex...
-PARSER_REGEX(Rename, "");
+PARSER_REGEX(Rename,
+    R"(rename\s*(?:)"
+    R"((?:structure\s*\{\s*old_name:\s*\w+\s*;\s*new_name:\s*\w+\s*;)|)"
+    R"((?:field\s*\{\s*old_name:\s*\w+\.\w+\s*;\s*new_name:\s*\w+\.\w+\s*;))"
+    R"()\s*})"
+);
 
 PARSER_LOGICS(Rename)
 {
