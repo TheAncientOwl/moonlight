@@ -6,19 +6,8 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_REGEX(Database, regex(
-    "database",
-    variant(
-        ".[ ]*create", functionArgs(IDENTIFIER),
-        VARIANT_OR,
-        ".[ ]*drop", functionArgs(IDENTIFIER),
-        VARIANT_OR,
-        ".[ ]*backup", functionArgs(IDENTIFIER),
-        ".[ ]*to_disk", functionArgs(PATH_IDENTIFIER),
-        optional(".[ ]*with_differential", functionArgs(BOOLEAN))
-    ),
-    ";"
-));
+// TODO: implement Database regex...
+PARSER_REGEX(Database, "");
 
 PARSER_LOGICS(Database)
 {

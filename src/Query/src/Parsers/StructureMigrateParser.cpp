@@ -6,13 +6,8 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_REGEX(StructureMigrate, regex(
-    "structure",
-    ".[ ]*migrate", functionArgs(IDENTIFIER),
-    ".[ ]*to", functionArgs(IDENTIFIER),
-    optional(".[ ]*migrate_dictionary", functionArgs(listOf(IDENTIFIER "[ ]*=>[ ]*" IDENTIFIER))),
-    ";"
-));
+// TODO: implement Schema regex...
+PARSER_REGEX(StructureMigrate, "");
 
 PARSER_LOGICS(StructureMigrate)
 {

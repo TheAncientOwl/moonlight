@@ -6,12 +6,8 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_REGEX(StructureDrop, regex(
-    "structure",
-    ".[ ]*drop", functionArgs(IDENTIFIER),
-    ".[ ]*cascade", functionArgs(BOOLEAN),
-    ";"
-));
+// TODO: implement Schema regex...
+PARSER_REGEX(StructureDrop, "");
 
 PARSER_LOGICS(StructureDrop)
 {

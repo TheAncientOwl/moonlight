@@ -6,20 +6,8 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_REGEX(StructureRename, regex(
-    "structure",
-    ".[ ]*rename",
-    variant(
-        functionArgs("structure"),
-        ".[ ]*old_name", functionArgs(IDENTIFIER),
-        ".[ ]*new_name", functionArgs(IDENTIFIER),
-        VARIANT_OR,
-        functionArgs("field"),
-        ".[ ]*old_name", functionArgs(IDENTIFIER "\\." IDENTIFIER),
-        ".[ ]*new_name", functionArgs(IDENTIFIER "\\." IDENTIFIER)
-    ),
-    ";"
-));
+// TODO: implement Schema regex...
+PARSER_REGEX(StructureRename, "");
 
 PARSER_LOGICS(StructureRename)
 {

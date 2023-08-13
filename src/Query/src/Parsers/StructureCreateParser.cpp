@@ -6,14 +6,8 @@ namespace {
 
 } // Anonymous namespace
 
-PARSER_REGEX(StructureCreate, regex(
-    "structure",
-    ".[ ]*create", functionArgs("(table|document)"),
-    ".[ ]*based_on", functionArgs(IDENTIFIER),
-    ".[ ]*named", functionArgs(IDENTIFIER),
-    optional(".[ ]*volatile", functionArgs(BOOLEAN)),
-    ";"
-));
+// TODO: implement Structure regex...
+PARSER_REGEX(StructureCreate, "");
 
 PARSER_LOGICS(StructureCreate)
 {
