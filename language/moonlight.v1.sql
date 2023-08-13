@@ -1,6 +1,6 @@
 -- 1. DROP
 drop {
-    from: StructureName;
+    structure: StructureName;
     cascade: boolean;
 }
 
@@ -9,7 +9,7 @@ create structure {
     name: StructureName;
     type: table|document;
     based_on: SchemaName;
-    volatile: boolean; -- optional @default false
+    volatile: boolean;
 }
 
 -- 3. RENAME
@@ -25,7 +25,7 @@ rename structure|field {
 database create|drop|backup {
     name: DatabaseName;
     to_disk: "/home/user/lunardb-backup";
-    with_differential: boolean; -- optional @default false
+    with_differential: boolean;
 }
 
 -- 5. INDEX
