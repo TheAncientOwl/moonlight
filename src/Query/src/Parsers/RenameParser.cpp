@@ -6,7 +6,7 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Schema regex...
+// ?Regex: https://regex101.com/r/8DhhKL/1
 PARSER_REGEX(Rename,
     R"(rename\s*(?:)"
     R"((?:structure\s*\{\s*old_name:\s*\w+\s*;\s*new_name:\s*\w+\s*;)|)"
