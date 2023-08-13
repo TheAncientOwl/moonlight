@@ -5,9 +5,10 @@ drop {
 }
 
 -- 2. CREATE
-create table |document{
-    based_on: SchemaName;
+create structure {
     name: StructureName;
+    type: table|document;
+    based_on: SchemaName;
     volatile: boolean; -- optional @default false
 }
 
@@ -76,8 +77,7 @@ schema SchemaName {
 -- 8. DELETE
 delete {
     from: StructureName;
-    where: 
-        rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120;
+    where: rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120;
 }
 
 -- 9. UPDATE
@@ -86,8 +86,7 @@ update StructureName {
         field1 => field1 * 1.5 + 2,
         field2 => 3
     ];
-    where: 
-        rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120;
+    where: rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120;
 }
     
 -- 10. SELECT
@@ -110,8 +109,7 @@ select {
         s3 => s1 on reference_field31
     ];
 
-    where: 
-        rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120;
+    where: rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120;
 
     order_by: [
         s1.some_field asc,
