@@ -1,7 +1,6 @@
 #pragma once
 
 #include "QueryObject.hpp"
-#include "RegexBuilder.hpp"
 
 #include <regex>
 
@@ -35,8 +34,7 @@ namespace Moonlight::QueryParser {
 using QueryObject = QueryData::QueryObject;
 QueryObject parseQuery(std::string_view query);
 
-using namespace Helpers::Regex;
-namespace Helpers {
+namespace Implementation {
 
 class IQueryParser
 {
@@ -68,6 +66,6 @@ PARSER_CLASS(Update)
 PARSER_CLASS(Select)
 PARSER_CLASS(View)
 
-} // namespace Helpers
+} // namespace Implementation
 
 } // namespace Moonlight::QueryParser

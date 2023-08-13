@@ -7,7 +7,7 @@
 
 #define MOONLIGHT_PRIMITIVE_CONVERTOR(name, ...) \
 namespace name { \
-    Helpers::LiteralToStringMap<Literal> map{ { \
+    Implementation::LiteralToStringMap<Literal> map{ { \
         __VA_ARGS__ \
     } };\
     std::string to_string(Literal literal) { return map.findByLiteral(literal); } \
@@ -16,7 +16,7 @@ namespace name { \
 
 namespace Moonlight::Primitives {
 
-namespace Helpers {
+namespace Implementation {
 
 template<typename Literal>
 class LiteralToStringMap
@@ -70,7 +70,7 @@ Literal LiteralToStringMap<Literal>::findByString(std::string str)
     return it->first;
 }
 
-} // namespace Helpers
+} // namespace Implementation
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(StructureType,
     std::make_pair(Literal::Undefined, "undefined"),

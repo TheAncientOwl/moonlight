@@ -1,6 +1,6 @@
 #include "../QueryParser.hpp"
 
-namespace Moonlight::QueryParser::Helpers {
+namespace Moonlight::QueryParser::Implementation {
 
 namespace {
 
@@ -18,4 +18,4 @@ PARSER_LOGICS(Database)
     RETURN_QUERY_OBJECT;
 }
 
-} // namespace Moonlight::QueryParser::Helpers
+} // namespace Moonlight::QueryParser::Implementation

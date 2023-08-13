@@ -5,7 +5,7 @@
 #define ASSERT_MATCH(query) ASSERT_TRUE(DropParser{}.match(query))
 #define ASSERT_NO_MATCH(query) ASSERT_FALSE(DropParser{}.match(query))
 
-namespace Moonlight::QueryParser::Helpers::Tests {
+namespace Moonlight::QueryParser::Implementation::Tests {
 
 TEST(RegexDropMatchTest, match)
 {
@@ -49,4 +49,4 @@ TEST(RegexDropMatchTest, noMatch)
 }
 
 
-} // namespace Moonlight::QueryParser::Helpers::Tests
+} // namespace Moonlight::QueryParser::Implementation::Tests
