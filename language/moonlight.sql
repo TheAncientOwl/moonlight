@@ -3,6 +3,7 @@ Structure
     .drop(StructureName)
     .cascade(true | false);
 
+
 -- 2. CREATE
 Structure
     .create(table | document)
@@ -12,12 +13,10 @@ Structure
 
 -- 3. RENAME
 Structure
-    .rename(structure)
+    .rename(structure|field)
     .old_name(StructureNameOld)
     .new_name(StructureNameNew);
-
-Structure
-    .rename(field)
+    OR
     .old_name(StructureName.old_field)
     .new_name(StructureName.new_field);
 
@@ -34,6 +33,8 @@ Index.create_on(SomeStructure)
      .on_fields(field1, field2)
      .unique(true | false);          // -- optional - default false
 
+
+
 -- 6. MIGRATE
 Structure
     .migrate(StructureName)
@@ -42,6 +43,7 @@ Structure
         old_field1 => new_field1,
         old_field2 => new_field2
     );
+
 
 -- 7. SCHEMA
 Schema
@@ -55,7 +57,9 @@ Schema
         decimal_field => Decimal[32] default -46,
 
         unsigned_integer_field => Integer[32] default 21,
-        integer_field => Integer[32] default -21
+        integer_field => Integer[32] default -21,
+
+        reference_field => Reference OtherSchemaName
     )
     .checks(           // -- optional
         email like "*@*.*",
@@ -64,10 +68,17 @@ Schema
     .unique(cnp, somefield)    // -- optional
     .not_null(cnp, somefield); // -- optional
 
+
+
+
+
+
 -- 8. DELETE
 Structure
     .delete_from(StructureName)
     .where(rid = 11 or (rid >= 2 and 5 <= rid or salary < 5000) or rid = 9 or rid = 120);
+
+
 
 -- 9. UPDATE
 Structure
@@ -78,6 +89,7 @@ Structure
     )
     .where(rid = 11 or (rid >= 2 and 5 <= rid or salary < 5000) or rid = 9 or rid = 120);
     
+
 -- 10. SELECT
 Structure
     .select(
