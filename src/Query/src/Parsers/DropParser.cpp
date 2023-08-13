@@ -7,7 +7,11 @@ namespace {
 } // Anonymous namespace
 
 // ?Regex: https://regex101.com/r/kOwmeb/1
-PARSER_REGEX(Drop, R"(drop\s*\{\s*structure:\s*\w+\s*;\s*cascade:\s*(true|false)\s*;\s*\})");
+PARSER_REGEX(Drop,
+    R"(drop\s*\{)"
+    R"(\s*structure:\s*\w+\s*;)"
+    R"(\s*cascade:\s*(true|false)\s*;)"
+    R"(\s*\})");
 
 PARSER_LOGICS(Drop)
 {
