@@ -47,16 +47,16 @@ Structure
 Schema
     .create(SchemaName)
     .inherits(SchemaName1, SchemaName2) // -- optional
-    .fields({
+    .fields(
         string_field => String[30] default "SomeName",
         date_field => DateTime default SysDate,
 
-        unsigned_decimal_field => Decimal[32, unsigned] default 46,
+        unsigned_decimal_field => Decimal[32] default 46,
         decimal_field => Decimal[32] default -46,
 
-        unsigned_integer_field => Integer[32, unsigned] default 21,
+        unsigned_integer_field => Integer[32] default 21,
         integer_field => Integer[32] default -21
-    })
+    )
     .checks(           // -- optional
         email like "*@*.*",
         length(cnp) = 13,
