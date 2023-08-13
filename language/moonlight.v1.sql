@@ -33,7 +33,7 @@ index {
     on: SomeStructure;
     name: Field1Field2Index;
     fields: [ field1, field2 ];
-    unique: boolean; -- optional @default false
+    unique: boolean;
 }
 
 -- 6. MIGRATE
