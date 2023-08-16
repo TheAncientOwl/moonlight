@@ -6,14 +6,11 @@ namespace {
 
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/g0dIlM/1
-PARSER_REGEX(Create,
-    R"(create\s*structure\s*\{)"
-    R"(\s*name:\s*\w+\s*;)"
-    R"(\s*type:\s*(?:table|document)\s*;)"
-    R"(\s*based_on:\s*\w+\s*;)"
-    R"(\s*volatile:\s*(?:true|false)\s*;)"
-    R"(\s*\})");
+// TODO: implement matcher...
+PARSER_MATCHER(Create)
+{
+    return false;
+}
 
 PARSER_LOGICS(Create)
 {

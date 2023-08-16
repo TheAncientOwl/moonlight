@@ -6,10 +6,11 @@ namespace {
 
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/5sJBmN/1
-PARSER_REGEX(Schema,
-    R"(schema\s*\w+\s*\{(?:\s*inherits:\s*\[\s*(?:\w+(?:,|\s)+)+\]\s*;)?\s*fields:\s*\[\s*(?:\w+\s*is\s*!?(?:Boolean|DateTime|String\[\d+\]|(?:Int|Float)\[(?:8|16|32|64)\]|Reference)\s*@(?:default|of)\(.+\)(?:,|\s)+)+\]\s*;(?:\s*checks:\s*\[\s*(?:[^\]]*(?:,|\s)+)+\]\s*;)?(?:\s*unique:\s*\[\s*(?:\w+(?:,|\s)+)+\]\s*;)?\s*\})"
-);
+// TODO: implement matcher...
+PARSER_MATCHER(Schema)
+{
+    return false;
+}
 
 PARSER_LOGICS(Schema)
 {

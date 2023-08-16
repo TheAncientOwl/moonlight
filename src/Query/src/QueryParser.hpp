@@ -2,8 +2,6 @@
 
 #include "QueryObject.hpp"
 
-#include <regex>
-
 #define PARSER_CLASS(Specialization) \
 class Specialization ## Parser : public IQueryParser { \
 public: \
@@ -11,12 +9,8 @@ public: \
     QueryObject parse(std::string_view query) const override; \
 };
 
-#define PARSER_REGEX(Specialization, regex_str) \
-bool Specialization ## Parser::match(std::string_view query) const \
-{ \
-    static const std::regex s_pattern(regex_str, std::regex_constants::icase); \
-    return std::regex_match(query.begin(), query.end(), s_pattern); \
-}
+#define PARSER_MATCHER(Specialization) \
+bool Specialization ## Parser::match(std::string_view query) const
 
 #define PARSER_LOGICS(Specialization) \
 QueryObject Specialization ## Parser::parse(std::string_view query) const

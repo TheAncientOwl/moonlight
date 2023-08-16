@@ -6,8 +6,11 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Delete regex...
-PARSER_REGEX(Delete, "");
+// TODO: implement matcher...
+PARSER_MATCHER(Delete)
+{
+    return false;
+}
 
 PARSER_LOGICS(Delete)
 {

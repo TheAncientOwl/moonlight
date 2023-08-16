@@ -6,13 +6,11 @@ namespace {
 
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/8DhhKL/1
-PARSER_REGEX(Rename,
-    R"(rename\s*(?:)"
-    R"((?:structure\s*\{\s*old_name:\s*\w+\s*;\s*new_name:\s*\w+\s*;)|)"
-    R"((?:field\s*\{\s*old_name:\s*\w+\.\w+\s*;\s*new_name:\s*\w+\.\w+\s*;))"
-    R"()\s*})"
-);
+// TODO: implement matcher...
+PARSER_MATCHER(Rename)
+{
+    return false;
+};
 
 PARSER_LOGICS(Rename)
 {

@@ -6,8 +6,11 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement View regex...
-PARSER_REGEX(View, "");
+// TODO: implement matcher...
+PARSER_MATCHER(View)
+{
+    return false;
+}
 
 PARSER_LOGICS(View)
 {

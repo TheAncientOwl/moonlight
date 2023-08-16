@@ -6,17 +6,11 @@ namespace {
 
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/PL4uPR/1
-PARSER_REGEX(Database,
-    R"(database\s*(?:)"
-    R"((?:(?:create|drop)\s*\{)"
-    R"(\s*name:\s*\w+\s*;)|)"
-    R"((?:backup\s*\{)"
-    R"(\s*name:\s*\w+\s*;)"
-    R"(\s*to_disk:\s*(?:".*")\s*;)"
-    R"(\s*with_differential:\s*(?:true|false)\s*;))"
-    R"()\s*\})"
-);
+// TODO: implement matcher...
+PARSER_MATCHER(Database)
+{
+    return false;
+}
 
 PARSER_LOGICS(Database)
 {

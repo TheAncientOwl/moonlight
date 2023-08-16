@@ -6,14 +6,11 @@ namespace {
 
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/1WeJpP/1
-PARSER_REGEX(Migrate,
-    R"(migrate\s*\{)"
-    R"(\s*structure:\s*\w+\s*;)"
-    R"(\s*to:\s*\w+\s*;)"
-    R"((?:\s*mappings:\s*\[\s*(?:\w+\s*=>\s*\w+(?:,|\s)+)+\]\s*;)?)"
-    R"(\s*\})"
-);
+// TODO: implement matcher...
+PARSER_MATCHER(Migrate)
+{
+    return false;
+}
 
 PARSER_LOGICS(Migrate)
 {

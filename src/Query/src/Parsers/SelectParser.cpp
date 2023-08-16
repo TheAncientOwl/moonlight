@@ -6,8 +6,11 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Select regex...
-PARSER_REGEX(Select, "");
+// TODO: implement matcher...
+PARSER_MATCHER(Select)
+{
+    return false;
+}
 
 PARSER_LOGICS(Select)
 {
