@@ -8,23 +8,31 @@ using namespace std::literals;
 
 constexpr auto c_whitespace = " \n\r\t\f\v"sv;
 
-std::string_view ltrim(std::string_view str)
+void ltrim(std::string_view& str)
 {
-    const auto start = str.find_first_not_of(c_whitespace);
-    return (start == std::string_view::npos) ? "" : str.substr(start);
+    if (!str.empty())
+    {
+        const auto start = str.find_first_not_of(c_whitespace);
+
+        str = str.substr(std::min(start, str.length()));
+    }
 }
 
-std::string_view rtrim(std::string_view str)
+void rtrim(std::string_view& str)
 {
-    const auto end = str.find_last_not_of(c_whitespace);
-    return (end == std::string_view::npos) ? "" : str.substr(0, end + 1);
+    if (!str.empty())
+    {
+        const auto end = str.find_last_not_of(c_whitespace);
+
+        str = str.substr(0, end + 1);
+    }
 }
 
-std::string_view trim(std::string_view str)
+void trim(std::string_view& str)
 {
-    return ltrim(rtrim(str));
+    ltrim(str);
+    rtrim(str);
 }
-
 
 bool equalsIgnoreCase(std::string_view s1, std::string_view s2)
 {
