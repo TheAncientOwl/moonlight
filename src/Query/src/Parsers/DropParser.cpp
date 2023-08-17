@@ -1,15 +1,16 @@
 #include "../QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 namespace Moonlight::QueryParser::Implementation {
 
 namespace {
 
 } // Anonymous namespace
 
-// TODO: implement matcher...
 QUERY_COULD_MATCH(Drop)
 {
-    return false;
+    return Utils::startsWithIgnoreCase(query, "drop");
 }
 
 QUERY_PARSER(Drop)
