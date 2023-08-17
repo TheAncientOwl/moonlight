@@ -17,4 +17,5 @@ add_library(MoonlightQuery SHARED
 
 target_link_libraries(MoonlightQuery PRIVATE
     MoonlightPrimitives
+    MoonlightUtils
 )

@@ -7,12 +7,12 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement matcher...
-PARSER_MATCHER(Migrate)
+QUERY_COULD_MATCH(Migrate)
 {
     return false;
 }
 
-PARSER_LOGICS(Migrate)
+QUERY_PARSER(Migrate)
 {
     QUERY_OBJECT(obj, Migrate);
 

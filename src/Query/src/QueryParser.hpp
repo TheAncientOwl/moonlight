@@ -2,18 +2,15 @@
 
 #include "QueryObject.hpp"
 
-#define PARSER_CLASS(Specialization) \
-class Specialization ## Parser : public IQueryParser { \
-public: \
-    bool match(std::string_view query) const override; \
-    QueryObject parse(std::string_view query) const override; \
-};
+#define QUERY_PARSER_CLASS(Specialization) \
+    class Specialization ## Parser : public IQueryParser { \
+    public: \
+        bool couldMatch(std::string_view query) const override; \
+        QueryObject parse(std::string_view query) const override; \
+    };
 
-#define PARSER_MATCHER(Specialization) \
-bool Specialization ## Parser::match(std::string_view query) const
-
-#define PARSER_LOGICS(Specialization) \
-QueryObject Specialization ## Parser::parse(std::string_view query) const
+#define QUERY_COULD_MATCH(Specialization) bool Specialization ## Parser::couldMatch(std::string_view query) const
+#define QUERY_PARSER(Specialization) QueryObject Specialization ## Parser::parse(std::string_view query) const
 
 #define PLAIN_QUERY_OBJECT QueryObject query_obj{}
 
@@ -33,7 +30,20 @@ namespace Implementation {
 class IQueryParser
 {
 public: // methods
-    virtual bool match(std::string_view query) const = 0;
+    /**
+     * @brief check if query string starts with a specific keyword (like drop | create | etc...)
+     *
+     * @param query -> string representation of query
+     * @return true -> if query starts with specific query string
+     */
+    virtual bool couldMatch(std::string_view query) const = 0;
+
+    /**
+     * @brief
+     *
+     * @param query -> string representation of query
+     * @return QueryObject -> object representations of parsed query
+     */
     virtual QueryObject parse(std::string_view query) const = 0;
 
 public: // constructors
@@ -48,17 +58,17 @@ public: // constructors
     virtual ~IQueryParser();
 };
 
-PARSER_CLASS(Drop)
-PARSER_CLASS(Create)
-PARSER_CLASS(Rename)
-PARSER_CLASS(Database)
-PARSER_CLASS(Index)
-PARSER_CLASS(Migrate)
-PARSER_CLASS(Schema)
-PARSER_CLASS(Delete)
-PARSER_CLASS(Update)
-PARSER_CLASS(Select)
-PARSER_CLASS(View)
+QUERY_PARSER_CLASS(Drop)
+QUERY_PARSER_CLASS(Create)
+QUERY_PARSER_CLASS(Rename)
+QUERY_PARSER_CLASS(Database)
+QUERY_PARSER_CLASS(Index)
+QUERY_PARSER_CLASS(Migrate)
+QUERY_PARSER_CLASS(Schema)
+QUERY_PARSER_CLASS(Delete)
+QUERY_PARSER_CLASS(Update)
+QUERY_PARSER_CLASS(Select)
+QUERY_PARSER_CLASS(View)
 
 } // namespace Implementation
 

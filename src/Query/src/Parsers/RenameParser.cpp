@@ -7,12 +7,12 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement matcher...
-PARSER_MATCHER(Rename)
+QUERY_COULD_MATCH(Rename)
 {
     return false;
 };
 
-PARSER_LOGICS(Rename)
+QUERY_PARSER(Rename)
 {
     QUERY_OBJECT(obj, Rename);
 

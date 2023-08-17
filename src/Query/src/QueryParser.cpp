@@ -27,7 +27,7 @@ QueryObject parseQuery(std::string_view query)
 
     const auto parser = std::find_if(s_parsers.begin(), s_parsers.end(),
         [query](const auto& parser) {
-            return parser->match(query);
+            return parser->couldMatch(query);
         });
 
     if (parser == s_parsers_end)

@@ -7,12 +7,12 @@ namespace {
 } // Anonymous namespace
 
 // TODO: implement matcher...
-PARSER_MATCHER(View)
+QUERY_COULD_MATCH(View)
 {
     return false;
 }
 
-PARSER_LOGICS(View)
+QUERY_PARSER(View)
 {
     QUERY_OBJECT(obj, View);
 
