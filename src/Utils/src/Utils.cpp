@@ -145,7 +145,7 @@ std::string_view extractIdentifier(std::string_view& query, std::string_view key
  */
 bool extractBoolean(std::string_view& query, std::string_view keyword)
 {
-    const auto boolean = extractValue(query, "cascade");
+    const auto boolean = extractValue(query, keyword);
 
     if (equalsIgnoreCase(boolean, "true"))
     {
