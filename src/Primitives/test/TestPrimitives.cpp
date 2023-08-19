@@ -22,6 +22,7 @@ TEST(PrimitivesTest, StructureRenameType)
     ASSERT_EQ(Literal::Undefined, to_literal(to_string(Literal::Undefined)));
     ASSERT_EQ(Literal::Structure, to_literal(to_string(Literal::Structure)));
     ASSERT_EQ(Literal::Field, to_literal(to_string(Literal::Field)));
+    ASSERT_EQ(Literal::Database, to_literal(to_string(Literal::Database)));
 }
 
 TEST(PrimitivesTest, DatabaseOperationType)

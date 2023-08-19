@@ -13,7 +13,8 @@ create structure {
 }
 
 -- 3. RENAME
-rename structure|field {
+rename {
+    type: structure|field|database;
     old_name: StructureNameOld;
     new_name: StructureNameNew;
     OR
