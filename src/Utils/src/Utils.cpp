@@ -191,6 +191,11 @@ void cleanupQuery(std::string_view& query, std::string_view prefix)
     query.remove_suffix(1);
 
     trim(query);
+
+    if (query.empty())
+    {
+        throw std::runtime_error("Query body cannot be empty");
+    }
 }
 
 } // namespace Moonlight::Utils
