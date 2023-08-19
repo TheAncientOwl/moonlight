@@ -27,7 +27,6 @@ TEST(DropParserTest, parseSuccess)
 
         EXPECT_DROP_EQ(out, expected);
     }
-
     {
         const auto query =
             "drop"
@@ -44,7 +43,6 @@ TEST(DropParserTest, parseSuccess)
 
         EXPECT_DROP_EQ(out, expected);
     }
-
     {
         const auto query =
             "drop"
@@ -61,7 +59,6 @@ TEST(DropParserTest, parseSuccess)
 
         EXPECT_DROP_EQ(out, expected);
     }
-
     {
         const auto query =
             "Drop"
@@ -86,7 +83,6 @@ TEST(DropParserTest, parseThrow)
         const auto query = "drop{}";
         EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
     }
-
     {
         const auto query =
             "drop"
@@ -96,7 +92,6 @@ TEST(DropParserTest, parseThrow)
             "}";
         EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
     }
-
     {
         const auto query =
             "drop"
@@ -105,7 +100,6 @@ TEST(DropParserTest, parseThrow)
             "}";
         EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
     }
-
     {
         const auto query =
             "drop"
@@ -114,7 +108,6 @@ TEST(DropParserTest, parseThrow)
             "}";
         EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
     }
-
     {
         const auto query =
             "drop"
@@ -124,7 +117,6 @@ TEST(DropParserTest, parseThrow)
             "}";
         EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
     }
-
     {
         const auto query =
             "drop"
