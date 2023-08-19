@@ -1,6 +1,11 @@
 #include "../QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 namespace Moonlight::QueryParser::Implementation {
+
+using namespace Utils;
+using namespace std::literals;
 
 namespace {
 

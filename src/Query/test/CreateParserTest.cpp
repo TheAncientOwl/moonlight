@@ -14,4 +14,9 @@ TEST(CreateParserTest, parseSuccess)
 
 }
 
+TEST(CreateParserTest, parseThrow)
+{
+
+}
+
 } // namespace Moonlight::QueryParser::Implementation::Tests
