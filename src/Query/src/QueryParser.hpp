@@ -2,6 +2,8 @@
 
 #include "QueryObject.hpp"
 
+#include <stdexcept>
+
 #define QUERY_PARSER_CLASS(Specialization) \
     class Specialization ## Parser : public IQueryParser { \
     public: \

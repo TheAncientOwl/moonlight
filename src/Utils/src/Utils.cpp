@@ -1,6 +1,9 @@
 #include "Utils.hpp"
 
+#include <stdexcept>
 #include <cctype>
+#include <string>
+#include <regex>
 
 namespace Moonlight::Utils {
 
@@ -60,6 +63,62 @@ bool startsWithIgnoreCase(std::string_view src, std::string_view what)
     }
 
     return equalsIgnoreCase(src.substr(0, what.length()), what);
+}
+
+/**
+ * @brief -> query format: [whitespace]keyword[:][whitespace]value[whitespace][;][query...].
+ *
+ * @param query -> string representation of the query
+ * @param keyword -> keyword to be removed
+ * @return std::string_view -> trimmed value
+ */
+std::string_view extractValue(std::string_view& query, std::string_view keyword)
+{
+    // 1. check if query starts with the keyword
+    ltrim(query);
+    if (!startsWithIgnoreCase(query, keyword))
+    {
+        throw std::runtime_error("Invalid query, missing '"s + std::string(keyword) + "' keyword"s);
+    }
+
+    // 2. remove keyword + ':' symbol && assert query not empty
+    query.remove_prefix(keyword.length());
+    ltrim(query);
+    if (query.empty() || !query.starts_with(':'))
+    {
+        throw std::runtime_error("Missing ':' symbol @ '"s + std::string(query) + "'"s);
+    }
+    query.remove_prefix(1);
+    ltrim(query);
+    if (query.empty())
+    {
+        throw std::runtime_error("Missing value for keyword '"s + std::string(keyword) + "'"s);
+    }
+
+    // 3. find ';' (end of value)
+    const auto end_pos = query.find_first_of(';');
+    if (end_pos == std::string_view::npos)
+    {
+        throw std::runtime_error("Missing ';' @"s + std::string(query));
+    }
+
+    // 4. extract & remove value
+    auto value = query.substr(0, end_pos);
+    trim(value);
+    if (value.empty())
+    {
+        throw std::runtime_error("Value cannot be empty @ keyword '"s + std::string(keyword) + "'"s);
+    }
+    query.remove_prefix(end_pos + 1);
+
+    return value;
+}
+
+bool isValidIdentifier(std::string_view str)
+{
+    static const std::regex c_identifier_regex(R"(\w+)");
+
+    return std::regex_match(str.begin(), str.end(), c_identifier_regex);
 }
 
 } // namespace Moonlight::Utils

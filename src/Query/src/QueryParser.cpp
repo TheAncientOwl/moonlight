@@ -3,7 +3,6 @@
 #include "Utils/src/Utils.hpp"
 
 #include <array>
-#include <stdexcept>
 #include <memory>
 
 namespace Moonlight::QueryParser {
