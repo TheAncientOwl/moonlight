@@ -18,5 +18,6 @@ std::string_view extractValue(std::string_view& query, std::string_view keyword)
 bool isValidIdentifier(std::string_view str);
 std::string_view extractIdentifier(std::string_view& query, std::string_view keyword);
 bool extractBoolean(std::string_view& query, std::string_view keyword);
+void cleanupQuery(std::string_view& query, std::string_view prefix);
 
 } // namespace Moonlight::Utils

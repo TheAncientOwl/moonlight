@@ -16,7 +16,7 @@ TEST(RenameParserTest, parseSuccess01)
         "   type: structure;"
         "   old_name: StructureNameOld;"
         "   new_name: StructureNameNew;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Rename>();
 
@@ -35,7 +35,7 @@ TEST(RenameParserTest, parseSuccess02)
         "   type: database;"
         "   old_name: StructureNameOld;"
         "   new_name: StructureNameNew;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Rename>();
 
@@ -54,7 +54,7 @@ TEST(RenameParserTest, parseSuccess03)
         "   type: field;"
         "   old_name: StructureName.old_field;"
         "   new_name: StructureName.new_field;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Rename>();
 
@@ -73,7 +73,7 @@ TEST(RenameParserTest, parseSuccess04)
         "   type        :       structure;"
         "   old_name        :            StructureNameOld       ;   "
         "   new_name        :       StructureNameNew        ;   "
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Rename>();
 
@@ -92,7 +92,7 @@ TEST(RenameParserTest, parseSuccess05)
         "   type            :               Database        ;"
         "   old_name            :       StructureNameOld      ;"
         "   new_name        :        StructureNameNew       ;       "
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Rename>();
 
@@ -111,7 +111,7 @@ TEST(RenameParserTest, parseSuccess06)
         "   type                :                    field;"
         "   old_name        :    StructureName.old_field;"
         "   new_name            :   StructureName.new_field         ;                "
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Rename>();
 
@@ -130,7 +130,7 @@ TEST(RenameParserTest, parseThrow01)
         "   type: sdasd;"
         "   old_name: StructureNameOld;"
         "   new_name: StructureNameNew;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -140,7 +140,7 @@ TEST(RenameParserTest, parseThrow02)
         "rename {"
         "   old_name: StructureNameOld;"
         "   new_name: StructureNameNew;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -150,7 +150,7 @@ TEST(RenameParserTest, parseThrow03)
         "rename {"
         "   type: structure;"
         "   new_name: StructureNameNew;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -160,7 +160,7 @@ TEST(RenameParserTest, parseThrow04)
         "rename {"
         "   type: structure;"
         "   old_name: StructureNameOld;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -171,7 +171,7 @@ TEST(RenameParserTest, parseThrow05)
         "   type: structure;"
         "   old_name: StructureName.Old;"
         "   new_name: StructureNameNew;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -182,7 +182,7 @@ TEST(RenameParserTest, parseThrow06)
         "   type: structure;"
         "   old_name: StructureNameOld;"
         "   new_name: StructureName.New;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -193,7 +193,7 @@ TEST(RenameParserTest, parseThrow07)
         "   type: database;"
         "   old_name: StructureName.Old;"
         "   new_name: StructureNameNew;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -204,7 +204,7 @@ TEST(RenameParserTest, parseThrow08)
         "   type: database;"
         "   old_name: StructureName.Old;"
         "   new_name: StructureName.New;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -215,7 +215,7 @@ TEST(RenameParserTest, parseThrow09)
         "   type: field;"
         "   old_name: StructureName.;"
         "   new_name: StructureName.New;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -226,7 +226,7 @@ TEST(RenameParserTest, parseThrow10)
         "   type: field;"
         "   old_name: StructureName.Old;"
         "   new_name: StructureName.;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -237,7 +237,7 @@ TEST(RenameParserTest, parseThrow11)
         "   type: field;"
         "   old_name: StructureNameOld;"
         "   new_name: StructureName.New;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -248,7 +248,7 @@ TEST(RenameParserTest, parseThrow12)
         "   type: field;"
         "   old_name: StructureName.Old;"
         "   new_name: StructureNameNew;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -259,7 +259,7 @@ TEST(RenameParserTest, parseThrow13)
         "   type: field;"
         "   old_name: StructureName.;"
         "   new_name: StructureName.New;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -270,7 +270,7 @@ TEST(RenameParserTest, parseThrow14)
         "   type: field;"
         "   old_name: StructureName.Old;"
         "   new_name: StructureName.;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -281,7 +281,7 @@ TEST(RenameParserTest, parseThrow15)
         "   type: field;"
         "   old_name: StructureName. Old;"
         "   new_name: StructureName.New;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -292,7 +292,7 @@ TEST(RenameParserTest, parseThrow16)
         "   type: field;"
         "   old_name: StructureName  .Old;"
         "   new_name: StructureName.New;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -303,7 +303,7 @@ TEST(RenameParserTest, parseThrow17)
         "   type: field;"
         "   old_name: StructureName  .  Old;"
         "   new_name: StructureName.New;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 

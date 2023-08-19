@@ -9,31 +9,6 @@ using namespace std::literals;
 
 namespace {
 
-/**
- * @brief bring query to format: "content"
- *
- * @param query string representation of query in format: "database { content }"
- */
-void cleanup(std::string_view& query)
-{
-    query.remove_prefix("database"sv.length());
-    ltrim(query);
-
-    if (query.front() != '{')
-    {
-        throw std::runtime_error("Missing '{' symbol");
-    }
-    query.remove_prefix(1);
-
-    if (query.back() != '}')
-    {
-        throw std::runtime_error("Missing '}' symbol");
-    }
-    query.remove_suffix(1);
-
-    trim(query);
-}
-
 Primitives::EDatabaseOperationType extractOperationType(std::string_view& query)
 {
     const auto type = extractValue(query, "operation");
@@ -52,7 +27,7 @@ QUERY_PARSER(Database)
 {
     QUERY_OBJECT(obj, Database);
 
-    cleanup(query);
+    cleanupQuery(query, "database");
 
     obj.type = extractOperationType(query);
     obj.name = extractIdentifier(query, "name");

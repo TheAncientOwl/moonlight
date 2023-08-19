@@ -14,7 +14,7 @@ TEST(DatabaseParserTest, parseSuccess01)
     const auto query = "database {"
         "operation: create;"
         "name: DatabaseName;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Database>();
 
@@ -30,7 +30,7 @@ TEST(DatabaseParserTest, parseSuccess02)
     const auto query = "database {"
         "       operation       :                    create     ;"
         "               name        :          DatabaseName     ;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Database>();
 
@@ -46,7 +46,7 @@ TEST(DatabaseParserTest, parseSuccess03)
     const auto query = "database {"
         "operation: drop;"
         "name: DatabaseName;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Database>();
 
@@ -62,7 +62,7 @@ TEST(DatabaseParserTest, parseSuccess04)
     const auto query = "database {"
         "           operation       :                     drop                ;"
         "           name    :          DatabaseName     ;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Database>();
 
@@ -80,7 +80,7 @@ TEST(DatabaseParserTest, parseSuccess05)
         "name: DatabaseName;"
         R"(to_disk: "/home/user/lunardb-backup";)"
         "with_differential: true;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Database>();
 
@@ -103,7 +103,7 @@ TEST(DatabaseParserTest, parseSuccess06)
         "       name        :          DatabaseName     ;   "
         R"(     to_disk     :        "/home/user/lunardb-backup"        ;)"
         "       with_differential       :     true    ;   "
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Database>();
 
@@ -126,7 +126,7 @@ TEST(DatabaseParserTest, parseSuccess07)
         "name: DatabaseName;"
         R"(to_disk: "/home/user/lunardb-backup";)"
         "with_differential: false;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Database>();
 
@@ -149,7 +149,7 @@ TEST(DatabaseParserTest, parseSuccess08)
         "       name        :      DatabaseName ;"
         R"(                         to_disk     : "/home/user/lunardb-backup";)"
         "       with_differential       :     false   ;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Database>();
 
@@ -170,7 +170,7 @@ TEST(DatabaseParserTest, parseThrow01)
     const auto query = "database {"
         "operation: something;"
         "name: DatabaseName;"
-        "}";
+        "};";
 
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
@@ -180,7 +180,7 @@ TEST(DatabaseParserTest, parseThrow02)
     const auto query = "database {"
         "operation: create;"
         "name: Database-Name;"
-        "}";
+        "};";
 
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
@@ -191,7 +191,7 @@ TEST(DatabaseParserTest, parseThrow03)
         "operation: backup;"
         "name: DatabaseName;"
         R"(to_disk: "/home/user/lunardb-backup";)"
-        "}";
+        "};";
 
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
@@ -202,7 +202,7 @@ TEST(DatabaseParserTest, parseThrow04)
         "operation: backup;"
         "name: DatabaseName;"
         "with_differential: true;"
-        "}";
+        "};";
 
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
@@ -214,7 +214,7 @@ TEST(DatabaseParserTest, parseThrow05)
         "name: DatabaseName;"
         R"(to_disk: ;)"
         "with_differential: true;"
-        "}";
+        "};";
 
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }

@@ -161,4 +161,36 @@ bool extractBoolean(std::string_view& query, std::string_view keyword)
     }
 }
 
+/**
+ * @brief bring query to format: "content"
+ *
+ * @param query string representation of query in format: "prefix { content };"
+ */
+void cleanupQuery(std::string_view& query, std::string_view prefix)
+{
+    query.remove_prefix(prefix.length());
+    ltrim(query);
+
+    if (query.front() != '{')
+    {
+        throw std::runtime_error("Missing '{' symbol");
+    }
+    query.remove_prefix(1);
+
+    if (query.back() != ';')
+    {
+        throw std::runtime_error("Missing ';' symbol");
+    }
+    query.remove_suffix(1);
+    rtrim(query);
+
+    if (query.back() != '}')
+    {
+        throw std::runtime_error("Missing '}' symbol");
+    }
+    query.remove_suffix(1);
+
+    trim(query);
+}
+
 } // namespace Moonlight::Utils

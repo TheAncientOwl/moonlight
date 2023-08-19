@@ -9,31 +9,6 @@ using namespace std::literals;
 
 namespace {
 
-/**
- * @brief bring query to format: "content"
- *
- * @param query string representation of query in format: "drop { content }"
- */
-void cleanup(std::string_view& query)
-{
-    query.remove_prefix("drop"sv.length());
-    ltrim(query);
-
-    if (query.front() != '{')
-    {
-        throw std::runtime_error("Missing '{' symbol");
-    }
-    query.remove_prefix(1);
-
-    if (query.back() != '}')
-    {
-        throw std::runtime_error("Missing '}' symbol");
-    }
-    query.remove_suffix(1);
-
-    trim(query);
-}
-
 } // Anonymous namespace
 
 QUERY_COULD_MATCH(Drop)
@@ -45,7 +20,7 @@ QUERY_PARSER(Drop)
 {
     QUERY_OBJECT(obj, Drop);
 
-    cleanup(query);
+    cleanupQuery(query, "drop");
 
     obj.name = extractIdentifier(query, "structure");
     obj.cascade = extractBoolean(query, "cascade");

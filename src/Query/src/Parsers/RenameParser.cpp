@@ -9,31 +9,6 @@ using namespace std::literals;
 
 namespace {
 
-/**
- * @brief bring query to format: "content"
- *
- * @param query string representation of query in format: "rename { content }"
- */
-void cleanup(std::string_view& query)
-{
-    query.remove_prefix("rename"sv.length());
-    ltrim(query);
-
-    if (query.front() != '{')
-    {
-        throw std::runtime_error("Missing '{' symbol");
-    }
-    query.remove_prefix(1);
-
-    if (query.back() != '}')
-    {
-        throw std::runtime_error("Missing '}' symbol");
-    }
-    query.remove_suffix(1);
-
-    trim(query);
-}
-
 Primitives::EStructureRenameType extractRenameType(std::string_view& query)
 {
     const auto type = extractValue(query, "type");
@@ -130,7 +105,7 @@ QUERY_PARSER(Rename)
 {
     QUERY_OBJECT(obj, Rename);
 
-    cleanup(query);
+    cleanupQuery(query, "rename");
 
     obj.type = extractRenameType(query);
     obj.old_name = extractValue(query, "old_name");

@@ -17,7 +17,7 @@ TEST(CreateParserTest, parseSuccess01)
         "   type: table;"
         "   based_on: SchemaName;"
         "   volatile: true;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Create>();
 
@@ -38,7 +38,7 @@ TEST(CreateParserTest, parseSuccess02)
         "   type: document;"
         "   based_on: SchemaName;"
         "   volatile: true;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Create>();
 
@@ -59,7 +59,7 @@ TEST(CreateParserTest, parseSuccess03)
         "   type: document;"
         "   based_on: SchemaName;"
         "   volatile: true;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Create>();
 
@@ -80,7 +80,7 @@ TEST(CreateParserTest, parseSuccess04)
         "   type: document;"
         "   based_on: SchemaName;"
         "   volatile: false;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Create>();
 
@@ -96,12 +96,12 @@ TEST(CreateParserTest, parseSuccess04)
 TEST(CreateParserTest, parseSuccess05)
 {
     const auto query =
-        "create           structure    {"
+        "create structure    {"
         "   name   :    StructureName   ;  "
         "   type  : table   ;  "
         "   based_on  : SchemaName  ;  "
         "   volatile  :   true  ;  "
-        "  }   ";
+        "  } ;  ";
 
     const auto out = parseQuery(query).get<Create>();
 
@@ -122,7 +122,7 @@ TEST(CreateParserTest, parseThrow01)
         "   type: table;"
         "   based_on: SchemaName;"
         "   volatile: maybe;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -134,7 +134,7 @@ TEST(CreateParserTest, parseThrow02)
         "   type: table;"
         "   based_on: SchemaName;"
         "   volatile: true;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -145,7 +145,7 @@ TEST(CreateParserTest, parseThrow03)
         "   type: table;"
         "   based_on: SchemaName;"
         "   volatile: true;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -156,7 +156,7 @@ TEST(CreateParserTest, parseThrow04)
         "   name: StructureName;"
         "   based_on: SchemaName;"
         "   volatile: true;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -167,7 +167,7 @@ TEST(CreateParserTest, parseThrow05)
         "   name: StructureName;"
         "   type: table;"
         "   volatile: true;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -178,7 +178,7 @@ TEST(CreateParserTest, parseThrow06)
         "   name: StructureName;"
         "   type: table;"
         "   based_on: SchemaName;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 

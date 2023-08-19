@@ -16,7 +16,7 @@ TEST(DropParserTest, parseSuccess01)
         "{"
         "   structure: StructureName;"
         "   cascade: true;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Drop>();
 
@@ -34,7 +34,7 @@ TEST(DropParserTest, parseSuccess02)
         "{"
         "   structure: StructureName;"
         "   cascade: false;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Drop>();
 
@@ -52,7 +52,7 @@ TEST(DropParserTest, parseSuccess03)
         "{"
         "   structure       :   StructureName       ;        "
         "   cascade: true;"
-        "}";
+        "};";
 
     const auto out = parseQuery(query).get<Drop>();
 
@@ -70,7 +70,7 @@ TEST(DropParserTest, parseSuccess04)
         "                       {"
         "   Structure  : StructureName;"
         "       Cascade      : true   ;"
-        "             }       ";
+        "             };       ";
 
     const auto out = parseQuery(query).get<Drop>();
 
@@ -83,7 +83,7 @@ TEST(DropParserTest, parseSuccess04)
 
 TEST(DropParserTest, parseThrow01)
 {
-    const auto query = "drop{}";
+    const auto query = "drop{};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -94,7 +94,7 @@ TEST(DropParserTest, parseThrow02)
         "{"
         "   structure StructureName;"
         "   cascade: true;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -104,7 +104,7 @@ TEST(DropParserTest, parseThrow03)
         "drop"
         "{"
         "   cascade: true;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -114,7 +114,7 @@ TEST(DropParserTest, parseThrow04)
         "drop"
         "{"
         "   structure: StructureName;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -125,7 +125,7 @@ TEST(DropParserTest, parseThrow05)
         "{"
         "   structure: StructureName;"
         "   cascade: maybe;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -136,7 +136,7 @@ TEST(DropParserTest, parseThrow06)
         "{"
         "   structure:"
         "   cascade: true;"
-        "}";
+        "};";
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 

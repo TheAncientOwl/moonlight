@@ -2,7 +2,7 @@
 drop {
     structure: StructureName;
     cascade: boolean;
-}
+};
 
 -- 2. CREATE
 create structure {
@@ -10,17 +10,18 @@ create structure {
     type: table|document;
     based_on: SchemaName;
     volatile: boolean;
-}
+};
 
 -- 3. RENAME
 rename {
     type: structure|field|database;
+    
     old_name: StructureNameOld;
     new_name: StructureNameNew;
     OR
     old_name: StructureName.old_field;
     new_name: StructureName.new_field;
-}
+};
 
 -- 4. DATABASE
 database {
@@ -28,7 +29,7 @@ database {
     name: DatabaseName;
     to_disk: "/home/user/lunardb-backup";
     with_differential: boolean;
-}
+};
 
 -- 5. INDEX
 index {
@@ -36,7 +37,7 @@ index {
     name: Field1Field2Index;
     fields: [ field1, field2 ];
     unique: boolean;
-}
+};
 
 -- 6. MIGRATE
 migrate {
@@ -46,10 +47,11 @@ migrate {
         old_field1 => new_field1,
         old_field2 => new_field2
     ];
-}
+};
 
 -- 7. SCHEMA
-schema SchemaName {
+schema {
+    name: SchemaName;
     inherits: [ SchemaName1, SchemaName2 ];   -- optional
 
     fields: [
@@ -74,16 +76,17 @@ schema SchemaName {
     ];
 
     unique: [ field1, field2 ];               -- optional
-}
+};
 
 -- 8. DELETE
 delete {
     from: StructureName;
     where: rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120;
-}
+};
 
 -- 9. UPDATE
-update StructureName {
+update {
+    structure: StructureName;
     set: [
         field1 => field1 * 1.5 + 2,
         field2 => 3
@@ -117,7 +120,7 @@ select {
         s1.some_field asc,
         s2.some_field desc
     ];
-}
+};
 
 -- 11. VIEW
 view {
