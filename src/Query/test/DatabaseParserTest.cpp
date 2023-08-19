@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 
 #include "QueryParser.hpp"
-#include "QueryDataInit.hpp"
-#include "QueryDataEquals.hpp"
+#include "helpers/QueryDataInit.hpp"
+#include "helpers/QueryDataEquals.hpp"
 
 namespace Moonlight::QueryParser::Implementation::Tests {
 
 using namespace QueryData;
 using namespace std::literals;
 
-TEST(DatabaseParserTest, parseSuccessCreate1)
+TEST(DatabaseParserTest, parseSuccess01)
 {
     const auto query = "database {"
         "operation: create;"
@@ -25,7 +25,7 @@ TEST(DatabaseParserTest, parseSuccessCreate1)
     EXPECT_DATABASE_EQ(out, expected);
 }
 
-TEST(DatabaseParserTest, parseSuccessCreate2)
+TEST(DatabaseParserTest, parseSuccess02)
 {
     const auto query = "database {"
         "       operation       :                    create     ;"
@@ -41,7 +41,7 @@ TEST(DatabaseParserTest, parseSuccessCreate2)
     EXPECT_DATABASE_EQ(out, expected);
 }
 
-TEST(DatabaseParserTest, parseSuccessDrop1)
+TEST(DatabaseParserTest, parseSuccess03)
 {
     const auto query = "database {"
         "operation: drop;"
@@ -57,7 +57,7 @@ TEST(DatabaseParserTest, parseSuccessDrop1)
     EXPECT_DATABASE_EQ(out, expected);
 }
 
-TEST(DatabaseParserTest, parseSuccessDrop2)
+TEST(DatabaseParserTest, parseSuccess04)
 {
     const auto query = "database {"
         "           operation       :                     drop                ;"
@@ -73,7 +73,7 @@ TEST(DatabaseParserTest, parseSuccessDrop2)
     EXPECT_DATABASE_EQ(out, expected);
 }
 
-TEST(DatabaseParserTest, parseSuccessBackup11)
+TEST(DatabaseParserTest, parseSuccess05)
 {
     const auto query = "database {"
         "operation: backup;"
@@ -96,7 +96,7 @@ TEST(DatabaseParserTest, parseSuccessBackup11)
     EXPECT_DATABASE_EQ(out, expected);
 }
 
-TEST(DatabaseParserTest, parseSuccessBackup12)
+TEST(DatabaseParserTest, parseSuccess06)
 {
     const auto query = "database {"
         "               operation   :                 backup  ;"
@@ -119,7 +119,7 @@ TEST(DatabaseParserTest, parseSuccessBackup12)
     EXPECT_DATABASE_EQ(out, expected);
 }
 
-TEST(DatabaseParserTest, parseSuccessBackup21)
+TEST(DatabaseParserTest, parseSuccess07)
 {
     const auto query = "database {"
         "operation: backup;"
@@ -142,7 +142,7 @@ TEST(DatabaseParserTest, parseSuccessBackup21)
     EXPECT_DATABASE_EQ(out, expected);
 }
 
-TEST(DatabaseParserTest, parseSuccessBackup22)
+TEST(DatabaseParserTest, parseSuccess08)
 {
     const auto query = "database {"
         "       operation   :   backup  ;"
@@ -165,7 +165,7 @@ TEST(DatabaseParserTest, parseSuccessBackup22)
     EXPECT_DATABASE_EQ(out, expected);
 }
 
-TEST(DatabaseParserTest, parseThrowUnknownOperation)
+TEST(DatabaseParserTest, parseThrow01)
 {
     const auto query = "database {"
         "operation: something;"
@@ -175,7 +175,7 @@ TEST(DatabaseParserTest, parseThrowUnknownOperation)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-TEST(DatabaseParserTest, parseThrowInvalidName)
+TEST(DatabaseParserTest, parseThrow02)
 {
     const auto query = "database {"
         "operation: create;"
@@ -185,7 +185,7 @@ TEST(DatabaseParserTest, parseThrowInvalidName)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-TEST(DatabaseParserTest, parseThrowBackup1)
+TEST(DatabaseParserTest, parseThrow03)
 {
     const auto query = "database {"
         "operation: backup;"
@@ -196,7 +196,7 @@ TEST(DatabaseParserTest, parseThrowBackup1)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-TEST(DatabaseParserTest, parseThrowBackup2)
+TEST(DatabaseParserTest, parseThrow04)
 {
     const auto query = "database {"
         "operation: backup;"
@@ -207,7 +207,7 @@ TEST(DatabaseParserTest, parseThrowBackup2)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-TEST(DatabaseParserTest, parseThrowBackup3)
+TEST(DatabaseParserTest, parseThrow05)
 {
     const auto query = "database {"
         "operation: backup;"

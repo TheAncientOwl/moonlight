@@ -1,4 +1,4 @@
-#include "QueryDataInit.hpp"
+#include "helpers/QueryDataInit.hpp"
 
 namespace Moonlight::QueryData::Init {
 
