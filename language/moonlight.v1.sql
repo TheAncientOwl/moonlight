@@ -23,7 +23,8 @@ rename {
 }
 
 -- 4. DATABASE
-database create|drop|backup {
+database {
+    operation: create|drop|backup
     name: DatabaseName;
     to_disk: "/home/user/lunardb-backup";
     with_differential: boolean;
