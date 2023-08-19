@@ -121,4 +121,44 @@ bool isValidIdentifier(std::string_view str)
     return std::regex_match(str.begin(), str.end(), c_identifier_regex);
 }
 
+/**
+ * @brief extract value and cleanup query
+ *
+ * @param query string representation of query in format "keyword: identifier; [query...]"
+ */
+std::string_view extractIdentifier(std::string_view& query, std::string_view keyword)
+{
+    const auto name = extractValue(query, keyword);
+
+    if (!isValidIdentifier(name))
+    {
+        throw std::runtime_error("Invalid identifier name @ '"s + std::string(name) + "'"s);
+    }
+
+    return name;
+}
+
+/**
+ * @brief extract value and cleanup query
+ *
+ * @param query string representation of query in format "keyword: true|false; [query...]"
+ */
+bool extractBoolean(std::string_view& query, std::string_view keyword)
+{
+    const auto boolean = extractValue(query, "cascade");
+
+    if (equalsIgnoreCase(boolean, "true"))
+    {
+        return true;
+    }
+    else if (equalsIgnoreCase(boolean, "false"))
+    {
+        return false;
+    }
+    else
+    {
+        throw std::runtime_error("Invalid boolean value '"s + std::string(boolean) + "'"s);
+    }
+}
+
 } // namespace Moonlight::Utils

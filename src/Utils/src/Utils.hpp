@@ -16,5 +16,7 @@ bool startsWithIgnoreCase(std::string_view src, std::string_view what);
 std::string_view extractValue(std::string_view& query, std::string_view keyword);
 
 bool isValidIdentifier(std::string_view str);
+std::string_view extractIdentifier(std::string_view& query, std::string_view keyword);
+bool extractBoolean(std::string_view& query, std::string_view keyword);
 
 } // namespace Moonlight::Utils
