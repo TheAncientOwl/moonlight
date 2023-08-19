@@ -17,7 +17,7 @@ namespace {
 void cleanup(std::string_view& query)
 {
     query.remove_prefix("drop"sv.length());
-    Utils::ltrim(query);
+    ltrim(query);
 
     if (query.front() != '{')
     {
@@ -31,7 +31,7 @@ void cleanup(std::string_view& query)
     }
     query.remove_suffix(1);
 
-    Utils::trim(query);
+    trim(query);
 }
 
 /**
