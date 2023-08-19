@@ -83,6 +83,11 @@ TEST(DropParserTest, parseSuccess)
 TEST(DropParserTest, parseThrow)
 {
     {
+        const auto query = "drop{}";
+        EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
+    }
+
+    {
         const auto query =
             "drop"
             "{"
