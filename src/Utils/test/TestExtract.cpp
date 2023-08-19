@@ -140,6 +140,10 @@ TEST(UtilsTest, cleanupQueryThrow)
         auto query = "someQuery {  };"sv;
         EXPECT_THROW({ cleanupQuery(query, "someQuery"); }, std::runtime_error);
     }
+    {
+        auto query = "someQuery {};"sv;
+        EXPECT_THROW({ cleanupQuery(query, "someQuery"); }, std::runtime_error);
+    }
 }
 
 } // namespace Moonlight::Utils::Tests
