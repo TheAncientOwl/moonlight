@@ -4,7 +4,7 @@
 
 namespace Moonlight::Utils::Tests {
 
-TEST(MoonlightUtilsTest, equalsIgnoreCase)
+TEST(UtilsTest, equalsIgnoreCase)
 {
     ASSERT_TRUE(equalsIgnoreCase("", ""));
     ASSERT_TRUE(equalsIgnoreCase("qWertYUIop", "QWErtyUIOp"));
@@ -14,7 +14,7 @@ TEST(MoonlightUtilsTest, equalsIgnoreCase)
     ASSERT_FALSE(equalsIgnoreCase("somestr1", "somestr2"));
 }
 
-TEST(MoonlightUtilsTest, startsWithIgnoreCase)
+TEST(UtilsTest, startsWithIgnoreCase)
 {
     ASSERT_TRUE(startsWithIgnoreCase("", ""));
     ASSERT_TRUE(startsWithIgnoreCase("qWertYUIopASDFGHJKL", "QWErtyUIOp"));

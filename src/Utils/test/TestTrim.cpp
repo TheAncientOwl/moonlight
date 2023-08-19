@@ -8,7 +8,7 @@ namespace Moonlight::Utils::Tests {
 
 using namespace std::literals;
 
-TEST(MoonlightUtilsTest, ltrim)
+TEST(UtilsTest, ltrim)
 {
     ASSERT_TRIM(ltrim, ""sv, "\r\r\r\t\t\t       "sv);
     ASSERT_TRIM(ltrim, ""sv, ""sv);
@@ -22,7 +22,7 @@ TEST(MoonlightUtilsTest, ltrim)
     ASSERT_TRIM(ltrim, "some string"sv, "  \t  \v  \f  \t    \v     \t \rsome string"sv);
 }
 
-TEST(MoonlightUtilsTest, rtrim)
+TEST(UtilsTest, rtrim)
 {
     ASSERT_TRIM(rtrim, ""sv, "\r\r\r\t\t\t       "sv);
     ASSERT_TRIM(rtrim, ""sv, ""sv);
@@ -36,7 +36,7 @@ TEST(MoonlightUtilsTest, rtrim)
     ASSERT_TRIM(rtrim, "some string"sv, "some string  \t  \v  \f  \t    \v     \t \r"sv);
 }
 
-TEST(MoonlightUtilsTest, trim)
+TEST(UtilsTest, trim)
 {
     ASSERT_TRIM(trim, ""sv, "\r\r\r\t\t\t       "sv);
     ASSERT_TRIM(trim, ""sv, ""sv);

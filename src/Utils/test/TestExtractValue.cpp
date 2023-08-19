@@ -6,7 +6,7 @@ namespace Moonlight::Utils::Tests {
 
 using namespace std::literals;
 
-TEST(MoonlightUtilsTest, extractValueNoThrow)
+TEST(UtilsTest, extractValueNoThrow)
 {
     {
         auto query = "  structure: StructureName; some other string"sv;
@@ -42,7 +42,7 @@ TEST(MoonlightUtilsTest, extractValueNoThrow)
     }
 }
 
-TEST(MoonlightUtilsTest, extractValueThrow)
+TEST(UtilsTest, extractValueThrow)
 {
     EXPECT_THROW({
         try
