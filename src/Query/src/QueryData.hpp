@@ -68,6 +68,7 @@ struct Schema
 {
     std::string name;
     std::vector<std::string> inherits;
+    std::vector<SchemaField> fields;
     std::vector<std::string> checks;
     std::vector<std::string> unique;
     std::vector<std::string> not_null;

@@ -90,6 +90,7 @@ struct SchemaInit : public Schema
 
     SchemaInit& name(const std::string& v);
     SchemaInit& inherits(const std::vector<std::string>& v);
+    SchemaInit& fields(std::vector<SchemaField>& v);
     SchemaInit& checks(const std::vector<std::string>& v);
     SchemaInit& unique(const std::vector<std::string>& v);
     SchemaInit& not_null(const std::vector<std::string>& v);
