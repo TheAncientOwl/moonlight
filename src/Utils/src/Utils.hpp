@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string_view>
+#include <vector>
 
 #define WHITESPACE " \n\r\t\f\v"sv
 
@@ -19,5 +20,12 @@ bool isValidIdentifier(std::string_view str);
 std::string_view extractIdentifier(std::string_view& query, std::string_view keyword);
 bool extractBoolean(std::string_view& query, std::string_view keyword);
 void cleanupQuery(std::string_view& query, std::string_view prefix);
+
+enum class ESplitModifier
+{
+    None = 0,
+    EscapeQuotes = 1
+};
+std::vector<std::string_view> splitAtComma(std::string_view str, ESplitModifier modifier = ESplitModifier::None);
 
 } // namespace Moonlight::Utils
