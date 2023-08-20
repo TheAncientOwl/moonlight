@@ -131,6 +131,7 @@ TEST(RenameParserTest, parseThrow01)
         "   old_name: StructureNameOld;"
         "   new_name: StructureNameNew;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -141,6 +142,7 @@ TEST(RenameParserTest, parseThrow02)
         "   old_name: StructureNameOld;"
         "   new_name: StructureNameNew;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -151,6 +153,7 @@ TEST(RenameParserTest, parseThrow03)
         "   type: structure;"
         "   new_name: StructureNameNew;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -161,6 +164,7 @@ TEST(RenameParserTest, parseThrow04)
         "   type: structure;"
         "   old_name: StructureNameOld;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -172,6 +176,7 @@ TEST(RenameParserTest, parseThrow05)
         "   old_name: StructureName.Old;"
         "   new_name: StructureNameNew;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -183,6 +188,7 @@ TEST(RenameParserTest, parseThrow06)
         "   old_name: StructureNameOld;"
         "   new_name: StructureName.New;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -194,6 +200,7 @@ TEST(RenameParserTest, parseThrow07)
         "   old_name: StructureName.Old;"
         "   new_name: StructureNameNew;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -205,6 +212,7 @@ TEST(RenameParserTest, parseThrow08)
         "   old_name: StructureName.Old;"
         "   new_name: StructureName.New;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -216,6 +224,7 @@ TEST(RenameParserTest, parseThrow09)
         "   old_name: StructureName.;"
         "   new_name: StructureName.New;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -227,6 +236,7 @@ TEST(RenameParserTest, parseThrow10)
         "   old_name: StructureName.Old;"
         "   new_name: StructureName.;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -238,6 +248,7 @@ TEST(RenameParserTest, parseThrow11)
         "   old_name: StructureNameOld;"
         "   new_name: StructureName.New;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -249,6 +260,7 @@ TEST(RenameParserTest, parseThrow12)
         "   old_name: StructureName.Old;"
         "   new_name: StructureNameNew;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -260,6 +272,7 @@ TEST(RenameParserTest, parseThrow13)
         "   old_name: StructureName.;"
         "   new_name: StructureName.New;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -271,6 +284,7 @@ TEST(RenameParserTest, parseThrow14)
         "   old_name: StructureName.Old;"
         "   new_name: StructureName.;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -282,6 +296,7 @@ TEST(RenameParserTest, parseThrow15)
         "   old_name: StructureName. Old;"
         "   new_name: StructureName.New;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -293,6 +308,7 @@ TEST(RenameParserTest, parseThrow16)
         "   old_name: StructureName  .Old;"
         "   new_name: StructureName.New;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -304,6 +320,7 @@ TEST(RenameParserTest, parseThrow17)
         "   old_name: StructureName  .  Old;"
         "   new_name: StructureName.New;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 

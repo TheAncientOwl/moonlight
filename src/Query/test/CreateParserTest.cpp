@@ -123,6 +123,7 @@ TEST(CreateParserTest, parseThrow01)
         "   based_on: SchemaName;"
         "   volatile: maybe;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -135,6 +136,7 @@ TEST(CreateParserTest, parseThrow02)
         "   based_on: SchemaName;"
         "   volatile: true;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -146,6 +148,7 @@ TEST(CreateParserTest, parseThrow03)
         "   based_on: SchemaName;"
         "   volatile: true;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -157,6 +160,7 @@ TEST(CreateParserTest, parseThrow04)
         "   based_on: SchemaName;"
         "   volatile: true;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -168,6 +172,7 @@ TEST(CreateParserTest, parseThrow05)
         "   type: table;"
         "   volatile: true;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -179,6 +184,7 @@ TEST(CreateParserTest, parseThrow06)
         "   type: table;"
         "   based_on: SchemaName;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 

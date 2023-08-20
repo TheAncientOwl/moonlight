@@ -102,6 +102,7 @@ TEST(IndexParserTest, parseThrow01)
         "   fields: [];"
         "   unique: true;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -114,6 +115,7 @@ TEST(IndexParserTest, parseThrow02)
         "   fields: [field1, field2, field3 field4];"
         "   unique: true;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -126,6 +128,7 @@ TEST(IndexParserTest, parseThrow03)
         "   fields: [field1, field2, fie&ld3, field4];"
         "   unique: true;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
@@ -138,6 +141,7 @@ TEST(IndexParserTest, parseThrow04)
         R"(   fields: [field1, field2, "fie ld3", field4];)"
         "   unique: true;"
         "};";
+
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
