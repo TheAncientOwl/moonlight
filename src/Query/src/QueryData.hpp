@@ -55,7 +55,7 @@ struct Migrate
 {
     std::string structure_name;
     std::string new_schema;
-    std::vector<std::pair<std::string, std::string>> migrate_dictionary;
+    std::vector<std::pair<std::string, std::string>> mappings;
 };
 
 struct SchemaField

@@ -71,7 +71,7 @@ struct MigrateInit : public Migrate
 
     MigrateInit& structure_name(const std::string& v);
     MigrateInit& new_schema(const std::string& v);
-    MigrateInit& migrate_dictionary(const std::vector<std::pair<std::string, std::string>>& v);
+    MigrateInit& mappings(const std::vector<std::pair<std::string, std::string>>& v);
 };
 
 struct SchemaFieldInit : public SchemaField

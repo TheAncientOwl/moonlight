@@ -43,7 +43,7 @@ index {
 migrate {
     structure: StructureName;
     to: NewSchemaName;
-    mappings: [ -- optional @ default only matching fields from NewSchemaName
+    mappings: [
         old_field1 => new_field1,
         old_field2 => new_field2
     ];

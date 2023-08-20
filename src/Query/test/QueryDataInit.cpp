@@ -101,9 +101,9 @@ MigrateInit& MigrateInit::new_schema(const std::string& v)
 {
     return base_t::new_schema = v, *this;
 }
-MigrateInit& MigrateInit::migrate_dictionary(const std::vector<std::pair<std::string, std::string>>& v)
+MigrateInit& MigrateInit::mappings(const std::vector<std::pair<std::string, std::string>>& v)
 {
-    return base_t::migrate_dictionary = v, *this;
+    return base_t::mappings = v, *this;
 }
 
 

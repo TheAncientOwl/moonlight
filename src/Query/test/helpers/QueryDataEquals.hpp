@@ -41,7 +41,7 @@
 #define EXPECT_MIGRATE_EQ(obj1, obj2) \
     EXPECT_EQ(obj1.structure_name, obj2.structure_name); \
     EXPECT_EQ(obj1.new_schema, obj2.new_schema); \
-    EXPECT_EQ(obj1.migrate_dictionary, obj2.migrate_dictionary)
+    EXPECT_EQ(obj1.mappings, obj2.mappings)
 
 #define EXPECT_SCHEMA_FIELD_EQ(obj1, obj2) \
     EXPECT_EQ(obj1.name, obj2.name); \
