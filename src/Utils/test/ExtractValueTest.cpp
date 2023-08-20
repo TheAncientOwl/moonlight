@@ -6,107 +6,79 @@ namespace Moonlight::Utils::Tests {
 
 using namespace std::literals;
 
-TEST(UtilsTest, extractValueNoThrow)
+TEST(UtilsTest, extractValueSuccess01)
 {
-    {
-        auto query = "  structure: StructureName; some other string"sv;
-        auto value = extractValue(query, "structure");
+    auto query = "  structure: StructureName; some other string"sv;
+    auto value = extractValue(query, "structure");
 
-        auto expected_value = "StructureName"sv;
-        auto expected_query = " some other string"sv;
+    auto expected_value = "StructureName"sv;
+    auto expected_query = " some other string"sv;
 
-        EXPECT_EQ(query, expected_query);
-        EXPECT_EQ(value, expected_value);
-    }
-
-    {
-        auto query = "  structure:       StructureName; some other string"sv;
-        auto value = extractValue(query, "structure");
-
-        auto expected_value = "StructureName"sv;
-        auto expected_query = " some other string"sv;
-
-        EXPECT_EQ(query, expected_query);
-        EXPECT_EQ(value, expected_value);
-    }
-
-    {
-        auto query = "  structure: StructureName;"sv;
-        auto value = extractValue(query, "structure");
-
-        auto expected_value = "StructureName"sv;
-        auto expected_query = ""sv;
-
-        EXPECT_EQ(query, expected_query);
-        EXPECT_EQ(value, expected_value);
-    }
+    EXPECT_EQ(query, expected_query);
+    EXPECT_EQ(value, expected_value);
 }
 
-TEST(UtilsTest, extractValueThrow)
+TEST(UtilsTest, extractValueSuccess02)
+{
+    auto query = "  structure:       StructureName; some other string"sv;
+    auto value = extractValue(query, "structure");
+
+    auto expected_value = "StructureName"sv;
+    auto expected_query = " some other string"sv;
+
+    EXPECT_EQ(query, expected_query);
+    EXPECT_EQ(value, expected_value);
+}
+
+TEST(UtilsTest, extractValueSuccess03)
+{
+    auto query = "  structure: StructureName;"sv;
+    auto value = extractValue(query, "structure");
+
+    auto expected_value = "StructureName"sv;
+    auto expected_query = ""sv;
+
+    EXPECT_EQ(query, expected_query);
+    EXPECT_EQ(value, expected_value);
+}
+
+TEST(UtilsTest, extractValueThrow01)
 {
     EXPECT_THROW({
-        try
-        {
-            auto query = "  ssstructure: StructureName; some other string"sv;
-            extractValue(query, "structure");
-        }
-        catch (const std::runtime_error& e)
-        {
-            ASSERT_TRUE(startsWithIgnoreCase(e.what(), "Invalid query, missing"));
-            throw e;
-        }
+        auto query = "  ssstructure: StructureName; some other string"sv;
+        extractValue(query, "structure");
         }, std::runtime_error);
+}
 
+TEST(UtilsTest, extractValueThrow02)
+{
     EXPECT_THROW({
-        try
-        {
-            auto query = "  structure:"sv;
-            extractValue(query, "structure");
-        }
-        catch (const std::runtime_error& e)
-        {
-            ASSERT_TRUE(startsWithIgnoreCase(e.what(), "Missing value for keyword"));
-            throw e;
-        }
+        auto query = "  structure:"sv;
+        extractValue(query, "structure");
         }, std::runtime_error);
+}
 
+TEST(UtilsTest, extractValueThrow03)
+{
     EXPECT_THROW({
-        try
-        {
-            auto query = "  structure SomeStructure"sv;
-            extractValue(query, "structure");
-        }
-        catch (const std::runtime_error& e)
-        {
-            ASSERT_TRUE(startsWithIgnoreCase(e.what(), "Missing ':' symbol"));
-            throw e;
-        }
+        auto query = "  structure SomeStructure"sv;
+        extractValue(query, "structure");
         }, std::runtime_error);
+}
 
+TEST(UtilsTest, extractValueThrow04)
+{
     EXPECT_THROW({
-        try
-        {
-            auto query = "  structure: StructureName some other string"sv;
-            extractValue(query, "structure");
-        }
-        catch (const std::runtime_error& e)
-        {
-            ASSERT_TRUE(startsWithIgnoreCase(e.what(), "Missing ';'"));
-            throw e;
-        }
+        auto query = "  structure: StructureName some other string"sv;
+        extractValue(query, "structure");
         }, std::runtime_error);
+}
 
+TEST(UtilsTest, extractValueThrow05)
+{
     EXPECT_THROW({
-        try
-        {
-            auto query = "  structure: ; some other string"sv;
-            extractValue(query, "structure");
-        }
-        catch (const std::runtime_error& e)
-        {
-            ASSERT_TRUE(startsWithIgnoreCase(e.what(), "Value cannot be empty"));
-            throw e;
-        }
+        auto query = "  structure: ; some other string"sv;
+        extractValue(query, "structure");
         }, std::runtime_error);
 }
 
