@@ -66,11 +66,11 @@ bool startsWithIgnoreCase(std::string_view src, std::string_view what)
 }
 
 /**
- * @brief -> query format: [whitespace]keyword[:][whitespace]value[whitespace][;][query...].
+ * @brief Query format: [whitespace]keyword[:][whitespace]value[whitespace][;][query...].
  *
- * @param query -> string representation of the query
- * @param keyword -> keyword to be removed
- * @return std::string_view -> trimmed value
+ * @param query string representation of the query
+ * @param keyword keyword to be matched
+ * @return std::string_view - trimmed value
  */
 std::string_view extractValue(std::string_view& query, std::string_view keyword)
 {
