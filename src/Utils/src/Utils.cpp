@@ -98,33 +98,29 @@ std::string_view extractValue(std::string_view& query, std::string_view keyword,
 
     // 3. find ';' (end of value)
     const auto find_end_pos = [modifier](std::string_view str) -> std::size_t {
-        bool quoted_string{ false };
         const auto c_end = std::cend(str);
         const auto c_begin = std::cbegin(str);
 
-        auto end_pos = std::cbegin(str);
-
+        bool quoted_string{ false };
         bool semicolon_found{ false };
 
+        auto end_pos = std::cbegin(str);
         while (end_pos != c_end)
         {
             const auto current_char = *end_pos;
             const auto prev_char = end_pos != c_begin ? *std::prev(end_pos) : ' ';
 
-            if (current_char == ';')
-            {
-                semicolon_found = true;
-            }
-
             if (modifier == EParserModifier::EscapeQuotes && current_char == '"' && prev_char != '\\')
             {
                 quoted_string = !quoted_string;
             }
-            else if (current_char == ';' && !quoted_string)
+            else if (current_char == ';')
             {
-                quoted_string = false;
-
-                return std::distance(std::cbegin(str), end_pos);
+                semicolon_found = true;
+                if (!quoted_string)
+                {
+                    return std::distance(std::cbegin(str), end_pos);
+                }
             }
 
             end_pos = std::next(end_pos);
