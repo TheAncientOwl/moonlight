@@ -42,6 +42,42 @@ TEST(UtilsTest, extractValueSuccess03)
     EXPECT_EQ(value, expected_value);
 }
 
+TEST(UtilsTest, extractValueSuccess04)
+{
+    auto query = R"(  structure: StructureName " "; some string)"sv;
+    auto value = extractValue(query, "structure");
+
+    auto expected_value = R"(StructureName " ")"sv;
+    auto expected_query = " some string"sv;
+
+    EXPECT_EQ(query, expected_query);
+    EXPECT_EQ(value, expected_value);
+}
+
+TEST(UtilsTest, extractValueSuccess05)
+{
+    auto query = R"(  structure: StructureName "; "; some string)"sv;
+    auto value = extractValue(query, "structure", EParserModifier::EscapeQuotes);
+
+    auto expected_value = R"(StructureName "; ")"sv;
+    auto expected_query = " some string"sv;
+
+    EXPECT_EQ(query, expected_query);
+    EXPECT_EQ(value, expected_value);
+}
+
+TEST(UtilsTest, extractValueSuccess06)
+{
+    auto query = R"(  structure: StructureName "; some quote \" "; some string)"sv;
+    auto value = extractValue(query, "structure", EParserModifier::EscapeQuotes);
+
+    auto expected_value = R"(StructureName "; some quote \" ")"sv;
+    auto expected_query = " some string"sv;
+
+    EXPECT_EQ(query, expected_query);
+    EXPECT_EQ(value, expected_value);
+}
+
 TEST(UtilsTest, extractValueThrow01)
 {
     EXPECT_THROW({

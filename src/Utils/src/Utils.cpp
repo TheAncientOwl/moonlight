@@ -70,9 +70,10 @@ bool startsWithIgnoreCase(std::string_view src, std::string_view what)
  *
  * @param query string representation of the query
  * @param keyword keyword to be matched
+ * @param modifier specifies if quotes escape ';' character
  * @return std::string_view - trimmed value
  */
-std::string_view extractValue(std::string_view& query, std::string_view keyword)
+std::string_view extractValue(std::string_view& query, std::string_view keyword, EParserModifier modifier)
 {
     // 1. check if query starts with the keyword
     ltrim(query);
@@ -96,7 +97,48 @@ std::string_view extractValue(std::string_view& query, std::string_view keyword)
     }
 
     // 3. find ';' (end of value)
-    const auto end_pos = query.find_first_of(';');
+    const auto find_end_pos = [modifier](std::string_view str) -> std::size_t {
+        bool quoted_string{ false };
+        const auto c_end = std::cend(str);
+        const auto c_begin = std::cbegin(str);
+
+        auto end_pos = std::cbegin(str);
+
+        bool semicolon_found{ false };
+
+        while (end_pos != c_end)
+        {
+            const auto current_char = *end_pos;
+            const auto prev_char = end_pos != c_begin ? *std::prev(end_pos) : ' ';
+
+            if (current_char == ';')
+            {
+                semicolon_found = true;
+            }
+
+            if (modifier == EParserModifier::EscapeQuotes && current_char == '"' && prev_char != '\\')
+            {
+                quoted_string = !quoted_string;
+            }
+            else if (current_char == ';' && !quoted_string)
+            {
+                quoted_string = false;
+
+                return std::distance(std::cbegin(str), end_pos);
+            }
+
+            end_pos = std::next(end_pos);
+        }
+
+        if (std::cbegin(str) != end_pos && !quoted_string && semicolon_found)
+        {
+            return std::distance(std::cbegin(str), end_pos);
+        }
+
+        return std::string_view::npos;
+        };
+
+    const auto end_pos = find_end_pos(query);
     if (end_pos == std::string_view::npos)
     {
         throw std::runtime_error("Missing ';' @"s + std::string(query));
@@ -205,7 +247,7 @@ void cleanupQuery(std::string_view& query, std::string_view prefix)
  * @param modifier EscapeQuotes if quotes can be escaped using backslash char
  * @return std::vector<std::string_view> splits
  */
-std::vector<std::string_view> splitAtComma(std::string_view str, ESplitModifier modifier)
+std::vector<std::string_view> splitAtComma(std::string_view str, EParserModifier modifier)
 {
     std::vector<std::string_view> out{};
 
@@ -226,7 +268,7 @@ std::vector<std::string_view> splitAtComma(std::string_view str, ESplitModifier 
         std::string_view word{ word_begin, static_cast<std::string_view::size_type>(std::distance(word_begin, word_end)) };
         trim(word);
 
-        if (modifier == ESplitModifier::EscapeQuotes && word.length() > 1 &&
+        if (modifier == EParserModifier::EscapeQuotes && word.length() > 1 &&
             word.starts_with('"') && word.ends_with('"'))
         {
             word.remove_prefix(1);
@@ -244,7 +286,7 @@ std::vector<std::string_view> splitAtComma(std::string_view str, ESplitModifier 
         const auto current_char = *word_end;
         const auto prev_char = word_end != c_begin ? *std::prev(word_end) : ' ';
 
-        if (modifier == ESplitModifier::EscapeQuotes && current_char == '"' && prev_char != '\\')
+        if (modifier == EParserModifier::EscapeQuotes && current_char == '"' && prev_char != '\\')
         {
             quoted_string = !quoted_string;
         }

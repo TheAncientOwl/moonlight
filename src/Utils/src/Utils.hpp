@@ -14,18 +14,19 @@ void trim(std::string_view& str);
 bool equalsIgnoreCase(std::string_view s1, std::string_view s2);
 bool startsWithIgnoreCase(std::string_view src, std::string_view what);
 
-std::string_view extractValue(std::string_view& query, std::string_view keyword);
-
 bool isValidIdentifier(std::string_view str);
-std::string_view extractIdentifier(std::string_view& query, std::string_view keyword);
-bool extractBoolean(std::string_view& query, std::string_view keyword);
-void cleanupQuery(std::string_view& query, std::string_view prefix);
 
-enum class ESplitModifier
+enum class EParserModifier
 {
     None = 0,
     EscapeQuotes = 1
 };
-std::vector<std::string_view> splitAtComma(std::string_view str, ESplitModifier modifier = ESplitModifier::None);
+
+std::string_view extractValue(std::string_view& query, std::string_view keyword, EParserModifier modifier = EParserModifier::None);
+std::string_view extractIdentifier(std::string_view& query, std::string_view keyword);
+bool extractBoolean(std::string_view& query, std::string_view keyword);
+
+void cleanupQuery(std::string_view& query, std::string_view prefix);
+std::vector<std::string_view> splitAtComma(std::string_view str, EParserModifier modifier = EParserModifier::None);
 
 } // namespace Moonlight::Utils
