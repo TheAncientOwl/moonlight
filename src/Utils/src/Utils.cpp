@@ -15,9 +15,9 @@ void ltrim(std::string_view& str)
 {
     if (!str.empty())
     {
-        const auto start = str.find_first_not_of(c_whitespace);
+        const auto begin{ str.find_first_not_of(c_whitespace) };
 
-        str = str.substr(std::min(start, str.length()));
+        str = str.substr(std::min(begin, str.length()));
     }
 }
 
@@ -25,7 +25,7 @@ void rtrim(std::string_view& str)
 {
     if (!str.empty())
     {
-        const auto end = str.find_last_not_of(c_whitespace);
+        const auto end{ str.find_last_not_of(c_whitespace) };
 
         str = str.substr(0, end + 1);
     }
@@ -98,17 +98,17 @@ std::string_view extractValue(std::string_view& query, std::string_view keyword,
 
     // 3. find ';' (end of value)
     const auto find_end_pos = [modifier](std::string_view str) -> std::size_t {
-        const auto c_end = std::cend(str);
-        const auto c_begin = std::cbegin(str);
+        const auto c_end{ std::cend(str) };
+        const auto c_begin{ std::cbegin(str) };
 
         bool quoted_string{ false };
         bool semicolon_found{ false };
 
-        auto end_pos = std::cbegin(str);
+        auto end_pos{ std::cbegin(str) };
         while (end_pos != c_end)
         {
-            const auto current_char = *end_pos;
-            const auto prev_char = end_pos != c_begin ? *std::prev(end_pos) : ' ';
+            const auto current_char{ *end_pos };
+            const auto prev_char{ end_pos != c_begin ? *std::prev(end_pos) : ' ' };
 
             if (modifier == EParserModifier::EscapeQuotes && current_char == '"' && prev_char != '\\')
             {
@@ -134,14 +134,14 @@ std::string_view extractValue(std::string_view& query, std::string_view keyword,
         return std::string_view::npos;
         };
 
-    const auto end_pos = find_end_pos(query);
+    const auto end_pos{ find_end_pos(query) };
     if (end_pos == std::string_view::npos)
     {
         throw std::runtime_error("Missing ';' @"s + std::string(query));
     }
 
     // 4. extract & remove value
-    auto value = query.substr(0, end_pos);
+    auto value{ query.substr(0, end_pos) };
     trim(value);
     if (value.empty())
     {
@@ -154,7 +154,7 @@ std::string_view extractValue(std::string_view& query, std::string_view keyword,
 
 bool isValidIdentifier(std::string_view str)
 {
-    static const std::regex c_identifier_regex(R"(\w+)");
+    static const std::regex c_identifier_regex{ R"(\w+)" };
 
     return std::regex_match(str.begin(), str.end(), c_identifier_regex);
 }
@@ -166,7 +166,7 @@ bool isValidIdentifier(std::string_view str)
  */
 std::string_view extractIdentifier(std::string_view& query, std::string_view keyword)
 {
-    const auto name = extractValue(query, keyword);
+    const auto name{ extractValue(query, keyword) };
 
     if (!isValidIdentifier(name))
     {
@@ -183,19 +183,19 @@ std::string_view extractIdentifier(std::string_view& query, std::string_view key
  */
 bool extractBoolean(std::string_view& query, std::string_view keyword)
 {
-    const auto boolean = extractValue(query, keyword);
+    const auto boolean_str{ extractValue(query, keyword) };
 
-    if (equalsIgnoreCase(boolean, "true"))
+    if (equalsIgnoreCase(boolean_str, "true"))
     {
         return true;
     }
-    else if (equalsIgnoreCase(boolean, "false"))
+    else if (equalsIgnoreCase(boolean_str, "false"))
     {
         return false;
     }
     else
     {
-        throw std::runtime_error("Invalid boolean value '"s + std::string(boolean) + "'"s);
+        throw std::runtime_error("Invalid boolean value '"s + std::string(boolean_str) + "'"s);
     }
 }
 
@@ -254,11 +254,11 @@ std::vector<std::string_view> splitAtComma(std::string_view str, EParserModifier
     }
 
     bool quoted_string{ false };
-    const auto c_end = std::cend(str);
-    const auto c_begin = std::cbegin(str);
+    const auto c_end{ std::cend(str) };
+    const auto c_begin{ std::cbegin(str) };
 
-    auto word_begin = std::cbegin(str);
-    auto word_end = std::cbegin(str);
+    auto word_begin{ c_begin };
+    auto word_end{ c_begin };
 
     const auto update_output = [&out, modifier](const char* word_begin, const char* word_end) {
         std::string_view word{ word_begin, static_cast<std::string_view::size_type>(std::distance(word_begin, word_end)) };
@@ -279,8 +279,8 @@ std::vector<std::string_view> splitAtComma(std::string_view str, EParserModifier
 
     while (word_end != c_end)
     {
-        const auto current_char = *word_end;
-        const auto prev_char = word_end != c_begin ? *std::prev(word_end) : ' ';
+        const auto current_char{ *word_end };
+        const auto prev_char{ word_end != c_begin ? *std::prev(word_end) : ' ' };
 
         if (modifier == EParserModifier::EscapeQuotes && current_char == '"' && prev_char != '\\')
         {
