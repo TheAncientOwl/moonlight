@@ -126,7 +126,7 @@ SchemaInit& SchemaInit::inherits(const std::vector<std::string>& v)
 {
     return base_t::inherits = v, *this;
 }
-SchemaInit& SchemaInit::fields(std::vector<SchemaField>& v)
+SchemaInit& SchemaInit::fields(std::vector<Field>& v)
 {
     return base_t::fields = v, *this;
 }

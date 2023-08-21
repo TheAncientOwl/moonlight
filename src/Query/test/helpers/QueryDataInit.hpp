@@ -74,9 +74,9 @@ struct MigrateInit : public Migrate
     MigrateInit& mappings(const std::vector<std::pair<std::string, std::string>>& v);
 };
 
-struct SchemaFieldInit : public SchemaField
+struct SchemaFieldInit : public Field
 {
-    using base_t = SchemaField;
+    using base_t = Field;
     SchemaFieldInit();
 
     SchemaFieldInit& name(const std::string& v);
@@ -90,7 +90,7 @@ struct SchemaInit : public Schema
 
     SchemaInit& name(const std::string& v);
     SchemaInit& inherits(const std::vector<std::string>& v);
-    SchemaInit& fields(std::vector<SchemaField>& v);
+    SchemaInit& fields(std::vector<Field>& v);
     SchemaInit& checks(const std::vector<std::string>& v);
     SchemaInit& unique(const std::vector<std::string>& v);
     SchemaInit& not_null(const std::vector<std::string>& v);

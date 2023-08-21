@@ -306,4 +306,52 @@ std::vector<std::string_view> splitAtComma(std::string_view str, EParserModifier
     return out;
 }
 
+/**
+ * @brief
+ *
+ * @param query query representation in format "keyword: [ identifier1, identifier2, ... ]; [query...]"
+ * @param keyword keyword to be matched
+ * @return std::vector<std::string> identifiers
+ */
+std::vector<std::string> extractIdentifiersList(std::string_view& query, std::string_view keyword)
+{
+    // 1. cleanup & validate format
+    auto fields_str = extractValue(query, keyword);
+
+    if (fields_str.length() > 1 && fields_str.front() != '[')
+    {
+        throw std::runtime_error("Missing '[' symbol @ '"s + std::string(fields_str) + "'"s);
+    }
+    fields_str.remove_prefix(1);
+
+    if (fields_str.length() > 1 && fields_str.back() != ']')
+    {
+        throw std::runtime_error("Missing ']' symbol @ '"s + std::string(fields_str) + "'"s);
+    }
+    fields_str.remove_suffix(1);
+
+    trim(fields_str);
+    if (fields_str.empty())
+    {
+        throw std::runtime_error("Identifiers list cannot be empty");
+    }
+
+    // 2. split & validate identifiers
+    const auto fields = splitAtComma(fields_str);
+
+    std::vector<std::string> out{};
+    for (const auto field : fields)
+    {
+        if (isValidIdentifier(field))
+        {
+            out.emplace_back(field);
+        }
+        else
+        {
+            throw std::runtime_error("Invalid identifier '"s + std::string(field) + "'"s);
+        }
+    }
+    return out;
+}
+
 } // namespace Moonlight::Utils
