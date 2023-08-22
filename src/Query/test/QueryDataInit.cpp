@@ -107,14 +107,26 @@ MigrateInit& MigrateInit::mappings(const std::vector<std::pair<std::string, std:
 }
 
 
-SchemaFieldInit::SchemaFieldInit() : base_t{} {}
-SchemaFieldInit& SchemaFieldInit::name(const std::string& v)
+FieldInit::FieldInit() : base_t{} {}
+FieldInit& FieldInit::name(const std::string& v)
 {
     return base_t::name = v, *this;
 }
-SchemaFieldInit& SchemaFieldInit::data_type(const Primitives::EDataType& v)
+FieldInit& FieldInit::data_type(const Primitives::EDataType& v)
 {
     return base_t::data_type = v, *this;
+}
+FieldInit& FieldInit::metadata(const std::optional<std::string>& v)
+{
+    return base_t::metadata = v, *this;
+}
+FieldInit& FieldInit::size(const std::uint8_t& v)
+{
+    return base_t::size = v, *this;
+}
+FieldInit& FieldInit::nullable(const bool& v)
+{
+    return base_t::nullable = v, *this;
 }
 
 SchemaInit::SchemaInit() : base_t{} {}
@@ -126,7 +138,7 @@ SchemaInit& SchemaInit::inherits(const std::vector<std::string>& v)
 {
     return base_t::inherits = v, *this;
 }
-SchemaInit& SchemaInit::fields(std::vector<Field>& v)
+SchemaInit& SchemaInit::fields(const std::vector<Field>& v)
 {
     return base_t::fields = v, *this;
 }
