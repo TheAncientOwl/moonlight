@@ -1,26 +1,31 @@
 #include "../QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 namespace Moonlight::QueryParser::Implementation {
+
+using namespace Utils;
+using namespace std::literals;
 
 namespace {
 
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/Vk7rKT/1
-PARSER_REGEX(Index,
-    R"(index\s*\{)"
-    R"(\s*on:\s*\w+\s*;)"
-    R"(\s*name:\s*\w+\s*;)"
-    R"(\s*fields:\s*\[\s*(?:\w+(?:,|\s)+)+\]\s*;)"
-    R"(\s*unique:\s*(?:true|false)\s*;)"
-    R"(\s*\})"
-);
+QUERY_COULD_MATCH(Index)
+{
+    return startsWithIgnoreCase(query, "index");
+}
 
-PARSER_LOGICS(Index)
+QUERY_PARSER(Index)
 {
     QUERY_OBJECT(obj, Index);
 
-    // TODO: implement Index parser...
+    cleanupQuery(query, "index");
+
+    obj.on_structure = extractIdentifier(query, "on");
+    obj.name = extractIdentifier(query, "name");
+    obj.on_fields = extractIdentifiersList(query, "fields");
+    obj.unique = extractBoolean(query, "unique");
 
     RETURN_QUERY_OBJECT;
 }

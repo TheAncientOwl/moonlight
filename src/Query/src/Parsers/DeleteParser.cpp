@@ -1,15 +1,23 @@
 #include "../QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 namespace Moonlight::QueryParser::Implementation {
+
+using namespace Utils;
+using namespace std::literals;
 
 namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Delete regex...
-PARSER_REGEX(Delete, "");
+// TODO: implement matcher...
+QUERY_COULD_MATCH(Delete)
+{
+    return false;
+}
 
-PARSER_LOGICS(Delete)
+QUERY_PARSER(Delete)
 {
     QUERY_OBJECT(obj, Delete);
 

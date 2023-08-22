@@ -1,28 +1,46 @@
 #include "../QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 namespace Moonlight::QueryParser::Implementation {
+
+using namespace Utils;
+using namespace std::literals;
 
 namespace {
 
+Primitives::EDatabaseOperationType extractOperationType(std::string_view& query)
+{
+    const auto type = extractValue(query, "operation");
+
+    return Primitives::DatabaseOperationType::to_literal(std::string(type));
+}
+
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/PL4uPR/1
-PARSER_REGEX(Database,
-    R"(database\s*(?:)"
-    R"((?:(?:create|drop)\s*\{)"
-    R"(\s*name:\s*\w+\s*;)|)"
-    R"((?:backup\s*\{)"
-    R"(\s*name:\s*\w+\s*;)"
-    R"(\s*to_disk:\s*(?:".*")\s*;)"
-    R"(\s*with_differential:\s*(?:true|false)\s*;))"
-    R"()\s*\})"
-);
+QUERY_COULD_MATCH(Database)
+{
+    return startsWithIgnoreCase(query, "database");
+}
 
-PARSER_LOGICS(Database)
+QUERY_PARSER(Database)
 {
     QUERY_OBJECT(obj, Database);
 
-    // TODO: implement Database parser...
+    cleanupQuery(query, "database");
+
+    obj.type = extractOperationType(query);
+    obj.name = extractIdentifier(query, "name");
+
+    if (obj.type == Primitives::EDatabaseOperationType::Backup)
+    {
+        QueryData::DatabaseBackupMetadata metadata{};
+
+        metadata.disk_path = extractValue(query, "to_disk");
+        metadata.with_differential = extractBoolean(query, "with_differential");
+
+        obj.backup_metadata = metadata;
+    }
 
     RETURN_QUERY_OBJECT;
 }

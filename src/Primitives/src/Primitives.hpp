@@ -24,7 +24,8 @@ MOONLIGHT_PRIMITIVE(StructureType,
 MOONLIGHT_PRIMITIVE(StructureRenameType,
     Undefined = 0,
     Structure = 1,
-    Field = 2
+    Field = 2,
+    Database = 3
 )
 
 MOONLIGHT_PRIMITIVE(DatabaseOperationType,

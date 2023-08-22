@@ -1,25 +1,38 @@
 #include "../QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 namespace Moonlight::QueryParser::Implementation {
+
+using namespace Utils;
+using namespace std::literals;
 
 namespace {
 
+Primitives::EStructureType extractType(std::string_view& query)
+{
+    const auto type = extractValue(query, "type");
+
+    return Primitives::StructureType::to_literal(std::string(type));
+}
+
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/g0dIlM/1
-PARSER_REGEX(Create,
-    R"(create\s*structure\s*\{)"
-    R"(\s*name:\s*\w+\s*;)"
-    R"(\s*type:\s*(?:table|document)\s*;)"
-    R"(\s*based_on:\s*\w+\s*;)"
-    R"(\s*volatile:\s*(?:true|false)\s*;)"
-    R"(\s*\})");
+QUERY_COULD_MATCH(Create)
+{
+    return startsWithIgnoreCase(query, "create structure");
+}
 
-PARSER_LOGICS(Create)
+QUERY_PARSER(Create)
 {
     QUERY_OBJECT(obj, Create);
 
-    // TODO: implement Create parser...
+    cleanupQuery(query, "create structure");
+
+    obj.name = extractIdentifier(query, "name");
+    obj.type = extractType(query);
+    obj.schema = extractIdentifier(query, "based_on");
+    obj.is_volatile = extractBoolean(query, "volatile");
 
     RETURN_QUERY_OBJECT;
 }

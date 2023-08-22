@@ -1,13 +1,17 @@
 #include "QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 #include <array>
-#include <stdexcept>
+#include <memory>
 
 namespace Moonlight::QueryParser {
 
 QueryObject parseQuery(std::string_view query)
 {
     PLAIN_QUERY_OBJECT;
+
+    Utils::trim(query);
 
     static const std::array<std::unique_ptr<Implementation::IQueryParser>, 11> s_parsers{
         std::make_unique<Implementation::DropParser>(),
@@ -26,7 +30,7 @@ QueryObject parseQuery(std::string_view query)
 
     const auto parser = std::find_if(s_parsers.begin(), s_parsers.end(),
         [query](const auto& parser) {
-            return parser->match(query);
+            return parser->couldMatch(query);
         });
 
     if (parser == s_parsers_end)

@@ -7,7 +7,7 @@
 
 namespace Moonlight::QueryData {
 
-TEST(MoonlightQueryDataTest, MakeObjects)
+TEST(QueryDataTest, MakeObjects)
 {
     ASSERT_MAKE_QUERY_OBJECT(Drop, Drop);
     ASSERT_MAKE_QUERY_OBJECT(Create, Create);

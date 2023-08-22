@@ -55,19 +55,22 @@ struct Migrate
 {
     std::string structure_name;
     std::string new_schema;
-    std::vector<std::pair<std::string, std::string>> migrate_dictionary;
+    std::vector<std::pair<std::string, std::string>> mappings;
 };
 
-struct SchemaField
+struct Field
 {
     std::string name;
     Primitives::EDataType data_type;
+    std::string default_value;
+    bool nullable{ false };
 };
 
 struct Schema
 {
     std::string name;
     std::vector<std::string> inherits;
+    std::vector<Field> fields;
     std::vector<std::string> checks;
     std::vector<std::string> unique;
     std::vector<std::string> not_null;

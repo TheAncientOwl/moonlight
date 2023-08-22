@@ -81,7 +81,8 @@ MOONLIGHT_PRIMITIVE_CONVERTOR(StructureType,
 MOONLIGHT_PRIMITIVE_CONVERTOR(StructureRenameType,
     std::make_pair(Literal::Undefined, "undefined"),
     std::make_pair(Literal::Structure, "structure"),
-    std::make_pair(Literal::Field, "field")
+    std::make_pair(Literal::Field, "field"),
+    std::make_pair(Literal::Database, "database")
 )
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(DatabaseOperationType,

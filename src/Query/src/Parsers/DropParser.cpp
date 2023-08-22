@@ -1,23 +1,29 @@
 #include "../QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 namespace Moonlight::QueryParser::Implementation {
+
+using namespace Utils;
+using namespace std::literals;
 
 namespace {
 
 } // Anonymous namespace
 
-// ?Regex: https://regex101.com/r/kOwmeb/1
-PARSER_REGEX(Drop,
-    R"(drop\s*\{)"
-    R"(\s*structure:\s*\w+\s*;)"
-    R"(\s*cascade:\s*(true|false)\s*;)"
-    R"(\s*\})");
+QUERY_COULD_MATCH(Drop)
+{
+    return startsWithIgnoreCase(query, "drop");
+}
 
-PARSER_LOGICS(Drop)
+QUERY_PARSER(Drop)
 {
     QUERY_OBJECT(obj, Drop);
 
-    // TODO: implement Drop parser...
+    cleanupQuery(query, "drop");
+
+    obj.name = extractIdentifier(query, "structure");
+    obj.cascade = extractBoolean(query, "cascade");
 
     RETURN_QUERY_OBJECT;
 }

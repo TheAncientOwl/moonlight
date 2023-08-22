@@ -4,7 +4,7 @@
 
 namespace Moonlight::Primitives {
 
-TEST(MoonlightPrimitivesTest, StructureType)
+TEST(PrimitivesTest, StructureType)
 {
     using namespace StructureType;
     using Literal = StructureType::Literal;
@@ -14,7 +14,7 @@ TEST(MoonlightPrimitivesTest, StructureType)
     ASSERT_EQ(Literal::Document, to_literal(to_string(Literal::Document)));
 }
 
-TEST(MoonlightPrimitivesTest, StructureRenameType)
+TEST(PrimitivesTest, StructureRenameType)
 {
     using namespace StructureRenameType;
     using Literal = StructureRenameType::Literal;
@@ -22,9 +22,10 @@ TEST(MoonlightPrimitivesTest, StructureRenameType)
     ASSERT_EQ(Literal::Undefined, to_literal(to_string(Literal::Undefined)));
     ASSERT_EQ(Literal::Structure, to_literal(to_string(Literal::Structure)));
     ASSERT_EQ(Literal::Field, to_literal(to_string(Literal::Field)));
+    ASSERT_EQ(Literal::Database, to_literal(to_string(Literal::Database)));
 }
 
-TEST(MoonlightPrimitivesTest, DatabaseOperationType)
+TEST(PrimitivesTest, DatabaseOperationType)
 {
     using namespace DatabaseOperationType;
     using Literal = DatabaseOperationType::Literal;
@@ -35,7 +36,7 @@ TEST(MoonlightPrimitivesTest, DatabaseOperationType)
     ASSERT_EQ(Literal::Backup, to_literal(to_string(Literal::Backup)));
 }
 
-TEST(MoonlightPrimitivesTest, DataType)
+TEST(PrimitivesTest, DataType)
 {
     using namespace DataType;
     using Literal = DataType::Literal;
@@ -48,7 +49,7 @@ TEST(MoonlightPrimitivesTest, DataType)
     ASSERT_EQ(Literal::Reference, to_literal(to_string(Literal::Reference)));
 }
 
-TEST(MoonlightPrimitivesTest, SelectSortType)
+TEST(PrimitivesTest, SelectSortType)
 {
     using namespace SelectSortType;
     using Literal = SelectSortType::Literal;
@@ -58,7 +59,7 @@ TEST(MoonlightPrimitivesTest, SelectSortType)
     ASSERT_EQ(Literal::Desc, to_literal(to_string(Literal::Desc)));
 }
 
-TEST(MoonlightPrimitivesTest, QueryType)
+TEST(PrimitivesTest, QueryType)
 {
     using namespace QueryType;
     using Literal = QueryType::Literal;

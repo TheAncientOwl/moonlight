@@ -1,15 +1,23 @@
 #include "../QueryParser.hpp"
 
+#include "Utils/src/Utils.hpp"
+
 namespace Moonlight::QueryParser::Implementation {
+
+using namespace Utils;
+using namespace std::literals;
 
 namespace {
 
 } // Anonymous namespace
 
-// TODO: implement Select regex...
-PARSER_REGEX(Select, "");
+// TODO: implement matcher...
+QUERY_COULD_MATCH(Select)
+{
+    return false;
+}
 
-PARSER_LOGICS(Select)
+QUERY_PARSER(Select)
 {
     QUERY_OBJECT(obj, Select);
 
