@@ -62,7 +62,8 @@ struct Field
 {
     std::string name;
     Primitives::EDataType data_type;
-    std::string default_value;
+    std::optional<std::string> metadata;
+    std::optional<std::uint8_t> size;
     bool nullable{ false };
 };
 

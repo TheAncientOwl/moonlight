@@ -43,6 +43,7 @@ TEST(PrimitivesTest, DataType)
 
     ASSERT_EQ(Literal::Undefined, to_literal(to_string(Literal::Undefined)));
     ASSERT_EQ(Literal::String, to_literal(to_string(Literal::String)));
+    ASSERT_EQ(Literal::Boolean, to_literal(to_string(Literal::Boolean)));
     ASSERT_EQ(Literal::Decimal, to_literal(to_string(Literal::Decimal)));
     ASSERT_EQ(Literal::Integer, to_literal(to_string(Literal::Integer)));
     ASSERT_EQ(Literal::DateTime, to_literal(to_string(Literal::DateTime)));

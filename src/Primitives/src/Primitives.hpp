@@ -38,10 +38,11 @@ MOONLIGHT_PRIMITIVE(DatabaseOperationType,
 MOONLIGHT_PRIMITIVE(DataType,
     Undefined = 0,
     String = 1,
-    Decimal = 2,
-    Integer = 3,
-    DateTime = 4,
-    Reference = 5
+    Boolean = 2,
+    Decimal = 3,
+    Integer = 4,
+    DateTime = 5,
+    Reference = 6
 )
 
 MOONLIGHT_PRIMITIVE(SelectSortType,
