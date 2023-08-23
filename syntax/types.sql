@@ -4,9 +4,12 @@ field_21 is ?Boolean              @default(false)
 field_31 is ?Boolean              @default(null)
 
 -- 2. DateTime
-field_12 is DateTime              @default(now())
-field_22 is ?DateTime             @default(now())
-field_32 is ?DateTime             @default(null)
+some_field is DateTime    @default(now)
+some_field is DateTime    @default(22/29/2023)
+some_field is DateTime    @default(22.29.2023)
+some_field is DateTime    @default(22-29-2023)
+some_field is ?DateTime   @default(now)
+some_field is ?DateTime   @default(null)
 
 -- 3. String
 field_13 is String[15]            @default("empty")

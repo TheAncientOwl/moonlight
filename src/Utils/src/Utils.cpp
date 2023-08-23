@@ -354,4 +354,29 @@ std::vector<std::string> extractIdentifiersList(std::string_view& query, std::st
     return out;
 }
 
+std::vector<std::string_view> extractList(std::string_view& query, std::string_view keyword, EParserModifier modifier)
+{
+    auto list_sequence = extractValue(query, keyword, modifier);
+
+    if (list_sequence.front() != '[')
+    {
+        throw std::runtime_error("Missing '[' symbol in fields sequence");
+    }
+
+    if (list_sequence.back() != ']')
+    {
+        throw std::runtime_error("Missing ']' symbol in fields sequence");
+    }
+
+    list_sequence.remove_prefix(1);
+    list_sequence.remove_suffix(1);
+
+    const auto list = splitAtComma(list_sequence, modifier);
+    if (list.empty())
+    {
+        throw std::runtime_error("List cannot be empty @ '"s + std::string(query) + "'"s);
+    }
+    return list;
+}
+
 } // namespace Moonlight::Utils

@@ -82,7 +82,7 @@ struct FieldInit : public Field
     FieldInit& name(const std::string& v);
     FieldInit& data_type(const Primitives::EDataType& v);
     FieldInit& metadata(const std::optional<std::string>& v);
-    FieldInit& size(const std::uint8_t& v);
+    FieldInit& size(const std::optional<std::uint32_t>& v);
     FieldInit& nullable(const bool& v);
 };
 
@@ -96,7 +96,6 @@ struct SchemaInit : public Schema
     SchemaInit& fields(const std::vector<Field>& v);
     SchemaInit& checks(const std::vector<std::string>& v);
     SchemaInit& unique(const std::vector<std::string>& v);
-    SchemaInit& not_null(const std::vector<std::string>& v);
 };
 
 struct WhereClauseInit : public WhereClause

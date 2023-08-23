@@ -1,0 +1,55 @@
+#pragma once
+
+#include "../QueryData.hpp"
+
+#include <regex>
+#include <string>
+
+#define FIELD_PARSER_CLASS(Type) \
+    class Type ## FieldParser : public IFieldParser \
+    { \
+    public: \
+        bool match(std::string field_str) override; \
+        QueryData::Field parse() const override; \
+    }
+
+#define FIELD_PARSER_MATCH(Type, rgx) \
+    bool Type ## FieldParser::match(std::string field_str) \
+    { \
+        static const std::regex regex{ rgx, std::regex_constants::icase }; \
+        m_field = std::move(field_str); \
+        return std::regex_match(m_field, m_smatch, regex); \
+    }
+#define FIELD_PARSER_LOGICS(Type) QueryData::Field Type ## FieldParser::parse() const
+
+namespace Moonlight::QueryParser::Implementation::FieldParsers {
+
+class IFieldParser
+{
+public: // methods
+    virtual bool match(std::string field_str) = 0;
+    virtual QueryData::Field parse() const = 0;
+
+public: // lifecycle
+    IFieldParser(const IFieldParser&) = delete;
+    IFieldParser& operator=(const IFieldParser&) = delete;
+
+    IFieldParser(IFieldParser&&) noexcept = delete;
+    IFieldParser& operator=(IFieldParser&&) noexcept = delete;
+
+    IFieldParser() = default;
+    virtual ~IFieldParser() {}
+
+protected: // fields
+    std::smatch m_smatch;
+    std::string m_field;
+};
+
+FIELD_PARSER_CLASS(String);
+FIELD_PARSER_CLASS(DateTime);
+FIELD_PARSER_CLASS(Boolean);
+FIELD_PARSER_CLASS(Integer);
+FIELD_PARSER_CLASS(Decimal);
+FIELD_PARSER_CLASS(Reference);
+
+} // namespace Moonlight::QueryParser::Implementation::FieldParsers

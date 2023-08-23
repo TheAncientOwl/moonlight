@@ -120,7 +120,7 @@ FieldInit& FieldInit::metadata(const std::optional<std::string>& v)
 {
     return base_t::metadata = v, *this;
 }
-FieldInit& FieldInit::size(const std::uint8_t& v)
+FieldInit& FieldInit::size(const std::optional<std::uint32_t>& v)
 {
     return base_t::size = v, *this;
 }
@@ -149,10 +149,6 @@ SchemaInit& SchemaInit::checks(const std::vector<std::string>& v)
 SchemaInit& SchemaInit::unique(const std::vector<std::string>& v)
 {
     return base_t::unique = v, *this;
-}
-SchemaInit& SchemaInit::not_null(const std::vector<std::string>& v)
-{
-    return base_t::not_null = v, *this;
 }
 
 

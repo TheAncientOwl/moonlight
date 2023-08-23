@@ -63,7 +63,7 @@ struct Field
     std::string name;
     Primitives::EDataType data_type;
     std::optional<std::string> metadata;
-    std::optional<std::uint8_t> size;
+    std::optional<std::uint32_t> size;
     bool nullable{ false };
 };
 
@@ -74,7 +74,6 @@ struct Schema
     std::vector<Field> fields;
     std::vector<std::string> checks;
     std::vector<std::string> unique;
-    std::vector<std::string> not_null;
 };
 
 struct WhereClause
