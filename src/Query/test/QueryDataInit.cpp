@@ -153,12 +153,15 @@ SchemaInit& SchemaInit::unique(const std::vector<std::string>& v)
 
 
 WhereClauseInit::WhereClauseInit() : base_t{} {}
-
+WhereClauseInit& WhereClauseInit::content(const std::string& v)
+{
+    return base_t::content = v, *this;
+}
 
 DeleteInit::DeleteInit() : base_t{} {}
-DeleteInit& DeleteInit::name(const std::string& v)
+DeleteInit& DeleteInit::from(const std::string& v)
 {
-    return base_t::name = v, *this;
+    return base_t::from = v, *this;
 }
 DeleteInit& DeleteInit::where(const WhereClause& v)
 {

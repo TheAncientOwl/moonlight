@@ -1,6 +1,7 @@
 add_library(MoonlightQuery SHARED
     QueryParser.cpp
     QueryObject.cpp
+    QueryDataHelpers.cpp
     
     Parsers/SchemaFieldParsers.cpp
 

@@ -103,7 +103,7 @@ struct WhereClauseInit : public WhereClause
     using base_t = WhereClause;
     WhereClauseInit();
 
-    // TODO: implement
+    WhereClauseInit& content(const std::string& v);
 };
 
 struct DeleteInit : public Delete
@@ -111,7 +111,7 @@ struct DeleteInit : public Delete
     using base_t = Delete;
     DeleteInit();
 
-    DeleteInit& name(const std::string& v);
+    DeleteInit& from(const std::string& v);
     DeleteInit& where(const WhereClause& v);
 };
 

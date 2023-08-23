@@ -11,17 +11,19 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement matcher...
 QUERY_COULD_MATCH(Delete)
 {
-    return false;
+    return startsWithIgnoreCase(query, "delete");
 }
 
 QUERY_PARSER(Delete)
 {
     QUERY_OBJECT(obj, Delete);
 
-    // TODO: implement Delete parser...
+    cleanupQuery(query, "delete");
+
+    obj.from = extractIdentifier(query, "from");
+    obj.where = QueryData::Helpers::parseWhereClause(extractValue(query, "where", EParserModifier::EscapeQuotes));
 
     RETURN_QUERY_OBJECT;
 }

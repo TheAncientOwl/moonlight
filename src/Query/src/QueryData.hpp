@@ -79,11 +79,17 @@ struct Schema
 struct WhereClause
 {
     // TODO: implement
+    std::string content;
 };
+namespace Helpers {
+
+WhereClause parseWhereClause(std::string_view seq);
+
+} // namespace Helpers
 
 struct Delete
 {
-    std::string name;
+    std::string from;
     WhereClause where;
 };
 

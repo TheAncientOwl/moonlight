@@ -69,10 +69,10 @@
     EXPECT_EQ(obj1.unique, obj2.unique)
 
 #define EXPECT_WHERE_CLAUSE_EQ(obj1, obj2) \
-    static_assert(false, "NOT IMPLEMENTED YET")
+    EXPECT_EQ(obj1.content, obj2.content)
 
 #define EXPECT_DELETE_EQ(obj1, obj2) \
-    EXPECT_EQ(obj1.name, obj2.name); \
+    EXPECT_EQ(obj1.from, obj2.from); \
     EXPECT_WHERE_CLAUSE_EQ(obj1.where, obj2.where)
 
 #define EXPECT_SET_CLAUSE_EQ(obj1, obj2) \
