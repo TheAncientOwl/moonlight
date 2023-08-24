@@ -4,6 +4,12 @@ namespace Moonlight::QueryParser::Implementation::FieldParsers {
 
 using namespace std::literals;
 
+void IFieldParser::clear()
+{
+    m_smatch = std::smatch{};
+    m_field.clear();
+}
+
 namespace {
 
 std::uint32_t parseSize(const std::string& str)

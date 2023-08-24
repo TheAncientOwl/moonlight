@@ -29,6 +29,7 @@ class IFieldParser
 public: // methods
     virtual bool match(std::string field_str) = 0;
     virtual QueryData::Field parse() const = 0;
+    void clear();
 
 public: // lifecycle
     IFieldParser(const IFieldParser&) = delete;

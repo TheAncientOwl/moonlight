@@ -47,7 +47,14 @@ QueryData::Field parseField(std::string_view field)
 
     const auto parser = std::find_if(s_parsers.begin(), s_parsers.end(),
         [field](const auto& field_parser) {
-            return field_parser->match(std::string(field));
+            bool is_match = field_parser->match(std::string(field));
+
+            if (!is_match)
+            {
+                field_parser->clear();
+            }
+
+            return is_match;
         }
     );
 
@@ -56,7 +63,10 @@ QueryData::Field parseField(std::string_view field)
         throw std::runtime_error("Invalid field declaration"s + std::string(field));
     }
 
-    return parser->get()->parse();
+    const auto parsed_field = parser->get()->parse();
+    parser->get()->clear();
+
+    return parsed_field;
 }
 
 std::vector<QueryData::Field> extractFields(std::string_view& query)
