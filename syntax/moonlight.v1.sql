@@ -75,14 +75,29 @@ schema {
         field_34 is Integer?[8|16|32|64]  @default(null),
         field_35 is Decimal?[8|16|32|64]  @default(null),
         field_36 is Reference?            @of(OtherSchemaName)
+
+-- TODO: implement Arrays to Field types
+        field_11 is ArrayOf<Boolean>               @default(false),
+        field_12 is ArrayOf<DateTime>              @default(now()),
+        field_13 is ArrayOf<String[15]>            @default("empty"),
+        field_14 is ArrayOf<Integer[8|16|32|64]>   @default(14),
+        field_15 is ArrayOf<Decimal[8|16|32|64]>   @default(3.14),
+        field_16 is ArrayOf<Reference>             @of(OtherSchemaName),
     ];
 
-    checks: [                                 -- optional
+-- TODO: remove checks
+    checks: [                   -- optional
+    ];
+
+-- TODO: remove unique
+    unique: [ field1, field2 ]; -- optional
+
+-- TODO: implement
+    restrictions: [          -- optional
         field3 like "*@*.*",
         length(field3) = 13,
+        field1 unique
     ];
-
-    unique: [ field1, field2 ];               -- optional
 };
 
 -- 8. DELETE
