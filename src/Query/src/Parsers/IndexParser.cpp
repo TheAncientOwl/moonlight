@@ -9,13 +9,15 @@ using namespace std::literals;
 
 namespace {
 
+constexpr auto c_query_prefix = "index";
+
 } // Anonymous namespace
 
-QUERY_PARSER_CLASS_IMPL(Index, "index")
+QUERY_PARSER_CLASS_IMPL(Index, c_query_prefix)
 {
     QUERY_OBJECT(obj, Index);
 
-    cleanupQuery(query, "index");
+    cleanupQuery(query, c_query_prefix);
 
     obj.on_structure = extractIdentifier(query, "on");
     obj.name = extractIdentifier(query, "name");

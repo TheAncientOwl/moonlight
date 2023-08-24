@@ -9,6 +9,8 @@ using namespace std::literals;
 
 namespace {
 
+constexpr auto c_query_prefix = "rename";
+
 Primitives::EStructureRenameType extractRenameType(std::string_view& query)
 {
     const auto type = extractValue(query, "type");
@@ -96,11 +98,11 @@ void validateRenameObject(const QueryData::Rename& obj)
 
 } // Anonymous namespace
 
-QUERY_PARSER_CLASS_IMPL(Rename, "rename")
+QUERY_PARSER_CLASS_IMPL(Rename, c_query_prefix)
 {
     QUERY_OBJECT(obj, Rename);
 
-    cleanupQuery(query, "rename");
+    cleanupQuery(query, c_query_prefix);
 
     obj.type = extractRenameType(query);
     obj.old_name = extractValue(query, "old_name");

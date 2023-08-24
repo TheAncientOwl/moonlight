@@ -9,6 +9,8 @@ using namespace std::literals;
 
 namespace {
 
+constexpr auto c_query_prefix = "database";
+
 Primitives::EDatabaseOperationType extractOperationType(std::string_view& query)
 {
     const auto type = extractValue(query, "operation");
@@ -18,11 +20,11 @@ Primitives::EDatabaseOperationType extractOperationType(std::string_view& query)
 
 } // Anonymous namespace
 
-QUERY_PARSER_CLASS_IMPL(Database, "database")
+QUERY_PARSER_CLASS_IMPL(Database, c_query_prefix)
 {
     QUERY_OBJECT(obj, Database);
 
-    cleanupQuery(query, "database");
+    cleanupQuery(query, c_query_prefix);
 
     obj.type = extractOperationType(query);
     obj.name = extractIdentifier(query, "name");

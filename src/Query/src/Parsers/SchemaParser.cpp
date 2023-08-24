@@ -13,6 +13,8 @@ using namespace std::literals;
 
 namespace {
 
+constexpr auto c_query_prefix = "schema";
+
 std::vector<std::string> extractInherits(std::string_view& query)
 {
     std::vector<std::string> out{};
@@ -120,11 +122,11 @@ std::vector<std::string> extractUnique(std::string_view& query)
 
 } // Anonymous namespace
 
-QUERY_PARSER_CLASS_IMPL(Schema, "schema")
+QUERY_PARSER_CLASS_IMPL(Schema, c_query_prefix)
 {
     QUERY_OBJECT(obj, Schema);
 
-    cleanupQuery(query, "schema");
+    cleanupQuery(query, c_query_prefix);
 
     obj.name = extractIdentifier(query, "name");
     obj.inherits = extractInherits(query);

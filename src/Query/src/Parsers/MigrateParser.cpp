@@ -9,6 +9,8 @@ using namespace std::literals;
 
 namespace {
 
+constexpr auto c_query_prefix = "migrate";
+
 std::pair<std::string_view, std::string_view> parseMapping(std::string_view mapping)
 {
     const auto left_end = mapping.find_first_of(WHITESPACE);
@@ -83,11 +85,11 @@ std::vector<std::pair<std::string, std::string>> extractMappings(std::string_vie
 
 } // Anonymous namespace
 
-QUERY_PARSER_CLASS_IMPL(Migrate, "migrate")
+QUERY_PARSER_CLASS_IMPL(Migrate, c_query_prefix)
 {
     QUERY_OBJECT(obj, Migrate);
 
-    cleanupQuery(query, "migrate");
+    cleanupQuery(query, c_query_prefix);
 
     obj.structure_name = extractIdentifier(query, "structure");
     obj.new_schema = extractIdentifier(query, "to");

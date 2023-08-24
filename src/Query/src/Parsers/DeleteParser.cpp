@@ -9,14 +9,16 @@ using namespace std::literals;
 
 namespace {
 
+constexpr auto c_query_prefix = "delete";
+
 } // Anonymous namespace
 
 
-QUERY_PARSER_CLASS_IMPL(Delete, "delete")
+QUERY_PARSER_CLASS_IMPL(Delete, c_query_prefix)
 {
     QUERY_OBJECT(obj, Delete);
 
-    cleanupQuery(query, "delete");
+    cleanupQuery(query, c_query_prefix);
 
     obj.from = extractIdentifier(query, "from");
     obj.where = QueryData::Helpers::parseWhereClause(extractValue(query, "where", EParserModifier::EscapeQuotes));
