@@ -9,7 +9,7 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix = "drop";
+constexpr auto c_query_prefix{ "drop" };
 
 } // Anonymous namespace
 

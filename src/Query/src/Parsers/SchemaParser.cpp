@@ -13,7 +13,7 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix = "schema";
+constexpr auto c_query_prefix{ "schema" };
 
 std::vector<std::string> extractInherits(std::string_view& query)
 {
@@ -62,7 +62,7 @@ QueryData::Field parseField(std::string_view field)
 std::vector<QueryData::Field> extractFields(std::string_view& query)
 {
 
-    const auto fields = extractList(query, "fields", EParserModifier::EscapeQuotes);
+    const auto fields{ extractList(query, "fields", EParserModifier::EscapeQuotes) };
 
     std::vector<QueryData::Field> out{};
     out.reserve(fields.size());
@@ -82,7 +82,6 @@ std::vector<std::string> extractChecks(std::string_view& query)
     try
     {
         const auto checks = extractList(query, "checks", EParserModifier::EscapeQuotes);
-
         out.reserve(checks.size());
 
         for (const auto check : checks)

@@ -9,13 +9,13 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix = "database";
+constexpr auto c_query_prefix{ "database" };
 
 Primitives::EDatabaseOperationType extractOperationType(std::string_view& query)
 {
-    const auto type = extractValue(query, "operation");
+    const auto operation_seq{ extractValue(query, "operation") };
 
-    return Primitives::DatabaseOperationType::to_literal(std::string(type));
+    return Primitives::DatabaseOperationType::to_literal(std::string(operation_seq));
 }
 
 } // Anonymous namespace

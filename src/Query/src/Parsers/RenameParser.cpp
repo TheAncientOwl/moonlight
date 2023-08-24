@@ -9,13 +9,13 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix = "rename";
+constexpr auto c_query_prefix{ "rename" };
 
 Primitives::EStructureRenameType extractRenameType(std::string_view& query)
 {
-    const auto type = extractValue(query, "type");
+    const auto type_seq{ extractValue(query, "type") };
 
-    return Primitives::StructureRenameType::to_literal(std::string(type));
+    return Primitives::StructureRenameType::to_literal(std::string(type_seq));
 }
 
 /**
@@ -44,7 +44,7 @@ void validateRenameObject(const QueryData::Rename& obj)
     case Primitives::EStructureRenameType::Field:
     {
         const auto extract_structure_name_and_validate = [](std::string_view name) -> std::string_view {
-            const auto dot_pos = name.find_first_of('.');
+            const auto dot_pos{ name.find_first_of('.') };
 
             if (dot_pos == std::string_view::npos)
             {
@@ -61,8 +61,8 @@ void validateRenameObject(const QueryData::Rename& obj)
                 throw std::runtime_error("Missing field name @ '"s + std::string(name) + "'"s);
             }
 
-            const auto structure_name = name.substr(0, dot_pos);
-            const auto field_name = name.substr(dot_pos + 1);
+            const auto structure_name{ name.substr(0, dot_pos) };
+            const auto field_name{ name.substr(dot_pos + 1) };
 
             if (!isValidIdentifier(structure_name))
             {
@@ -77,8 +77,8 @@ void validateRenameObject(const QueryData::Rename& obj)
             return structure_name;
             };
 
-        const auto old_structure_name = extract_structure_name_and_validate(obj.old_name);
-        const auto new_structure_name = extract_structure_name_and_validate(obj.new_name);
+        const auto old_structure_name{ extract_structure_name_and_validate(obj.old_name) };
+        const auto new_structure_name{ extract_structure_name_and_validate(obj.new_name) };
         if (old_structure_name != new_structure_name)
         {
             throw std::runtime_error(

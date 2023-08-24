@@ -9,7 +9,7 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix = "update";
+constexpr auto c_query_prefix{ "update" };
 
 } // Anonymous namespace
 

@@ -9,13 +9,13 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix = "create structure";
+constexpr auto c_query_prefix{ "create structure" };
 
 Primitives::EStructureType extractType(std::string_view& query)
 {
-    const auto type = extractValue(query, "type");
+    const auto type_seq{ extractValue(query, "type") };
 
-    return Primitives::StructureType::to_literal(std::string(type));
+    return Primitives::StructureType::to_literal(std::string(type_seq));
 }
 
 } // Anonymous namespace

@@ -9,7 +9,7 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix = "select";
+constexpr auto c_query_prefix{ "select" };
 
 } // Anonymous namespace
 

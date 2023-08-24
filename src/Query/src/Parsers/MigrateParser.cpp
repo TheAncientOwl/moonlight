@@ -9,27 +9,27 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix = "migrate";
+constexpr auto c_query_prefix{ "migrate" };
 
 std::pair<std::string_view, std::string_view> parseMapping(std::string_view mapping)
 {
-    const auto left_end = mapping.find_first_of(WHITESPACE);
-    const auto right_begin = mapping.find_last_of(WHITESPACE);
+    const auto left_end{ mapping.find_first_of(WHITESPACE) };
+    const auto right_begin{ mapping.find_last_of(WHITESPACE) };
 
     if (left_end == std::string_view::npos || right_begin == std::string_view::npos || left_end == right_begin)
     {
         throw std::runtime_error("Missing ' ' in mapping '"s + std::string(mapping) + "'"s);
     }
 
-    std::string_view middle = mapping.substr(left_end, right_begin - left_end + 1);
+    std::string_view middle{ mapping.substr(left_end, right_begin - left_end + 1) };
     trim(middle);
     if (middle != "=>"sv)
     {
         throw std::runtime_error("Missing '=>' symbol in mapping '"s + std::string(mapping) + "'"s);
     }
 
-    auto left = mapping.substr(0, left_end);
-    auto right = mapping.substr(right_begin + 1);
+    auto left{ mapping.substr(0, left_end) };
+    auto right{ mapping.substr(right_begin + 1) };
 
     const auto validate_field = [mapping](std::string_view field) {
         if (field.empty())
@@ -52,7 +52,7 @@ std::pair<std::string_view, std::string_view> parseMapping(std::string_view mapp
 std::vector<std::pair<std::string, std::string>> extractMappings(std::string_view& query)
 {
     // 1. cleanup & validate format
-    auto mappings_str = extractValue(query, "mappings");
+    auto mappings_str{ extractValue(query, "mappings") };
 
     if (mappings_str.length() > 1 && mappings_str.front() != '[')
     {
@@ -73,9 +73,11 @@ std::vector<std::pair<std::string, std::string>> extractMappings(std::string_vie
     }
 
     // 2. split & validate identifiers
-    const auto mappings = splitAtComma(mappings_str);
+    const auto mappings{ splitAtComma(mappings_str) };
 
     std::vector<std::pair<std::string, std::string>> out{};
+    out.reserve(mappings.size());
+
     for (const auto& mapping : mappings)
     {
         out.emplace_back(parseMapping(mapping));
