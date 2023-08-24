@@ -88,7 +88,7 @@ TEST(FieldParserDateTimeTest, parseSuccess04)
 
 TEST(FieldParserDateTimeTest, parseSuccess05)
 {
-    const auto query = "some_field is ?DateTime @default(now)";
+    const auto query = "some_field is DateTime? @default(now)";
     DateTimeFieldParser parser{};
 
     EXPECT_TRUE(parser.match(query));
@@ -107,7 +107,7 @@ TEST(FieldParserDateTimeTest, parseSuccess05)
 
 TEST(FieldParserDateTimeTest, parseSuccess06)
 {
-    const auto query = "some_field is ?DateTime @default(null)";
+    const auto query = "some_field is DateTime? @default(null)";
     DateTimeFieldParser parser{};
 
     EXPECT_TRUE(parser.match(query));

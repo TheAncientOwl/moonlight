@@ -80,7 +80,7 @@ TEST(FieldParserStringTest, parseSuccess04)
 
 TEST(FieldParserStringTest, parseSuccess05)
 {
-    const auto field = R"(some_field is ?String[15] @default(null))";
+    const auto field = R"(some_field is String?[15] @default(null))";
     StringFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -97,7 +97,7 @@ TEST(FieldParserStringTest, parseSuccess05)
 
 TEST(FieldParserStringTest, parseSuccess06)
 {
-    const auto field = R"(some_field is ?String[15] @default("empty"))";
+    const auto field = R"(some_field is String?[15] @default("empty"))";
     StringFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));

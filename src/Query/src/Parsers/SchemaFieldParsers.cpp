@@ -32,7 +32,7 @@ std::uint32_t parseSize(const std::string& str)
 
 bool isNullable(std::string_view type)
 {
-    return type.front() == '?';
+    return type.back() == '?';
 }
 
 std::optional<std::string> getMetadata(std::string str, bool nullable)
@@ -58,7 +58,7 @@ std::optional<std::string> getMetadata(std::string str, bool nullable)
 
 } // Anonymous namespace
 
-FIELD_PARSER_CLASS_IMPL(Boolean, R"((\w+)\s*is\s*([?]{0,1}Boolean)\s*@default\s*\(\s*(true|false|null)\s*\))")
+FIELD_PARSER_CLASS_IMPL(Boolean, R"((\w+)\s*is\s*(Boolean[?]{0,1})\s*@default\s*\(\s*(true|false|null)\s*\))")
 {
     QueryData::Field out{};
 
@@ -71,7 +71,7 @@ FIELD_PARSER_CLASS_IMPL(Boolean, R"((\w+)\s*is\s*([?]{0,1}Boolean)\s*@default\s*
     return out;
 }
 
-FIELD_PARSER_CLASS_IMPL(String, R"((\w+)\s*is\s([?]{0,1}String)\s*\[\s*([1-9]\d*)\s*\]\s*@default\s*\(\s*(".+"|null)\s*\))")
+FIELD_PARSER_CLASS_IMPL(String, R"((\w+)\s*is\s(String[?]{0,1})\s*\[\s*([1-9]\d*)\s*\]\s*@default\s*\(\s*(".+"|null)\s*\))")
 {
     QueryData::Field out{};
 
@@ -84,7 +84,7 @@ FIELD_PARSER_CLASS_IMPL(String, R"((\w+)\s*is\s([?]{0,1}String)\s*\[\s*([1-9]\d*
     return out;
 }
 
-FIELD_PARSER_CLASS_IMPL(Integer, R"((\w+)\s*is\s*([?]{0,1}Integer)\s*\[\s*(8|16|32|64)\s*\]\s*@default\s*\(\s*(0|[-]{0,1}[1-9]\d*|null)\s*\))")
+FIELD_PARSER_CLASS_IMPL(Integer, R"((\w+)\s*is\s*(Integer[?]{0,1})\s*\[\s*(8|16|32|64)\s*\]\s*@default\s*\(\s*(0|[-]{0,1}[1-9]\d*|null)\s*\))")
 {
     QueryData::Field out{};
 
@@ -99,7 +99,7 @@ FIELD_PARSER_CLASS_IMPL(Integer, R"((\w+)\s*is\s*([?]{0,1}Integer)\s*\[\s*(8|16|
     return out;
 }
 
-FIELD_PARSER_CLASS_IMPL(Decimal, R"((\w+)\s*is\s*([?]{0,1}Decimal)\s*\[\s*(8|16|32|64)\s*\]\s*@default\s*\(\s*(0|[-]{0,1}\d+\.\d+|null)\s*\))")
+FIELD_PARSER_CLASS_IMPL(Decimal, R"((\w+)\s*is\s*(Decimal[?]{0,1})\s*\[\s*(8|16|32|64)\s*\]\s*@default\s*\(\s*(0|[-]{0,1}\d+\.\d+|null)\s*\))")
 {
     QueryData::Field out{};
 
@@ -114,7 +114,7 @@ FIELD_PARSER_CLASS_IMPL(Decimal, R"((\w+)\s*is\s*([?]{0,1}Decimal)\s*\[\s*(8|16|
     return out;
 }
 
-FIELD_PARSER_CLASS_IMPL(Reference, R"((\w+)\s*is\s*([?]{0,1}Reference)\s*@of\s*\(\s*(\w+)\s*\))")
+FIELD_PARSER_CLASS_IMPL(Reference, R"((\w+)\s*is\s*(Reference[?]{0,1})\s*@of\s*\(\s*(\w+)\s*\))")
 {
     QueryData::Field out{};
 
@@ -127,7 +127,7 @@ FIELD_PARSER_CLASS_IMPL(Reference, R"((\w+)\s*is\s*([?]{0,1}Reference)\s*@of\s*\
     return out;
 }
 
-FIELD_PARSER_CLASS_IMPL(DateTime, R"((\w+)\s*is\s*([?]{0,1}DateTime)\s*@default\s*\(\s*(null|now|\d\d(?:\/|.|-)\d\d(?:\/|.|-)\d\d\d\d)\s*\))")
+FIELD_PARSER_CLASS_IMPL(DateTime, R"((\w+)\s*is\s*(DateTime[?]{0,1})\s*@default\s*\(\s*(null|now|\d\d(?:\/|.|-)\d\d(?:\/|.|-)\d\d\d\d)\s*\))")
 {
     QueryData::Field out{};
 

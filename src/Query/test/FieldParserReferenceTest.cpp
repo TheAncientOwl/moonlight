@@ -30,7 +30,7 @@ TEST(FieldParserReferenceTest, parseSuccess01)
 
 TEST(FieldParserReferenceTest, parseSuccess02)
 {
-    const auto query = "some_field is ?Reference @of(OtherSchemaName)";
+    const auto query = "some_field is Reference? @of(OtherSchemaName)";
     ReferenceFieldParser parser{};
 
     ASSERT_TRUE(parser.match(query));

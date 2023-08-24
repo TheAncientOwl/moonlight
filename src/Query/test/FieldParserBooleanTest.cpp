@@ -51,7 +51,7 @@ TEST(FieldParserBooleanTest, parseSuccess02)
 
 TEST(FieldParserBooleanTest, parseSuccess03)
 {
-    const auto field = "some_field is ?Boolean @default(false)";
+    const auto field = "some_field is Boolean? @default(false)";
 
     BooleanFieldParser parser{};
 
@@ -71,7 +71,7 @@ TEST(FieldParserBooleanTest, parseSuccess03)
 
 TEST(FieldParserBooleanTest, parseSuccess04)
 {
-    const auto field = "some_field is ?Boolean @default(true)";
+    const auto field = "some_field is Boolean? @default(true)";
 
     BooleanFieldParser parser{};
 
@@ -91,7 +91,7 @@ TEST(FieldParserBooleanTest, parseSuccess04)
 
 TEST(FieldParserBooleanTest, parseSuccess05)
 {
-    const auto field = "some_field is ?Boolean @default(null)";
+    const auto field = "some_field is Boolean? @default(null)";
 
     BooleanFieldParser parser{};
 

@@ -88,7 +88,7 @@ TEST(FieldParserIntegerTest, parseSuccess04)
 
 TEST(FieldParserIntegerTest, parseSuccess05)
 {
-    const auto field = "some_field is ?Integer[8] @default(14)";
+    const auto field = "some_field is Integer?[8] @default(14)";
     IntegerFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -107,7 +107,7 @@ TEST(FieldParserIntegerTest, parseSuccess05)
 
 TEST(FieldParserIntegerTest, parseSuccess06)
 {
-    const auto field = "some_field is ?Integer[16] @default(14)";
+    const auto field = "some_field is Integer?[16] @default(14)";
     IntegerFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -126,7 +126,7 @@ TEST(FieldParserIntegerTest, parseSuccess06)
 
 TEST(FieldParserIntegerTest, parseSuccess07)
 {
-    const auto field = "some_field is ?Integer[32] @default(14)";
+    const auto field = "some_field is Integer?[32] @default(14)";
     IntegerFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -145,7 +145,7 @@ TEST(FieldParserIntegerTest, parseSuccess07)
 
 TEST(FieldParserIntegerTest, parseSuccess08)
 {
-    const auto field = "some_field is ?Integer[64] @default(14)";
+    const auto field = "some_field is Integer?[64] @default(14)";
     IntegerFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -164,7 +164,7 @@ TEST(FieldParserIntegerTest, parseSuccess08)
 
 TEST(FieldParserIntegerTest, parseSuccess09)
 {
-    const auto field = "some_field is ?Integer[8] @default(null)";
+    const auto field = "some_field is Integer?[8] @default(null)";
     IntegerFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -183,7 +183,7 @@ TEST(FieldParserIntegerTest, parseSuccess09)
 
 TEST(FieldParserIntegerTest, parseSuccess10)
 {
-    const auto field = "some_field is ?Integer[16] @default(null)";
+    const auto field = "some_field is Integer?[16] @default(null)";
     IntegerFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -202,7 +202,7 @@ TEST(FieldParserIntegerTest, parseSuccess10)
 
 TEST(FieldParserIntegerTest, parseSuccess11)
 {
-    const auto field = "some_field is ?Integer[32] @default(null)";
+    const auto field = "some_field is Integer?[32] @default(null)";
     IntegerFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -221,7 +221,7 @@ TEST(FieldParserIntegerTest, parseSuccess11)
 
 TEST(FieldParserIntegerTest, parseSuccess12)
 {
-    const auto field = "some_field is ?Integer[64] @default(null)";
+    const auto field = "some_field is Integer?[64] @default(null)";
     IntegerFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));

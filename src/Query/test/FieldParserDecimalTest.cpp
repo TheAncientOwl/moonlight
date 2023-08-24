@@ -88,7 +88,7 @@ TEST(FieldParserDecimalTest, parseSuccess04)
 
 TEST(FieldParserDecimalTest, parseSuccess05)
 {
-    const auto field = "some_field is ?Decimal[8] @default(14.29)";
+    const auto field = "some_field is Decimal?[8] @default(14.29)";
     DecimalFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -107,7 +107,7 @@ TEST(FieldParserDecimalTest, parseSuccess05)
 
 TEST(FieldParserDecimalTest, parseSuccess06)
 {
-    const auto field = "some_field is ?Decimal[16] @default(14.29)";
+    const auto field = "some_field is Decimal?[16] @default(14.29)";
     DecimalFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -126,7 +126,7 @@ TEST(FieldParserDecimalTest, parseSuccess06)
 
 TEST(FieldParserDecimalTest, parseSuccess07)
 {
-    const auto field = "some_field is ?Decimal[32] @default(14.29)";
+    const auto field = "some_field is Decimal?[32] @default(14.29)";
     DecimalFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -145,7 +145,7 @@ TEST(FieldParserDecimalTest, parseSuccess07)
 
 TEST(FieldParserDecimalTest, parseSuccess08)
 {
-    const auto field = "some_field is ?Decimal[64] @default(14.29)";
+    const auto field = "some_field is Decimal?[64] @default(14.29)";
     DecimalFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -164,7 +164,7 @@ TEST(FieldParserDecimalTest, parseSuccess08)
 
 TEST(FieldParserDecimalTest, parseSuccess09)
 {
-    const auto field = "some_field is ?Decimal[8] @default(null)";
+    const auto field = "some_field is Decimal?[8] @default(null)";
     DecimalFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -183,7 +183,7 @@ TEST(FieldParserDecimalTest, parseSuccess09)
 
 TEST(FieldParserDecimalTest, parseSuccess10)
 {
-    const auto field = "some_field is ?Decimal[16] @default(null)";
+    const auto field = "some_field is Decimal?[16] @default(null)";
     DecimalFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -202,7 +202,7 @@ TEST(FieldParserDecimalTest, parseSuccess10)
 
 TEST(FieldParserDecimalTest, parseSuccess11)
 {
-    const auto field = "some_field is ?Decimal[32] @default(null)";
+    const auto field = "some_field is Decimal?[32] @default(null)";
     DecimalFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));
@@ -221,7 +221,7 @@ TEST(FieldParserDecimalTest, parseSuccess11)
 
 TEST(FieldParserDecimalTest, parseSuccess12)
 {
-    const auto field = "some_field is ?Decimal[64] @default(null)";
+    const auto field = "some_field is Decimal?[64] @default(null)";
     DecimalFieldParser parser{};
 
     EXPECT_TRUE(parser.match(field));

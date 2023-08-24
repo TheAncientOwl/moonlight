@@ -62,19 +62,19 @@ schema {
         field_15 is Decimal[8|16|32|64]   @default(3.14),
         field_16 is Reference             @of(OtherSchemaName),
 
-        field_21 is ?Boolean              @default(false),
-        field_22 is ?DateTime             @default(now()),
-        field_23 is ?String[15]           @default("empty"),
-        field_24 is ?Integer[8|16|32|64]  @default(14),
-        field_25 is ?Decimal[8|16|32|64]  @default(3.14),
-        field_26 is ?Reference            @of(OtherSchemaName),
+        field_21 is Boolean?              @default(false),
+        field_22 is DateTime?             @default(now()),
+        field_23 is String?[15]           @default("empty"),
+        field_24 is Integer?[8|16|32|64]  @default(14),
+        field_25 is Decimal?[8|16|32|64]  @default(3.14),
+        field_26 is Reference?            @of(OtherSchemaName),
 
-        field_31 is ?Boolean              @default(null),
-        field_32 is ?DateTime             @default(null),
-        field_33 is ?String[15]           @default(null),
-        field_34 is ?Integer[8|16|32|64]  @default(null),
-        field_35 is ?Decimal[8|16|32|64]  @default(null),
-        field_36 is ?Reference            @of(OtherSchemaName)
+        field_31 is Boolean?              @default(null),
+        field_32 is DateTime?             @default(null),
+        field_33 is String?[15]           @default(null),
+        field_34 is Integer?[8|16|32|64]  @default(null),
+        field_35 is Decimal?[8|16|32|64]  @default(null),
+        field_36 is Reference?            @of(OtherSchemaName)
     ];
 
     checks: [                                 -- optional
