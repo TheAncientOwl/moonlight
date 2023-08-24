@@ -15,6 +15,7 @@ bool equalsIgnoreCase(std::string_view s1, std::string_view s2);
 bool startsWithIgnoreCase(std::string_view src, std::string_view what);
 
 bool isValidIdentifier(std::string_view str);
+void cleanupQuery(std::string_view& query, std::string_view prefix);
 
 enum class EParserModifier
 {
@@ -22,13 +23,12 @@ enum class EParserModifier
     EscapeQuotes = 1
 };
 
+std::vector<std::string_view> splitAtComma(std::string_view str, EParserModifier modifier = EParserModifier::None);
+
 std::string_view extractValue(std::string_view& query, std::string_view keyword, EParserModifier modifier = EParserModifier::None);
 std::string_view extractIdentifier(std::string_view& query, std::string_view keyword);
 bool extractBoolean(std::string_view& query, std::string_view keyword);
-std::vector<std::string> extractIdentifiersList(std::string_view& query, std::string_view keyword);
 std::vector<std::string_view> extractList(std::string_view& query, std::string_view keyword, EParserModifier modifier = EParserModifier::None);
-
-void cleanupQuery(std::string_view& query, std::string_view prefix);
-std::vector<std::string_view> splitAtComma(std::string_view str, EParserModifier modifier = EParserModifier::None);
+std::vector<std::string> extractIdentifiersList(std::string_view& query, std::string_view keyword);
 
 } // namespace Moonlight::Utils

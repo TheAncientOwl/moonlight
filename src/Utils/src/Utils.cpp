@@ -9,13 +9,11 @@ namespace Moonlight::Utils {
 
 using namespace std::literals;
 
-constexpr auto c_whitespace = " \n\r\t\f\v"sv;
-
 void ltrim(std::string_view& str)
 {
     if (!str.empty())
     {
-        const auto begin{ str.find_first_not_of(c_whitespace) };
+        const auto begin{ str.find_first_not_of(WHITESPACE) };
 
         str = str.substr(std::min(begin, str.length()));
     }
@@ -25,7 +23,7 @@ void rtrim(std::string_view& str)
 {
     if (!str.empty())
     {
-        const auto end{ str.find_last_not_of(c_whitespace) };
+        const auto end{ str.find_last_not_of(WHITESPACE) };
 
         str = str.substr(0, end + 1);
     }
@@ -65,138 +63,11 @@ bool startsWithIgnoreCase(std::string_view src, std::string_view what)
     return equalsIgnoreCase(src.substr(0, what.length()), what);
 }
 
-/**
- * @brief Query format: [whitespace]keyword[:][whitespace]value[whitespace][;][query...].
- *
- * @param query string representation of the query
- * @param keyword keyword to be matched
- * @param modifier specifies if quotes escape ';' character
- * @return std::string_view - trimmed value
- */
-std::string_view extractValue(std::string_view& query, std::string_view keyword, EParserModifier modifier)
-{
-    // 1. check if query starts with the keyword
-    ltrim(query);
-    if (!startsWithIgnoreCase(query, keyword))
-    {
-        throw std::runtime_error("Invalid query, missing '"s + std::string(keyword) + "' keyword"s);
-    }
-
-    // 2. remove keyword + ':' symbol && assert query not empty
-    query.remove_prefix(keyword.length());
-    ltrim(query);
-    if (query.empty() || !query.starts_with(':'))
-    {
-        throw std::runtime_error("Missing ':' symbol @ '"s + std::string(query) + "'"s);
-    }
-    query.remove_prefix(1);
-    ltrim(query);
-    if (query.empty())
-    {
-        throw std::runtime_error("Missing value for keyword '"s + std::string(keyword) + "'"s);
-    }
-
-    // 3. find ';' (end of value)
-    const auto find_end_pos = [modifier](std::string_view str) -> std::size_t {
-        const auto c_end{ std::cend(str) };
-        const auto c_begin{ std::cbegin(str) };
-
-        bool quoted_string{ false };
-        bool semicolon_found{ false };
-
-        auto end_pos{ std::cbegin(str) };
-        while (end_pos != c_end)
-        {
-            const auto current_char{ *end_pos };
-            const auto prev_char{ end_pos != c_begin ? *std::prev(end_pos) : ' ' };
-
-            if (modifier == EParserModifier::EscapeQuotes && current_char == '"' && prev_char != '\\')
-            {
-                quoted_string = !quoted_string;
-            }
-            else if (current_char == ';')
-            {
-                semicolon_found = true;
-                if (!quoted_string)
-                {
-                    return std::distance(std::cbegin(str), end_pos);
-                }
-            }
-
-            end_pos = std::next(end_pos);
-        }
-
-        if (std::cbegin(str) != end_pos && !quoted_string && semicolon_found)
-        {
-            return std::distance(std::cbegin(str), end_pos);
-        }
-
-        return std::string_view::npos;
-        };
-
-    const auto end_pos{ find_end_pos(query) };
-    if (end_pos == std::string_view::npos)
-    {
-        throw std::runtime_error("Missing ';' @"s + std::string(query));
-    }
-
-    // 4. extract & remove value
-    auto value{ query.substr(0, end_pos) };
-    trim(value);
-    if (value.empty())
-    {
-        throw std::runtime_error("Value cannot be empty @ keyword '"s + std::string(keyword) + "'"s);
-    }
-    query.remove_prefix(end_pos + 1);
-
-    return value;
-}
-
 bool isValidIdentifier(std::string_view str)
 {
     static const std::regex c_identifier_regex{ R"(\w+)" };
 
     return std::regex_match(str.begin(), str.end(), c_identifier_regex);
-}
-
-/**
- * @brief extract value and cleanup query
- *
- * @param query string representation of query in format "keyword: identifier; [query...]"
- */
-std::string_view extractIdentifier(std::string_view& query, std::string_view keyword)
-{
-    const auto name{ extractValue(query, keyword) };
-
-    if (!isValidIdentifier(name))
-    {
-        throw std::runtime_error("Invalid identifier name @ '"s + std::string(name) + "'"s);
-    }
-
-    return name;
-}
-
-/**
- * @brief extract value and cleanup query
- *
- * @param query string representation of query in format "keyword: true|false; [query...]"
- */
-bool extractBoolean(std::string_view& query, std::string_view keyword)
-{
-    const auto boolean_str{ extractValue(query, keyword) };
-
-    if (equalsIgnoreCase(boolean_str, "true"))
-    {
-        return true;
-    }
-    else if (equalsIgnoreCase(boolean_str, "false"))
-    {
-        return false;
-    }
-    else
-    {
-        throw std::runtime_error("Invalid boolean value '"s + std::string(boolean_str) + "'"s);
-    }
 }
 
 /**
@@ -307,56 +178,135 @@ std::vector<std::string_view> splitAtComma(std::string_view str, EParserModifier
 }
 
 /**
- * @brief
+ * @brief Query format: [whitespace]keyword[:][whitespace]value[whitespace][;][query...].
  *
- * @param query query representation in format "keyword: [ identifier1, identifier2, ... ]; [query...]"
+ * @param query string representation of the query
  * @param keyword keyword to be matched
- * @return std::vector<std::string> identifiers
+ * @param modifier specifies if quotes escape ';' character
+ * @return std::string_view - trimmed value
  */
-std::vector<std::string> extractIdentifiersList(std::string_view& query, std::string_view keyword)
+std::string_view extractValue(std::string_view& query, std::string_view keyword, EParserModifier modifier)
 {
-    // 1. cleanup & validate format
-    auto fields_str = extractValue(query, keyword);
-
-    if (fields_str.length() > 1 && fields_str.front() != '[')
+    // 1. check if query starts with the keyword
+    ltrim(query);
+    if (!startsWithIgnoreCase(query, keyword))
     {
-        throw std::runtime_error("Missing '[' symbol @ '"s + std::string(fields_str) + "'"s);
-    }
-    fields_str.remove_prefix(1);
-
-    if (fields_str.length() > 1 && fields_str.back() != ']')
-    {
-        throw std::runtime_error("Missing ']' symbol @ '"s + std::string(fields_str) + "'"s);
-    }
-    fields_str.remove_suffix(1);
-
-    trim(fields_str);
-    if (fields_str.empty())
-    {
-        throw std::runtime_error("Identifiers list cannot be empty");
+        throw std::runtime_error("Invalid query, missing '"s + std::string(keyword) + "' keyword"s);
     }
 
-    // 2. split & validate identifiers
-    const auto fields = splitAtComma(fields_str);
-
-    std::vector<std::string> out{};
-    for (const auto field : fields)
+    // 2. remove keyword + ':' symbol && assert query not empty
+    query.remove_prefix(keyword.length());
+    ltrim(query);
+    if (query.empty() || !query.starts_with(':'))
     {
-        if (isValidIdentifier(field))
+        throw std::runtime_error("Missing ':' symbol @ '"s + std::string(query) + "'"s);
+    }
+    query.remove_prefix(1);
+    ltrim(query);
+    if (query.empty())
+    {
+        throw std::runtime_error("Missing value for keyword '"s + std::string(keyword) + "'"s);
+    }
+
+    // 3. find ';' (end of value)
+    const auto find_end_pos = [modifier](std::string_view str) -> std::size_t {
+        const auto c_end{ std::cend(str) };
+        const auto c_begin{ std::cbegin(str) };
+
+        bool quoted_string{ false };
+        bool semicolon_found{ false };
+
+        auto end_pos{ std::cbegin(str) };
+        while (end_pos != c_end)
         {
-            out.emplace_back(field);
+            const auto current_char{ *end_pos };
+            const auto prev_char{ end_pos != c_begin ? *std::prev(end_pos) : ' ' };
+
+            if (modifier == EParserModifier::EscapeQuotes && current_char == '"' && prev_char != '\\')
+            {
+                quoted_string = !quoted_string;
+            }
+            else if (current_char == ';')
+            {
+                semicolon_found = true;
+                if (!quoted_string)
+                {
+                    return std::distance(std::cbegin(str), end_pos);
+                }
+            }
+
+            end_pos = std::next(end_pos);
         }
-        else
+
+        if (std::cbegin(str) != end_pos && !quoted_string && semicolon_found)
         {
-            throw std::runtime_error("Invalid identifier '"s + std::string(field) + "'"s);
+            return std::distance(std::cbegin(str), end_pos);
         }
+
+        return std::string_view::npos;
+        };
+
+    const auto end_pos{ find_end_pos(query) };
+    if (end_pos == std::string_view::npos)
+    {
+        throw std::runtime_error("Missing ';' @"s + std::string(query));
     }
-    return out;
+
+    // 4. extract & remove value
+    auto value{ query.substr(0, end_pos) };
+    trim(value);
+    if (value.empty())
+    {
+        throw std::runtime_error("Value cannot be empty @ keyword '"s + std::string(keyword) + "'"s);
+    }
+    query.remove_prefix(end_pos + 1);
+
+    return value;
+}
+
+/**
+ * @brief extract value and cleanup query
+ *
+ * @param query string representation of query in format "keyword: identifier; [query...]"
+ */
+std::string_view extractIdentifier(std::string_view& query, std::string_view keyword)
+{
+    const auto name{ extractValue(query, keyword) };
+
+    if (!isValidIdentifier(name))
+    {
+        throw std::runtime_error("Invalid identifier name @ '"s + std::string(name) + "'"s);
+    }
+
+    return name;
+}
+
+/**
+ * @brief extract value and cleanup query
+ *
+ * @param query string representation of query in format "keyword: true|false; [query...]"
+ */
+bool extractBoolean(std::string_view& query, std::string_view keyword)
+{
+    const auto boolean_str{ extractValue(query, keyword) };
+
+    if (equalsIgnoreCase(boolean_str, "true"))
+    {
+        return true;
+    }
+    else if (equalsIgnoreCase(boolean_str, "false"))
+    {
+        return false;
+    }
+    else
+    {
+        throw std::runtime_error("Invalid boolean value '"s + std::string(boolean_str) + "'"s);
+    }
 }
 
 std::vector<std::string_view> extractList(std::string_view& query, std::string_view keyword, EParserModifier modifier)
 {
-    auto list_sequence = extractValue(query, keyword, modifier);
+    auto list_sequence{ extractValue(query, keyword, modifier) };
 
     if (list_sequence.front() != '[')
     {
@@ -377,6 +327,34 @@ std::vector<std::string_view> extractList(std::string_view& query, std::string_v
         throw std::runtime_error("List cannot be empty @ '"s + std::string(query) + "'"s);
     }
     return list;
+}
+
+/**
+ * @brief
+ *
+ * @param query query representation in format "keyword: [ identifier1, identifier2, ... ]; [query...]"
+ * @param keyword keyword to be matched
+ * @return std::vector<std::string> identifiers
+ */
+std::vector<std::string> extractIdentifiersList(std::string_view& query, std::string_view keyword)
+{
+    const auto fields{ extractList(query, keyword) };
+
+    std::vector<std::string> out{};
+    out.reserve(fields.size());
+
+    for (const auto field : fields)
+    {
+        if (isValidIdentifier(field))
+        {
+            out.emplace_back(field);
+        }
+        else
+        {
+            throw std::runtime_error("Invalid identifier '"s + std::string(field) + "'"s);
+        }
+    }
+    return out;
 }
 
 } // namespace Moonlight::Utils
