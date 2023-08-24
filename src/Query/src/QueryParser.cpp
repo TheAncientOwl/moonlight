@@ -15,32 +15,19 @@ QueryObject parseQuery(std::string_view query)
 
     trim(query);
 
-    static const std::array<std::unique_ptr<Implementation::IQueryParser>, 11> s_parsers{
-        std::make_unique<Implementation::DropParser>(),
-        std::make_unique<Implementation::CreateParser>(),
-        std::make_unique<Implementation::RenameParser>(),
-        std::make_unique<Implementation::DatabaseParser>(),
-        std::make_unique<Implementation::IndexParser>(),
-        std::make_unique<Implementation::MigrateParser>(),
-        std::make_unique<Implementation::SchemaParser>(),
-        std::make_unique<Implementation::DeleteParser>(),
-        std::make_unique<Implementation::UpdateParser>(),
-        std::make_unique<Implementation::SelectParser>(),
-        std::make_unique<Implementation::ViewParser>()
-    };
-    static const auto s_parsers_end = s_parsers.end();
+    using namespace Implementation;
+    static const HierarchyMap<IQueryParser, QUERY_PARSERS> s_parsers{};
 
-    const auto parser = std::find_if(s_parsers.begin(), s_parsers.end(),
-        [query](const auto& parser) {
-            return startsWithIgnoreCase(query, parser->queryPrefix());
+    const auto parser_ptr = s_parsers.findIf([query](const auto& parser) -> bool {
+        return startsWithIgnoreCase(query, parser.queryPrefix());
         });
 
-    if (parser == s_parsers_end)
+    if (!parser_ptr)
     {
         throw std::runtime_error("Invalid query syntax.");
     }
 
-    query_obj = parser->get()->parse(query);
+    query_obj = parser_ptr->parse(query);
 
     RETURN_QUERY_OBJECT;
 }

@@ -53,4 +53,12 @@ FIELD_PARSER_CLASS_DEFINITION(Integer);
 FIELD_PARSER_CLASS_DEFINITION(Decimal);
 FIELD_PARSER_CLASS_DEFINITION(Reference);
 
+#define FIELD_PARSERS \
+    StringFieldParser, \
+    DateTimeFieldParser, \
+    BooleanFieldParser, \
+    IntegerFieldParser, \
+    DecimalFieldParser, \
+    ReferenceFieldParser
+
 } // namespace Moonlight::QueryParser::Implementation::FieldParsers

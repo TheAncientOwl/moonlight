@@ -1,7 +1,11 @@
 #pragma once
 
 #include <string_view>
+#include <memory>
 #include <vector>
+#include <array>
+#include <optional>
+#include <functional>
 
 #define WHITESPACE " \n\r\t\f\v"sv
 
@@ -30,5 +34,54 @@ std::string_view extractIdentifier(std::string_view& query, std::string_view key
 bool extractBoolean(std::string_view& query, std::string_view keyword);
 std::vector<std::string_view> extractList(std::string_view& query, std::string_view keyword, EParserModifier modifier = EParserModifier::None);
 std::vector<std::string> extractIdentifiersList(std::string_view& query, std::string_view keyword);
+
+template<typename Base, typename... Derived>
+class HierarchyMap
+{
+public:
+    using BasePtr = std::shared_ptr<Base>;
+    using ConstBasePtr = const BasePtr;
+    using Container = std::array<BasePtr, sizeof...(Derived)>;
+
+public:
+    HierarchyMap();
+
+    BasePtr findIf(std::function<bool(Base& current)> valid);
+    ConstBasePtr findIf(std::function<bool(const Base& current)> valid) const;
+
+private:
+    Container m_data;
+};
+
+template<typename Base, typename ...Derived>
+inline HierarchyMap<Base, Derived...>::HierarchyMap()
+    : m_data({ (std::make_unique<Derived>())... })
+{}
+
+template<typename Base, typename ...Derived>
+inline HierarchyMap<Base, Derived...>::BasePtr HierarchyMap<Base, Derived...>::findIf(std::function<bool(Base& current)> valid)
+{
+    auto value_it = std::find_if(m_data.begin(), m_data.end(), [&valid](auto& it) -> bool { return valid(*it); });
+
+    if (value_it != m_data.end())
+    {
+        return *value_it;
+    }
+
+    return nullptr;
+}
+
+template<typename Base, typename ...Derived>
+inline HierarchyMap<Base, Derived...>::ConstBasePtr HierarchyMap<Base, Derived...>::findIf(std::function<bool(const Base& current)> valid) const
+{
+    const auto value_it = std::find_if(m_data.begin(), m_data.end(), [&valid](const auto& it) -> bool { return valid(*it); });
+
+    if (value_it != m_data.end())
+    {
+        return *value_it;
+    }
+
+    return nullptr;
+}
 
 } // namespace Moonlight::Utils

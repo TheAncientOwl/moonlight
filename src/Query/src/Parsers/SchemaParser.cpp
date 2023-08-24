@@ -36,35 +36,27 @@ std::vector<std::string> extractInherits(std::string_view& query)
 
 QueryData::Field parseField(std::string_view field)
 {
-    static const std::array<std::unique_ptr<FieldParsers::IFieldParser>, 6> s_parsers = {
-        std::make_unique<FieldParsers::StringFieldParser>(),
-        std::make_unique<FieldParsers::DateTimeFieldParser>(),
-        std::make_unique<FieldParsers::BooleanFieldParser>(),
-        std::make_unique<FieldParsers::IntegerFieldParser>(),
-        std::make_unique<FieldParsers::DecimalFieldParser>(),
-        std::make_unique<FieldParsers::ReferenceFieldParser>()
-    };
+    using namespace FieldParsers;
+    static HierarchyMap<IFieldParser, FIELD_PARSERS> s_parsers{};
 
-    const auto parser = std::find_if(s_parsers.begin(), s_parsers.end(),
-        [field](const auto& field_parser) {
-            bool is_match = field_parser->match(std::string(field));
+    const auto parser_ptr = s_parsers.findIf([field](auto& field_parser) -> bool {
+        bool is_match = field_parser.match(std::string(field));
 
-            if (!is_match)
-            {
-                field_parser->clear();
-            }
-
-            return is_match;
+        if (!is_match)
+        {
+            field_parser.clear();
         }
-    );
 
-    if (parser == std::cend(s_parsers))
+        return is_match;
+        });
+
+    if (!parser_ptr)
     {
         throw std::runtime_error("Invalid field declaration"s + std::string(field));
     }
 
-    const auto parsed_field = parser->get()->parse();
-    parser->get()->clear();
+    const auto parsed_field = parser_ptr->parse();
+    parser_ptr->clear();
 
     return parsed_field;
 }
