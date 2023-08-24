@@ -11,12 +11,7 @@ namespace {
 
 } // Anonymous namespace
 
-QUERY_COULD_MATCH(Drop)
-{
-    return startsWithIgnoreCase(query, "drop");
-}
-
-QUERY_PARSER(Drop)
+QUERY_PARSER_CLASS_IMPL(Drop, "drop")
 {
     QUERY_OBJECT(obj, Drop);
 

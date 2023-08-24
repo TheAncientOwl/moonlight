@@ -11,13 +11,7 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement matcher...
-QUERY_COULD_MATCH(Update)
-{
-    return false;
-}
-
-QUERY_PARSER(Update)
+QUERY_PARSER_CLASS_IMPL(Update, "update")
 {
     QUERY_OBJECT(obj, Update);
 

@@ -11,12 +11,8 @@ namespace {
 
 } // Anonymous namespace
 
-QUERY_COULD_MATCH(Delete)
-{
-    return startsWithIgnoreCase(query, "delete");
-}
 
-QUERY_PARSER(Delete)
+QUERY_PARSER_CLASS_IMPL(Delete, "delete")
 {
     QUERY_OBJECT(obj, Delete);
 

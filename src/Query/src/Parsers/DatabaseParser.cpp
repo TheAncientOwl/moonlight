@@ -18,12 +18,7 @@ Primitives::EDatabaseOperationType extractOperationType(std::string_view& query)
 
 } // Anonymous namespace
 
-QUERY_COULD_MATCH(Database)
-{
-    return startsWithIgnoreCase(query, "database");
-}
-
-QUERY_PARSER(Database)
+QUERY_PARSER_CLASS_IMPL(Database, "database")
 {
     QUERY_OBJECT(obj, Database);
 

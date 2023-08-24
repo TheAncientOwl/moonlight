@@ -52,8 +52,7 @@ std::optional<std::string> getMetadata(std::string str, bool nullable)
 
 } // Anonymous namespace
 
-FIELD_PARSER_MATCH(Boolean, R"((\w+)\s*is\s*([?]{0,1}Boolean)\s*@default\s*\(\s*(true|false|null)\s*\))");
-FIELD_PARSER_LOGICS(Boolean)
+FIELD_PARSER_CLASS_IMPL(Boolean, R"((\w+)\s*is\s*([?]{0,1}Boolean)\s*@default\s*\(\s*(true|false|null)\s*\))")
 {
     QueryData::Field out{};
 
@@ -66,9 +65,7 @@ FIELD_PARSER_LOGICS(Boolean)
     return out;
 }
 
-
-FIELD_PARSER_MATCH(String, R"((\w+)\s*is\s([?]{0,1}String)\s*\[\s*([1-9]\d*)\s*\]\s*@default\s*\(\s*(".+"|null)\s*\))");
-FIELD_PARSER_LOGICS(String)
+FIELD_PARSER_CLASS_IMPL(String, R"((\w+)\s*is\s([?]{0,1}String)\s*\[\s*([1-9]\d*)\s*\]\s*@default\s*\(\s*(".+"|null)\s*\))")
 {
     QueryData::Field out{};
 
@@ -81,8 +78,7 @@ FIELD_PARSER_LOGICS(String)
     return out;
 }
 
-FIELD_PARSER_MATCH(Integer, R"((\w+)\s*is\s*([?]{0,1}Integer)\s*\[\s*(8|16|32|64)\s*\]\s*@default\s*\(\s*(0|[-]{0,1}[1-9]\d*|null)\s*\))");
-FIELD_PARSER_LOGICS(Integer)
+FIELD_PARSER_CLASS_IMPL(Integer, R"((\w+)\s*is\s*([?]{0,1}Integer)\s*\[\s*(8|16|32|64)\s*\]\s*@default\s*\(\s*(0|[-]{0,1}[1-9]\d*|null)\s*\))")
 {
     QueryData::Field out{};
 
@@ -97,9 +93,7 @@ FIELD_PARSER_LOGICS(Integer)
     return out;
 }
 
-
-FIELD_PARSER_MATCH(Decimal, R"((\w+)\s*is\s*([?]{0,1}Decimal)\s*\[\s*(8|16|32|64)\s*\]\s*@default\s*\(\s*(0|[-]{0,1}\d+\.\d+|null)\s*\))");
-FIELD_PARSER_LOGICS(Decimal)
+FIELD_PARSER_CLASS_IMPL(Decimal, R"((\w+)\s*is\s*([?]{0,1}Decimal)\s*\[\s*(8|16|32|64)\s*\]\s*@default\s*\(\s*(0|[-]{0,1}\d+\.\d+|null)\s*\))")
 {
     QueryData::Field out{};
 
@@ -114,9 +108,7 @@ FIELD_PARSER_LOGICS(Decimal)
     return out;
 }
 
-
-FIELD_PARSER_MATCH(Reference, R"((\w+)\s*is\s*([?]{0,1}Reference)\s*@of\s*\(\s*(\w+)\s*\))");
-FIELD_PARSER_LOGICS(Reference)
+FIELD_PARSER_CLASS_IMPL(Reference, R"((\w+)\s*is\s*([?]{0,1}Reference)\s*@of\s*\(\s*(\w+)\s*\))")
 {
     QueryData::Field out{};
 
@@ -129,9 +121,7 @@ FIELD_PARSER_LOGICS(Reference)
     return out;
 }
 
-
-FIELD_PARSER_MATCH(DateTime, R"((\w+)\s*is\s*([?]{0,1}DateTime)\s*@default\s*\(\s*(null|now|\d\d(?:\/|.|-)\d\d(?:\/|.|-)\d\d\d\d)\s*\))");
-FIELD_PARSER_LOGICS(DateTime)
+FIELD_PARSER_CLASS_IMPL(DateTime, R"((\w+)\s*is\s*([?]{0,1}DateTime)\s*@default\s*\(\s*(null|now|\d\d(?:\/|.|-)\d\d(?:\/|.|-)\d\d\d\d)\s*\))")
 {
     QueryData::Field out{};
 

@@ -11,12 +11,7 @@ namespace {
 
 } // Anonymous namespace
 
-QUERY_COULD_MATCH(Index)
-{
-    return startsWithIgnoreCase(query, "index");
-}
-
-QUERY_PARSER(Index)
+QUERY_PARSER_CLASS_IMPL(Index, "index")
 {
     QUERY_OBJECT(obj, Index);
 

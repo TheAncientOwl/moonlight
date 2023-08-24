@@ -96,12 +96,7 @@ void validateRenameObject(const QueryData::Rename& obj)
 
 } // Anonymous namespace
 
-QUERY_COULD_MATCH(Rename)
-{
-    return startsWithIgnoreCase(query, "rename");
-};
-
-QUERY_PARSER(Rename)
+QUERY_PARSER_CLASS_IMPL(Rename, "rename")
 {
     QUERY_OBJECT(obj, Rename);
 

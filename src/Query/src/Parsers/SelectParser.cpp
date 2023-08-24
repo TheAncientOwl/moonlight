@@ -11,13 +11,7 @@ namespace {
 
 } // Anonymous namespace
 
-// TODO: implement matcher...
-QUERY_COULD_MATCH(Select)
-{
-    return false;
-}
-
-QUERY_PARSER(Select)
+QUERY_PARSER_CLASS_IMPL(Select, "select")
 {
     QUERY_OBJECT(obj, Select);
 

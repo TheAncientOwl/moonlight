@@ -18,12 +18,7 @@ Primitives::EStructureType extractType(std::string_view& query)
 
 } // Anonymous namespace
 
-QUERY_COULD_MATCH(Create)
-{
-    return startsWithIgnoreCase(query, "create structure");
-}
-
-QUERY_PARSER(Create)
+QUERY_PARSER_CLASS_IMPL(Create, "create structure")
 {
     QUERY_OBJECT(obj, Create);
 

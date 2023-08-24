@@ -120,12 +120,7 @@ std::vector<std::string> extractUnique(std::string_view& query)
 
 } // Anonymous namespace
 
-QUERY_COULD_MATCH(Schema)
-{
-    return startsWithIgnoreCase(query, "schema");
-}
-
-QUERY_PARSER(Schema)
+QUERY_PARSER_CLASS_IMPL(Schema, "schema")
 {
     QUERY_OBJECT(obj, Schema);
 

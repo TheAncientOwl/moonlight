@@ -83,12 +83,7 @@ std::vector<std::pair<std::string, std::string>> extractMappings(std::string_vie
 
 } // Anonymous namespace
 
-QUERY_COULD_MATCH(Migrate)
-{
-    return startsWithIgnoreCase(query, "migrate");
-}
-
-QUERY_PARSER(Migrate)
+QUERY_PARSER_CLASS_IMPL(Migrate, "migrate")
 {
     QUERY_OBJECT(obj, Migrate);
 
