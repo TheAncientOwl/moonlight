@@ -50,7 +50,8 @@
     if (obj1.metadata.has_value() && obj2.metadata.has_value()) { EXPECT_EQ(obj1.metadata.value(), obj2.metadata.value()); } \
     EXPECT_EQ(obj1.size.has_value(), obj2.size.has_value()); \
     if (obj1.size.has_value() && obj2.size.has_value()) { EXPECT_EQ(obj1.size.value(), obj2.size.value()); } \
-    EXPECT_EQ(obj1.nullable, obj2.nullable)
+    EXPECT_EQ(obj1.nullable, obj2.nullable); \
+    EXPECT_EQ(obj1.array, obj2.array)
 
 #define EXPECT_ARRAYS_EQ(arr1, arr2, expect) \
     for (std::size_t i = 0u, end = std::min(arr1.size(), arr2.size()); i < end; i++) \

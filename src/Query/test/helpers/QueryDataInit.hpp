@@ -84,6 +84,7 @@ struct FieldInit : public Field
     FieldInit& metadata(const std::optional<std::string>& v);
     FieldInit& size(const std::optional<std::uint32_t>& v);
     FieldInit& nullable(const bool& v);
+    FieldInit& array(const bool& v);
 };
 
 struct SchemaInit : public Schema

@@ -128,6 +128,11 @@ FieldInit& FieldInit::nullable(const bool& v)
 {
     return base_t::nullable = v, *this;
 }
+FieldInit& FieldInit::array(const bool& v)
+{
+    return base_t::array = v, *this;
+}
+
 
 SchemaInit::SchemaInit() : base_t{} {}
 SchemaInit& SchemaInit::name(const std::string& v)

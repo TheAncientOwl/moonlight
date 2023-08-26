@@ -65,6 +65,7 @@ struct Field
     std::optional<std::string> metadata;
     std::optional<std::uint32_t> size;
     bool nullable{ false };
+    bool array{ false };
 };
 
 struct Schema
