@@ -25,6 +25,8 @@ TEST(FieldParserStringTest, parseSuccess01)
         .size(15)
         .metadata(R"("empty")")
         .nullable(false);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserStringTest, parseSuccess02)
@@ -42,6 +44,8 @@ TEST(FieldParserStringTest, parseSuccess02)
         .size(15)
         .metadata(R"("emp\"ty")")
         .nullable(false);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserStringTest, parseSuccess03)
@@ -59,6 +63,8 @@ TEST(FieldParserStringTest, parseSuccess03)
         .size(15)
         .metadata(R"("emp;ty")")
         .nullable(false);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserStringTest, parseSuccess04)
@@ -76,6 +82,8 @@ TEST(FieldParserStringTest, parseSuccess04)
         .size(15)
         .metadata(R"("null")")
         .nullable(false);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserStringTest, parseSuccess05)
@@ -92,7 +100,9 @@ TEST(FieldParserStringTest, parseSuccess05)
         .data_type(Primitives::EDataType::String)
         .size(15)
         .metadata(std::nullopt)
-        .nullable(false);
+        .nullable(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserStringTest, parseSuccess06)
@@ -110,6 +120,8 @@ TEST(FieldParserStringTest, parseSuccess06)
         .size(15)
         .metadata(R"("empty")")
         .nullable(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserStringTest, parseSuccess07)
@@ -127,6 +139,8 @@ TEST(FieldParserStringTest, parseSuccess07)
         .size(15)
         .metadata(R"("empty")")
         .nullable(false);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserStringTest, noParseSuccess01)

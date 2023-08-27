@@ -26,6 +26,8 @@ TEST(FieldParserReferenceTest, parseSuccess01)
         .metadata(std::nullopt)
         .metadata("OtherSchemaName")
         .nullable(false);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserReferenceTest, parseSuccess02)
@@ -44,6 +46,8 @@ TEST(FieldParserReferenceTest, parseSuccess02)
         .metadata(std::nullopt)
         .metadata("OtherSchemaName")
         .nullable(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
 TEST(FieldParserReferenceTest, noParseSuccess01)
