@@ -11,6 +11,17 @@ namespace {
 
 constexpr auto c_query_prefix{ "update" };
 
+QueryData::SetClause extractSetClause(std::string_view& query)
+{
+    QueryData::SetClause out{};
+
+    const auto set_seq = extractValue(query, "set", EParserModifier::EscapeQuotes);
+
+    out.data = set_seq;
+
+    return out;
+}
+
 } // Anonymous namespace
 
 QUERY_PARSER_CLASS_IMPL(Update, c_query_prefix)
@@ -19,7 +30,9 @@ QUERY_PARSER_CLASS_IMPL(Update, c_query_prefix)
 
     cleanupQuery(query, c_query_prefix);
 
-    // TODO: implement Update parser...
+    obj.name = extractIdentifier(query, "structure");
+    obj.set = extractSetClause(query);
+    obj.where = QueryData::Helpers::parseWhereClause(extractValue(query, "where", EParserModifier::EscapeQuotes));
 
     RETURN_QUERY_OBJECT;
 }

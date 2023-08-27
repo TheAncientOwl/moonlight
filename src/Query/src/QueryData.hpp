@@ -96,6 +96,7 @@ struct Delete
 struct SetClause
 {
     // TODO: implement
+    std::string data;
 };
 
 struct Update

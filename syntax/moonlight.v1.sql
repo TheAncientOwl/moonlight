@@ -105,7 +105,7 @@ update {
         field2 => 3
     ];
     where: rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120;
-}
+};
     
 -- 10. SELECT
 select {

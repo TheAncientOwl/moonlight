@@ -76,7 +76,7 @@
     EXPECT_WHERE_CLAUSE_EQ(obj1.where, obj2.where)
 
 #define EXPECT_SET_CLAUSE_EQ(obj1, obj2) \
-    static_assert(false, "NOT IMPLEMENTED YET")
+    EXPECT_EQ(obj1.data, obj2.data)
 
 #define EXPECT_UPDATE_EQ(obj1, obj2) \
     EXPECT_EQ(obj1.name, obj2.name); \

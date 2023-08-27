@@ -120,7 +120,7 @@ struct SetClauseInit : public SetClause
     using base_t = SetClause;
     SetClauseInit();
 
-    // TODO: implement
+    SetClauseInit& data(const std::string& v);
 };
 
 struct UpdateInit : public Update

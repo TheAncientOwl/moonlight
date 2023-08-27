@@ -31,3 +31,4 @@ create_test_executable(QueryObjectTest QueryObjectTest.cpp)
 
 create_test_executable(RenameParserTest RenameParserTest.cpp)
 create_test_executable(SchemaParserTest SchemaParserTest.cpp)
+create_test_executable(UpdateParserTest UpdateParserTest.cpp)

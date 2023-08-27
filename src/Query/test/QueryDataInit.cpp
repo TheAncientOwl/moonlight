@@ -171,6 +171,10 @@ DeleteInit& DeleteInit::where(const WhereClause& v)
 
 
 SetClauseInit::SetClauseInit() : base_t{} {}
+SetClauseInit& SetClauseInit::data(const std::string& v)
+{
+    return base_t::data = v, *this;
+}
 
 
 UpdateInit::UpdateInit() : base_t{} {}
