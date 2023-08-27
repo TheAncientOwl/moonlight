@@ -124,6 +124,46 @@ TEST(FieldParserDateTimeTest, parseSuccess06)
     EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
+TEST(FieldParserDateTimeTest, parseSuccess07)
+{
+    const auto query = "some_field is ArrayOf<DateTime> @default(now)";
+    DateTimeFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(query));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::DateTime)
+        .metadata("now")
+        .size(std::nullopt)
+        .nullable(false)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
+TEST(FieldParserDateTimeTest, parseSuccess08)
+{
+    const auto query = "some_field is ArrayOf<DateTime?> @default(now)";
+    DateTimeFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(query));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::DateTime)
+        .metadata("now")
+        .size(std::nullopt)
+        .nullable(true)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
 TEST(FieldParserDateTimeTest, noParseSuccess01)
 {
     const auto query = R"(some_field is DateTime @default("09/10/2000"))";

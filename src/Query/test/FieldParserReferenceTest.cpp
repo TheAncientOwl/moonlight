@@ -50,6 +50,48 @@ TEST(FieldParserReferenceTest, parseSuccess02)
     EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
+TEST(FieldParserReferenceTest, parseSuccess03)
+{
+    const auto query = "some_field is ArrayOf<Reference> @of(OtherSchemaName)";
+    ReferenceFieldParser parser{};
+
+    ASSERT_TRUE(parser.match(query));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::Reference)
+        .size(std::nullopt)
+        .metadata(std::nullopt)
+        .metadata("OtherSchemaName")
+        .nullable(false)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
+TEST(FieldParserReferenceTest, parseSuccess04)
+{
+    const auto query = "some_field is ArrayOf<Reference?> @of(OtherSchemaName)";
+    ReferenceFieldParser parser{};
+
+    ASSERT_TRUE(parser.match(query));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::Reference)
+        .size(std::nullopt)
+        .metadata(std::nullopt)
+        .metadata("OtherSchemaName")
+        .nullable(true)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
 TEST(FieldParserReferenceTest, noParseSuccess01)
 {
     const auto query = "some_field is Reference @of()";

@@ -143,6 +143,46 @@ TEST(FieldParserStringTest, parseSuccess07)
     EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
+TEST(FieldParserStringTest, parseSuccess08)
+{
+    const auto field = R"(some_field is ArrayOf<String[15]> @default("empty"))";
+    StringFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(field));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::String)
+        .size(15)
+        .metadata(R"("empty")")
+        .nullable(false)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
+TEST(FieldParserStringTest, parseSuccess09)
+{
+    const auto field = R"(some_field is ArrayOf<String?[15]> @default("empty"))";
+    StringFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(field));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::String)
+        .size(15)
+        .metadata(R"("empty")")
+        .nullable(true)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
 TEST(FieldParserStringTest, noParseSuccess01)
 {
     const auto field = R"(some_field is String[015] @default("empty"))";

@@ -257,6 +257,46 @@ TEST(FieldParserDecimalTest, parseSuccess13)
     EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
+TEST(FieldParserDecimalTest, parseSuccess14)
+{
+    const auto field = "some_field is ArrayOf<Decimal[8]> @default(14.29)";
+    DecimalFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(field));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::Decimal)
+        .size(8)
+        .metadata("14.29")
+        .nullable(false)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
+TEST(FieldParserDecimalTest, parseSuccess15)
+{
+    const auto field = "some_field is ArrayOf<Decimal?[8]> @default(14.29)";
+    DecimalFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(field));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::Decimal)
+        .size(8)
+        .metadata("14.29")
+        .nullable(true)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
 TEST(FieldParserDecimalTest, noParseSuccess01)
 {
     const auto field = "some_field is Decimal[128] @default(14.29)";

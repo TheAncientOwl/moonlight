@@ -257,6 +257,46 @@ TEST(FieldParserIntegerTest, parseSuccess13)
     EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
+TEST(FieldParserIntegerTest, parseSuccess14)
+{
+    const auto field = "some_field is ArrayOf<Integer[8]> @default(14)";
+    IntegerFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(field));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::Integer)
+        .size(8)
+        .metadata("14")
+        .nullable(false)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
+TEST(FieldParserIntegerTest, parseSuccess15)
+{
+    const auto field = "some_field is ArrayOf<Integer?[8]> @default(14)";
+    IntegerFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(field));
+
+    const auto out = parser.parse();
+
+    const QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::Integer)
+        .size(8)
+        .metadata("14")
+        .nullable(true)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
 TEST(FieldParserIntegerTest, noParseSuccess01)
 {
     const auto field = "some_field is Integer[128] @default(14)";

@@ -109,6 +109,46 @@ TEST(FieldParserBooleanTest, parseSuccess05)
     EXPECT_SCHEMA_FIELD_EQ(out, expected);
 }
 
+TEST(FieldParserBooleanTest, parseSuccess06)
+{
+    const auto field = "some_field is ArrayOf<Boolean> @default(false)";
+    BooleanFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(field));
+
+    const auto out = parser.parse();
+
+    QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::Boolean)
+        .metadata("false")
+        .size(std::nullopt)
+        .nullable(false)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
+TEST(FieldParserBooleanTest, parseSuccess07)
+{
+    const auto field = "some_field is ArrayOf<Boolean?> @default(false)";
+    BooleanFieldParser parser{};
+
+    EXPECT_TRUE(parser.match(field));
+
+    const auto out = parser.parse();
+
+    QueryData::Field expected = Init::FieldInit{}
+        .name("some_field")
+        .data_type(Primitives::EDataType::Boolean)
+        .metadata("false")
+        .size(std::nullopt)
+        .nullable(true)
+        .array(true);
+
+    EXPECT_SCHEMA_FIELD_EQ(out, expected);
+}
+
 TEST(FieldParserBooleanTest, noParseSuccess01)
 {
     const auto field = "some_field is Booolean @default(false)";
