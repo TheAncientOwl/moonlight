@@ -147,13 +147,9 @@ SchemaInit& SchemaInit::fields(const std::vector<Field>& v)
 {
     return base_t::fields = v, *this;
 }
-SchemaInit& SchemaInit::checks(const std::vector<std::string>& v)
+SchemaInit& SchemaInit::restrictions(const std::vector<std::string>& v)
 {
-    return base_t::checks = v, *this;
-}
-SchemaInit& SchemaInit::unique(const std::vector<std::string>& v)
-{
-    return base_t::unique = v, *this;
+    return base_t::restrictions = v, *this;
 }
 
 

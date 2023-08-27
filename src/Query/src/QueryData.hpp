@@ -73,8 +73,7 @@ struct Schema
     std::string name;
     std::vector<std::string> inherits;
     std::vector<Field> fields;
-    std::vector<std::string> checks;
-    std::vector<std::string> unique;
+    std::vector<std::string> restrictions;
 };
 
 struct WhereClause

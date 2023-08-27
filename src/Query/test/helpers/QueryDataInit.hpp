@@ -95,8 +95,7 @@ struct SchemaInit : public Schema
     SchemaInit& name(const std::string& v);
     SchemaInit& inherits(const std::vector<std::string>& v);
     SchemaInit& fields(const std::vector<Field>& v);
-    SchemaInit& checks(const std::vector<std::string>& v);
-    SchemaInit& unique(const std::vector<std::string>& v);
+    SchemaInit& restrictions(const std::vector<std::string>& v);
 };
 
 struct WhereClauseInit : public WhereClause

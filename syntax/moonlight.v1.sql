@@ -85,14 +85,6 @@ schema {
         field_16 is ArrayOf<Reference>             @of(OtherSchemaName),
     ];
 
--- TODO: remove checks
-    checks: [                   -- optional
-    ];
-
--- TODO: remove unique
-    unique: [ field1, field2 ]; -- optional
-
--- TODO: implement
     restrictions: [          -- optional
         field3 like "*@*.*",
         length(field3) = 13,

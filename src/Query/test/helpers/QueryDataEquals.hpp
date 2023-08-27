@@ -66,8 +66,7 @@
     EXPECT_EQ(obj1.name, obj2.name); \
     EXPECT_EQ(obj1.inherits, obj2.inherits); \
     EXPECT_ARRAYS_EQ(obj1.fields, obj2.fields, EXPECT_SCHEMA_FIELD_EQ); \
-    EXPECT_EQ(obj1.checks, obj2.checks); \
-    EXPECT_EQ(obj1.unique, obj2.unique)
+    EXPECT_EQ(obj1.restrictions, obj2.restrictions)
 
 #define EXPECT_WHERE_CLAUSE_EQ(obj1, obj2) \
     EXPECT_EQ(obj1.content, obj2.content)

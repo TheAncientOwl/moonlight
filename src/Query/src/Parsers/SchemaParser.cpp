@@ -77,13 +77,13 @@ std::vector<QueryData::Field> extractFields(std::string_view& query)
     return out;
 }
 
-std::vector<std::string> extractChecks(std::string_view& query)
+std::vector<std::string> extractRestrictions(std::string_view& query)
 {
     std::vector<std::string> out{};
 
     try
     {
-        const auto checks = extractList(query, "checks", EParserModifier::EscapeQuotes);
+        const auto checks = extractList(query, "restrictions", EParserModifier::EscapeQuotes);
         out.reserve(checks.size());
 
         for (const auto check : checks)
@@ -93,26 +93,7 @@ std::vector<std::string> extractChecks(std::string_view& query)
     }
     catch (const std::runtime_error& e)
     {
-        if (!equalsIgnoreCase(e.what(), "Invalid query, missing 'checks' keyword"))
-        {
-            throw e;
-        }
-    }
-
-    return out;
-}
-
-std::vector<std::string> extractUnique(std::string_view& query)
-{
-    std::vector<std::string> out{};
-
-    try
-    {
-        out = extractIdentifiersList(query, "unique");
-    }
-    catch (const std::runtime_error& e)
-    {
-        if (!equalsIgnoreCase(e.what(), "Invalid query, missing 'unique' keyword"))
+        if (!equalsIgnoreCase(e.what(), "Invalid query, missing 'restrictions' keyword"))
         {
             throw e;
         }
@@ -132,8 +113,7 @@ QUERY_PARSER_CLASS_IMPL(Schema, c_query_prefix)
     obj.name = extractIdentifier(query, "name");
     obj.inherits = extractInherits(query);
     obj.fields = extractFields(query);
-    obj.checks = extractChecks(query);
-    obj.unique = extractUnique(query);
+    obj.restrictions = extractRestrictions(query);
 
     RETURN_QUERY_OBJECT;
 }
