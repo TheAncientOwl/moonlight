@@ -76,7 +76,6 @@ schema {
         field_35 is Decimal?[8|16|32|64]  @default(null),
         field_36 is Reference?            @of(OtherSchemaName)
 
--- TODO: implement Arrays to Field types
         field_11 is ArrayOf<Boolean>               @default(false),
         field_12 is ArrayOf<DateTime>              @default(now()),
         field_13 is ArrayOf<String[15]>            @default("empty"),
