@@ -115,12 +115,13 @@ struct DeleteInit : public Delete
     DeleteInit& where(const WhereClause& v);
 };
 
-struct SetClauseInit : public SetClause
+struct SetClauseItemInit : public SetClauseItem
 {
-    using base_t = SetClause;
-    SetClauseInit();
+    using base_t = SetClauseItem;
+    SetClauseItemInit();
 
-    SetClauseInit& data(const std::string& v);
+    SetClauseItemInit& field(const std::string& v);
+    SetClauseItemInit& expression(const std::string& v);
 };
 
 struct UpdateInit : public Update
@@ -129,7 +130,7 @@ struct UpdateInit : public Update
     UpdateInit();
 
     UpdateInit& name(const std::string& v);
-    UpdateInit& set(const SetClause& v);
+    UpdateInit& set(const std::vector<SetClauseItem>& v);
     UpdateInit& where(const WhereClause& v);
 };
 

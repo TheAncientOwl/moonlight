@@ -93,16 +93,16 @@ struct Delete
     WhereClause where;
 };
 
-struct SetClause
+struct SetClauseItem
 {
-    // TODO: implement
-    std::string data;
+    std::string field;
+    std::string expression;
 };
 
 struct Update
 {
     std::string name;
-    SetClause set;
+    std::vector<SetClauseItem> set;
     WhereClause where;
 };
 

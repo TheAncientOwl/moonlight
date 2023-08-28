@@ -75,12 +75,13 @@
     EXPECT_EQ(obj1.from, obj2.from); \
     EXPECT_WHERE_CLAUSE_EQ(obj1.where, obj2.where)
 
-#define EXPECT_SET_CLAUSE_EQ(obj1, obj2) \
-    EXPECT_EQ(obj1.data, obj2.data)
+#define EXPECT_SET_CLAUSE_ITEMS_EQ(obj1, obj2) \
+    EXPECT_EQ(obj1.field, obj2.field); \
+    EXPECT_EQ(obj1.expression, obj2.expression)
 
 #define EXPECT_UPDATE_EQ(obj1, obj2) \
     EXPECT_EQ(obj1.name, obj2.name); \
-    EXPECT_SET_CLAUSE_EQ(obj1.set, obj2.set); \
+    EXPECT_ARRAYS_EQ(obj1.set, obj2.set, EXPECT_SET_CLAUSE_ITEMS_EQ); \
     EXPECT_WHERE_CLAUSE_EQ(obj1.where, obj2.where)
 
 #define EXPECT_ALIAS_EQ(obj1, obj2) \

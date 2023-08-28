@@ -170,19 +170,22 @@ DeleteInit& DeleteInit::where(const WhereClause& v)
 }
 
 
-SetClauseInit::SetClauseInit() : base_t{} {}
-SetClauseInit& SetClauseInit::data(const std::string& v)
+SetClauseItemInit::SetClauseItemInit() : base_t{} {}
+SetClauseItemInit& SetClauseItemInit::field(const std::string& v)
 {
-    return base_t::data = v, *this;
+    return base_t::field = v, *this;
 }
-
+SetClauseItemInit& SetClauseItemInit::expression(const std::string& v)
+{
+    return base_t::expression = v, *this;
+}
 
 UpdateInit::UpdateInit() : base_t{} {}
 UpdateInit& UpdateInit::name(const std::string& v)
 {
     return base_t::name = v, *this;
 }
-UpdateInit& UpdateInit::set(const SetClause& v)
+UpdateInit& UpdateInit::set(const std::vector<SetClauseItem>& v)
 {
     return base_t::set = v, *this;
 }

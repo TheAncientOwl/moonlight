@@ -11,13 +11,46 @@ namespace {
 
 constexpr auto c_query_prefix{ "update" };
 
-QueryData::SetClause extractSetClause(std::string_view& query)
+std::vector<QueryData::SetClauseItem> extractSetClause(std::string_view& query)
 {
-    QueryData::SetClause out{};
+    const auto items = extractList(query, "set", EParserModifier::EscapeQuotes);
 
-    const auto set_seq = extractValue(query, "set", EParserModifier::EscapeQuotes);
+    std::vector<QueryData::SetClauseItem> out{};
+    out.reserve(items.size());
 
-    out.data = set_seq;
+    for (const auto item : items)
+    {
+        const auto arrow_pos = item.find("=>");
+
+        if (arrow_pos == std::string_view::npos)
+        {
+            throw std::runtime_error("Missing '=>' symbol in set clause @ '"s + std::string(item) + "'"s);
+        }
+
+        auto field = item.substr(0, arrow_pos);
+        trim(field);
+        if (field.empty())
+        {
+            throw std::runtime_error("Empty field in set clause @ '"s + std::string(item) + "'"s);
+        }
+        if (!isValidIdentifier(field))
+        {
+            throw std::runtime_error("Invalid identifier '"s + std::string(field) + "'"s);
+        }
+
+        if (arrow_pos + 2 >= query.length() - 1)
+        {
+            throw std::runtime_error("Missing expression in set clause @ '"s + std::string(item) + "'"s);
+        }
+        auto expression = item.substr(arrow_pos + 2);
+        trim(expression);
+        if (expression.empty())
+        {
+            throw std::runtime_error("Missing expression in set clause @ '"s + std::string(item) + "'"s);
+        }
+
+        out.emplace_back(std::string(field), std::string(expression));
+    }
 
     return out;
 }
