@@ -109,16 +109,16 @@ update {
     
 -- 10. SELECT
 select {
-    fields: [
-        s1.field as alias_field1,
-        s2.field as alias_field2,
-        s3.field as alias_field3
-    ];
-
     from: [
         structure1 as s1,
         structure2 as s2,
         structure3 as s3
+    ];
+
+    fields: [
+        s1.field as alias_field1,
+        s2.field as alias_field2,
+        s3.field as alias_field3
     ];
 
     join: [
