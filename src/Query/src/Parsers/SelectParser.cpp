@@ -65,11 +65,69 @@ QueryData::Alias parseFieldAlias(std::string seq)
     return out;
 }
 
-std::vector<QueryData::Alias> extractAliases(std::string_view& query, std::string_view keyword, std::function<QueryData::Alias(std::string)> parse)
+QueryData::Join parseJoin(std::string seq)
+{
+    static const std::regex s_regex(R"((\w+)\s*=>\s*(\w+)\s+on\s+(\w+))", std::regex_constants::icase);
+
+    QueryData::Join out{};
+
+    std::smatch match{};
+    if (std::regex_match(seq, match, s_regex))
+    {
+        out.child = match.str(1);
+        out.father = match.str(2);
+        out.reference_field = match.str(3);
+    }
+    else
+    {
+        throw std::runtime_error("Invalid join @ '"s + seq + "'"s);
+    }
+
+    return out;
+}
+
+QueryData::OrderBy parseOrderBy(std::string seq)
+{
+    static const std::regex s_field_regex(R"(\w+\.\w+)", std::regex_constants::icase);
+
+    const std::string_view seq_sv = seq;
+    const auto whitespace_pos = seq_sv.find_first_of(WHITESPACE);
+
+    auto field = seq_sv.substr(0, whitespace_pos);
+    auto type = seq_sv.substr(whitespace_pos + 1);
+
+    trim(field);
+    trim(type);
+
+    if (field.empty())
+    {
+        throw std::runtime_error("Missing field @ '"s + seq + "'"s);
+    }
+
+    if (type.empty())
+    {
+        throw std::runtime_error("Missing sort type @ '"s + seq + "'"s);
+    }
+
+    QueryData::OrderBy out{};
+
+    out.field = field;
+    out.type = Primitives::SelectSortType::to_literal(std::string(type));
+
+    if (!std::regex_match(out.field, s_field_regex))
+    {
+        throw std::runtime_error("Invalid field @ '"s + seq + "'"s);
+    }
+
+    return out;
+}
+
+template<typename T>
+std::vector<T> extractAndParseList(std::string_view& query, std::string_view keyword, std::function<T(std::string)> parse)
 {
     const auto aliases = extractList(query, keyword);
 
-    std::vector<QueryData::Alias> out{};
+    std::vector<T> out{};
     out.reserve(aliases.size());
 
     for (const auto alias : aliases)
@@ -88,8 +146,11 @@ QUERY_PARSER_CLASS_IMPL(Select, c_query_prefix)
 
     cleanupQuery(query, c_query_prefix);
 
-    obj.from = extractAliases(query, "from", parseStructureAlias);
-    obj.fields = extractAliases(query, "fields", parseFieldAlias);
+    obj.from = extractAndParseList<QueryData::Alias>(query, "from", parseStructureAlias);
+    obj.fields = extractAndParseList<QueryData::Alias>(query, "fields", parseFieldAlias);
+    obj.join = extractAndParseList<QueryData::Join>(query, "join", parseJoin);
+    obj.where = QueryData::Helpers::parseWhereClause(extractValue(query, "where"));
+    obj.order_by = extractAndParseList<QueryData::OrderBy>(query, "order_by", parseOrderBy);
 
     RETURN_QUERY_OBJECT;
 }
