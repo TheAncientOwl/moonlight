@@ -102,7 +102,7 @@
     EXPECT_ARRAYS_EQ(obj1.from, obj2.from, EXPECT_ALIAS_EQ); \
     EXPECT_ARRAYS_EQ(obj1.join, obj2.join, EXPECT_JOIN_EQ); \
     EXPECT_WHERE_CLAUSE_EQ(obj1.where, obj2.where); \
-    EXPECT_ORDER_BY_EQ(obj1.order_by, obj2.order_by)
+    EXPECT_ARRAYS_EQ(obj1.order_by, obj2.order_by, EXPECT_ORDER_BY_EQ)
 
 #define EXPECT_VIEW_EQ(obj1, obj2) \
     static_assert(false, "NOT IMPLEMENTED YET")
