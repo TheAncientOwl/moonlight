@@ -1,5 +1,5 @@
 function(create_test_executable TARGET_NAME SOURCE_FILES)
-    add_executable(${TARGET_NAME} ${SOURCE_FILES} QueryDataInit.cpp)
+    add_executable(${TARGET_NAME} ${SOURCE_FILES} ParsedQueriesInit.cpp)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 
     target_link_libraries(${TARGET_NAME} PRIVATE

@@ -31,7 +31,7 @@ QUERY_PARSER_CLASS_IMPL(Database, c_query_prefix)
 
     if (obj.type == Primitives::EDatabaseOperationType::Backup)
     {
-        QueryData::DatabaseBackupMetadata metadata{};
+        ParsedQuery::DatabaseBackupMetadata metadata{};
 
         metadata.disk_path = extractValue(query, "to_disk");
         metadata.with_differential = extractBoolean(query, "with_differential");

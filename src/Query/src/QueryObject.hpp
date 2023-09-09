@@ -1,10 +1,10 @@
 #pragma once
 
-#include "QueryData.hpp"
+#include "ParsedQueries.hpp"
 
 #include <variant>
 
-namespace Moonlight::QueryData {
+namespace Moonlight::ParsedQuery {
 
 class QueryObject
 {
@@ -39,17 +39,17 @@ private: // fields
     > m_data;
 
     template<typename T>
-    struct QueryDataToEnumMap { static const Primitives::EQueryType value; };
+    struct ParsedQueryToEnumMap { static const Primitives::EQueryType value; };
 };
 
 template<typename Data>
-inline Data& Moonlight::QueryData::QueryObject::get()
+inline Data& Moonlight::ParsedQuery::QueryObject::get()
 {
     return std::get<Data>(m_data);
 }
 
 template<typename Data>
-inline const Data& Moonlight::QueryData::QueryObject::get() const
+inline const Data& Moonlight::ParsedQuery::QueryObject::get() const
 {
     return std::get<Data>(m_data);
 }
@@ -58,10 +58,10 @@ template<typename Data>
 QueryObject QueryObject::make()
 {
     QueryObject obj{};
-    obj.m_type = QueryDataToEnumMap<Data>::value;
+    obj.m_type = ParsedQueryToEnumMap<Data>::value;
     obj.m_data = Data();
 
     return obj;
 }
 
-} // namespace Moonlight::QueryData
+} // namespace Moonlight::ParsedQuery

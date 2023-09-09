@@ -1,20 +1,20 @@
 #include "QueryObject.hpp"
 
-#define MAP_QUERY_DATA_TO_ENUM(QueryData, Enum) \
+#define MAP_QUERY_DATA_TO_ENUM(ParsedQuery, Enum) \
     template <> const EQueryType \
-    QueryObject::QueryDataToEnumMap<QueryData>::value = EQueryType::Enum;
+    QueryObject::ParsedQueryToEnumMap<ParsedQuery>::value = EQueryType::Enum;
 
-namespace Moonlight::QueryData {
+namespace Moonlight::ParsedQuery {
 
 using EQueryType = Primitives::EQueryType;
 
-Primitives::EQueryType Moonlight::QueryData::QueryObject::type() const
+Primitives::EQueryType Moonlight::ParsedQuery::QueryObject::type() const
 {
     return m_type;
 }
 
 template<typename T>
-const EQueryType QueryObject::QueryDataToEnumMap<T>::value = EQueryType::Undefined;
+const EQueryType QueryObject::ParsedQueryToEnumMap<T>::value = EQueryType::Undefined;
 
 MAP_QUERY_DATA_TO_ENUM(Drop, Drop)
 MAP_QUERY_DATA_TO_ENUM(Create, Create)
@@ -28,4 +28,4 @@ MAP_QUERY_DATA_TO_ENUM(Update, Update)
 MAP_QUERY_DATA_TO_ENUM(Select, Select)
 MAP_QUERY_DATA_TO_ENUM(View, View)
 
-} // namespace Moonlight::QueryData
+} // namespace Moonlight::ParsedQuery

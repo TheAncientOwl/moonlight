@@ -1,21 +1,21 @@
 add_library(MoonlightQuery SHARED
     QueryParser.cpp
     QueryObject.cpp
-    QueryDataHelpers.cpp
     
-    Parsers/SchemaFieldParsers.cpp
+    helpers/SchemaFieldParsers.cpp
+    helpers/ParsedQueryHelpers.cpp
 
-    Parsers/DropParser.cpp
-    Parsers/CreateParser.cpp
-    Parsers/RenameParser.cpp
-    Parsers/DatabaseParser.cpp
-    Parsers/IndexParser.cpp
-    Parsers/MigrateParser.cpp
-    Parsers/SchemaParser.cpp
-    Parsers/DeleteParser.cpp
-    Parsers/UpdateParser.cpp
-    Parsers/SelectParser.cpp
-    Parsers/ViewParser.cpp
+    helpers/DropParser.cpp
+    helpers/CreateParser.cpp
+    helpers/RenameParser.cpp
+    helpers/DatabaseParser.cpp
+    helpers/IndexParser.cpp
+    helpers/MigrateParser.cpp
+    helpers/SchemaParser.cpp
+    helpers/DeleteParser.cpp
+    helpers/UpdateParser.cpp
+    helpers/SelectParser.cpp
+    helpers/ViewParser.cpp
 )
 
 target_link_libraries(MoonlightQuery PRIVATE

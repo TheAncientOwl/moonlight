@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../src/QueryData.hpp"
+#include "../src/ParsedQueries.hpp"
 
-namespace Moonlight::QueryData::Init {
+namespace Moonlight::ParsedQuery::Init {
 
 struct DropInit : public Drop
 {
-    using base_t = QueryData::Drop;
+    using base_t = ParsedQuery::Drop;
     DropInit();
 
     DropInit& name(const std::string& v);
@@ -182,4 +182,4 @@ struct ViewInit : public View
     // TODO: implement
 };
 
-} // namespace Moonlight::QueryData::Init
+} // namespace Moonlight::ParsedQuery::Init

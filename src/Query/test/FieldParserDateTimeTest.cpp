@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 
-#include "Parsers/SchemaFieldParsers.hpp"
+#include "../src/helpers/SchemaFieldParsers.hpp"
 
-#include "helpers/QueryDataInit.hpp"
-#include "helpers/QueryDataEquals.hpp"
+#include "helpers/ParsedQueriesInit.hpp"
+#include "helpers/ParsedQueriesCompare.hpp"
 
 namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests {
 
-using namespace QueryData;
+using namespace ParsedQuery;
 using namespace std::literals;
 
 TEST(FieldParserDateTimeTest, parseSuccess01)
@@ -19,7 +19,7 @@ TEST(FieldParserDateTimeTest, parseSuccess01)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::DateTime)
         .metadata("now")
@@ -38,7 +38,7 @@ TEST(FieldParserDateTimeTest, parseSuccess02)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::DateTime)
         .metadata("22/29/2023")
@@ -57,7 +57,7 @@ TEST(FieldParserDateTimeTest, parseSuccess03)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::DateTime)
         .metadata("22.29.2023")
@@ -76,7 +76,7 @@ TEST(FieldParserDateTimeTest, parseSuccess04)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::DateTime)
         .metadata("22-29-2023")
@@ -95,7 +95,7 @@ TEST(FieldParserDateTimeTest, parseSuccess05)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::DateTime)
         .metadata("now")
@@ -114,7 +114,7 @@ TEST(FieldParserDateTimeTest, parseSuccess06)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::DateTime)
         .metadata(std::nullopt)
@@ -133,7 +133,7 @@ TEST(FieldParserDateTimeTest, parseSuccess07)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::DateTime)
         .metadata("now")
@@ -153,7 +153,7 @@ TEST(FieldParserDateTimeTest, parseSuccess08)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::DateTime)
         .metadata("now")

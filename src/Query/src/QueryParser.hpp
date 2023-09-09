@@ -18,14 +18,14 @@
 
 #define PLAIN_QUERY_OBJECT QueryObject query_obj{}
 #define QUERY_OBJECT(name, type) \
-    QueryObject query_obj = QueryObject::make<QueryData::type>(); \
-    auto& name = query_obj.get<QueryData::type>();
+    QueryObject query_obj = QueryObject::make<ParsedQuery::type>(); \
+    auto& name = query_obj.get<ParsedQuery::type>();
 #define RETURN_QUERY_OBJECT return query_obj
 
 
 namespace Moonlight::QueryParser {
 
-using QueryObject = QueryData::QueryObject;
+using QueryObject = ParsedQuery::QueryObject;
 
 QueryObject parseQuery(std::string_view query);
 

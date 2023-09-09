@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 
-#include "Parsers/SchemaFieldParsers.hpp"
+#include "../src/helpers/SchemaFieldParsers.hpp"
 
-#include "helpers/QueryDataInit.hpp"
-#include "helpers/QueryDataEquals.hpp"
+#include "helpers/ParsedQueriesInit.hpp"
+#include "helpers/ParsedQueriesCompare.hpp"
 
 namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests {
 
-using namespace QueryData;
+using namespace ParsedQuery;
 using namespace std::literals;
 
 TEST(FieldParserBooleanTest, parseSuccess01)
@@ -19,7 +19,7 @@ TEST(FieldParserBooleanTest, parseSuccess01)
 
     const auto out = parser.parse();
 
-    QueryData::Field expected = Init::FieldInit{}
+    ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("false")
@@ -39,7 +39,7 @@ TEST(FieldParserBooleanTest, parseSuccess02)
 
     const auto out = parser.parse();
 
-    QueryData::Field expected = Init::FieldInit{}
+    ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("true")
@@ -59,7 +59,7 @@ TEST(FieldParserBooleanTest, parseSuccess03)
 
     const auto out = parser.parse();
 
-    QueryData::Field expected = Init::FieldInit{}
+    ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("false")
@@ -79,7 +79,7 @@ TEST(FieldParserBooleanTest, parseSuccess04)
 
     const auto out = parser.parse();
 
-    QueryData::Field expected = Init::FieldInit{}
+    ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("true")
@@ -99,7 +99,7 @@ TEST(FieldParserBooleanTest, parseSuccess05)
 
     const auto out = parser.parse();
 
-    QueryData::Field expected = Init::FieldInit{}
+    ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata(std::nullopt)
@@ -118,7 +118,7 @@ TEST(FieldParserBooleanTest, parseSuccess06)
 
     const auto out = parser.parse();
 
-    QueryData::Field expected = Init::FieldInit{}
+    ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("false")
@@ -138,7 +138,7 @@ TEST(FieldParserBooleanTest, parseSuccess07)
 
     const auto out = parser.parse();
 
-    QueryData::Field expected = Init::FieldInit{}
+    ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("false")

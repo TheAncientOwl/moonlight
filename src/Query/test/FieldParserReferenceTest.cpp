@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 
-#include "Parsers/SchemaFieldParsers.hpp"
+#include "../src/helpers/SchemaFieldParsers.hpp"
 
-#include "helpers/QueryDataInit.hpp"
-#include "helpers/QueryDataEquals.hpp"
+#include "helpers/ParsedQueriesInit.hpp"
+#include "helpers/ParsedQueriesCompare.hpp"
 
 namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests {
 
-using namespace QueryData;
+using namespace ParsedQuery;
 using namespace std::literals;
 
 TEST(FieldParserReferenceTest, parseSuccess01)
@@ -19,7 +19,7 @@ TEST(FieldParserReferenceTest, parseSuccess01)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Reference)
         .size(std::nullopt)
@@ -39,7 +39,7 @@ TEST(FieldParserReferenceTest, parseSuccess02)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Reference)
         .size(std::nullopt)
@@ -59,7 +59,7 @@ TEST(FieldParserReferenceTest, parseSuccess03)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Reference)
         .size(std::nullopt)
@@ -80,7 +80,7 @@ TEST(FieldParserReferenceTest, parseSuccess04)
 
     const auto out = parser.parse();
 
-    const QueryData::Field expected = Init::FieldInit{}
+    const ParsedQuery::Field expected = Init::FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Reference)
         .size(std::nullopt)

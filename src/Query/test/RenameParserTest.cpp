@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
 #include "QueryParser.hpp"
-#include "helpers/QueryDataInit.hpp"
-#include "helpers/QueryDataEquals.hpp"
+#include "helpers/ParsedQueriesInit.hpp"
+#include "helpers/ParsedQueriesCompare.hpp"
 
 namespace Moonlight::QueryParser::Implementation::Tests {
 
-using namespace QueryData;
+using namespace ParsedQuery;
 using namespace std::literals;
 
 TEST(RenameParserTest, parseSuccess01)

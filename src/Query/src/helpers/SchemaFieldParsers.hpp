@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../QueryData.hpp"
+#include "../ParsedQueries.hpp"
 
 #include <regex>
 #include <string>
@@ -10,7 +10,7 @@
     { \
     public: \
         bool match(std::string field_str) override; \
-        QueryData::Field parse() const override; \
+        ParsedQuery::Field parse() const override; \
     }
 
 #define FIELD_PARSER_CLASS_IMPL(Type, rgx) \
@@ -20,7 +20,7 @@
         m_field = std::move(field_str); \
         return std::regex_match(m_field, m_smatch, regex); \
     } \
-    QueryData::Field Type ## FieldParser::parse() const
+    ParsedQuery::Field Type ## FieldParser::parse() const
 
 namespace Moonlight::QueryParser::Implementation::FieldParsers {
 
@@ -28,7 +28,7 @@ class IFieldParser
 {
 public: // methods
     virtual bool match(std::string field_str) = 0;
-    virtual QueryData::Field parse() const = 0;
+    virtual ParsedQuery::Field parse() const = 0;
     void clear();
 
 public: // lifecycle

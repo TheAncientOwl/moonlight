@@ -1,6 +1,6 @@
-#include "helpers/QueryDataInit.hpp"
+#include "helpers/ParsedQueriesInit.hpp"
 
-namespace Moonlight::QueryData::Init {
+namespace Moonlight::ParsedQuery::Init {
 
 DropInit::DropInit() : base_t{} {}
 DropInit& DropInit::name(const std::string& v)
@@ -257,4 +257,4 @@ SelectInit& SelectInit::order_by(const std::vector<OrderBy>& v)
 
 ViewInit::ViewInit() : base_t{} {}
 
-} // namespace Moonlight::QueryData::Init
+} // namespace Moonlight::ParsedQuery::Init

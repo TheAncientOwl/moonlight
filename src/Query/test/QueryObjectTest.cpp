@@ -5,7 +5,7 @@
 #define ASSERT_MAKE_QUERY_OBJECT(Type, Enum) \
     ASSERT_EQ(QueryObject::make<Type>().type(), Primitives::EQueryType::Enum);
 
-namespace Moonlight::QueryData {
+namespace Moonlight::ParsedQuery {
 
 TEST(QueryDataTest, MakeObjects)
 {
@@ -22,4 +22,4 @@ TEST(QueryDataTest, MakeObjects)
     ASSERT_MAKE_QUERY_OBJECT(View, View);
 }
 
-} // namespace Moonlight::QueryData
+} // namespace Moonlight::ParsedQuery

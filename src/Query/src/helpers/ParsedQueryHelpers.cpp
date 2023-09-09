@@ -1,6 +1,6 @@
-#include "QueryData.hpp"
+#include "../ParsedQueries.hpp"
 
-namespace Moonlight::QueryData::Helpers {
+namespace Moonlight::ParsedQuery::Helpers {
 
 // TODO: update when WhereClause implemented...
 WhereClause parseWhereClause(std::string_view seq)
@@ -12,4 +12,4 @@ WhereClause parseWhereClause(std::string_view seq)
     return out;
 }
 
-} // namespace Moonlight::QueryData::Helpers
+} // namespace Moonlight::ParsedQuery::Helpers

@@ -23,7 +23,7 @@ Primitives::EStructureRenameType extractRenameType(std::string_view& query)
  *
  * @param obj object representation of a Rename query
  */
-void validateRenameObject(const QueryData::Rename& obj)
+void validateRenameObject(const ParsedQuery::Rename& obj)
 {
     switch (obj.type)
     {

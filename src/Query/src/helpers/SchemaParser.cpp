@@ -34,7 +34,7 @@ std::vector<std::string> extractInherits(std::string_view& query)
     return out;
 }
 
-QueryData::Field parseField(std::string_view field)
+ParsedQuery::Field parseField(std::string_view field)
 {
     using namespace FieldParsers;
     static HierarchyMap<IFieldParser, FIELD_PARSERS> s_parsers{};
@@ -61,12 +61,12 @@ QueryData::Field parseField(std::string_view field)
     return parsed_field;
 }
 
-std::vector<QueryData::Field> extractFields(std::string_view& query)
+std::vector<ParsedQuery::Field> extractFields(std::string_view& query)
 {
 
     const auto fields{ extractList(query, "fields", EParserModifier::EscapeQuotes) };
 
-    std::vector<QueryData::Field> out{};
+    std::vector<ParsedQuery::Field> out{};
     out.reserve(fields.size());
 
     for (const auto field : fields)

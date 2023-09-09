@@ -69,7 +69,7 @@ std::optional<std::string> getMetadata(std::string str, bool nullable)
 
 FIELD_PARSER_CLASS_IMPL(Boolean, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?Boolean[?]{0,1})(?:\s*>)?\s*@default\s*\(\s*(true|false|null)\s*\))")
 {
-    QueryData::Field out{};
+    ParsedQuery::Field out{};
 
     out.name = m_smatch.str(1);
     out.data_type = Primitives::EDataType::Boolean;
@@ -86,7 +86,7 @@ FIELD_PARSER_CLASS_IMPL(Boolean, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?Boolean[?]{
 
 FIELD_PARSER_CLASS_IMPL(String, R"((\w+)\s*is\s((?:ArrayOf\s*<\s*)?String[?]{0,1})\s*\[\s*([1-9]\d*)\s*\](?:\s*>)?\s*@default\s*\(\s*(".+"|null)\s*\))")
 {
-    QueryData::Field out{};
+    ParsedQuery::Field out{};
 
     out.name = m_smatch.str(1);
     out.data_type = Primitives::EDataType::String;
@@ -103,7 +103,7 @@ FIELD_PARSER_CLASS_IMPL(String, R"((\w+)\s*is\s((?:ArrayOf\s*<\s*)?String[?]{0,1
 
 FIELD_PARSER_CLASS_IMPL(Integer, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?Integer[?]{0,1})\s*\[\s*(8|16|32|64)\s*\](?:\s*>)?\s*@default\s*\(\s*(0|[-]{0,1}[1-9]\d*|null)\s*\))")
 {
-    QueryData::Field out{};
+    ParsedQuery::Field out{};
 
     out.name = m_smatch.str(1);
     out.data_type = Primitives::EDataType::Integer;
@@ -122,7 +122,7 @@ FIELD_PARSER_CLASS_IMPL(Integer, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?Integer[?]{
 
 FIELD_PARSER_CLASS_IMPL(Decimal, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?Decimal[?]{0,1})\s*\[\s*(8|16|32|64)\s*\](?:\s*>)?\s*@default\s*\(\s*(0|[-]{0,1}\d+\.\d+|null)\s*\))")
 {
-    QueryData::Field out{};
+    ParsedQuery::Field out{};
 
     out.name = m_smatch.str(1);
     out.data_type = Primitives::EDataType::Decimal;
@@ -141,7 +141,7 @@ FIELD_PARSER_CLASS_IMPL(Decimal, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?Decimal[?]{
 
 FIELD_PARSER_CLASS_IMPL(Reference, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?Reference[?]{0,1})(?:\s*>)?\s*@of\s*\(\s*(\w+)\s*\))")
 {
-    QueryData::Field out{};
+    ParsedQuery::Field out{};
 
     out.name = m_smatch.str(1);
     out.data_type = Primitives::EDataType::Reference;
@@ -158,7 +158,7 @@ FIELD_PARSER_CLASS_IMPL(Reference, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?Reference
 
 FIELD_PARSER_CLASS_IMPL(DateTime, R"((\w+)\s*is\s*((?:ArrayOf\s*<\s*)?DateTime[?]{0,1})(?:\s*>)?\s*@default\s*\(\s*(null|now|\d\d(?:\/|.|-)\d\d(?:\/|.|-)\d\d\d\d)\s*\))")
 {
-    QueryData::Field out{};
+    ParsedQuery::Field out{};
 
     out.name = m_smatch.str(1);
     out.data_type = Primitives::EDataType::DateTime;

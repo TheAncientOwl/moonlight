@@ -6,7 +6,7 @@
 #include <optional>
 #include <vector>
 
-namespace Moonlight::QueryData {
+namespace Moonlight::ParsedQuery {
 
 struct Drop
 {
@@ -139,4 +139,4 @@ struct View : public Select
     bool replace{ false };
 };
 
-} // namespace Moonlight::QueryData
+} // namespace Moonlight::ParsedQuery

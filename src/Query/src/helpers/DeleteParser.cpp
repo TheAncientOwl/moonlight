@@ -21,7 +21,7 @@ QUERY_PARSER_CLASS_IMPL(Delete, c_query_prefix)
     cleanupQuery(query, c_query_prefix);
 
     obj.from = extractIdentifier(query, "from");
-    obj.where = QueryData::Helpers::parseWhereClause(extractValue(query, "where", EParserModifier::EscapeQuotes));
+    obj.where = ParsedQuery::Helpers::parseWhereClause(extractValue(query, "where", EParserModifier::EscapeQuotes));
 
     RETURN_QUERY_OBJECT;
 }
