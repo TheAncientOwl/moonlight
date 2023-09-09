@@ -124,4 +124,11 @@ MOONLIGHT_PRIMITIVE_CONVERTOR(QueryType,
     std::make_pair(Literal::View, "view")
 )
 
+MOONLIGHT_PRIMITIVE_CONVERTOR(BooleanOperators,
+    std::make_pair(Literal::Undefined, "undefined"),
+    std::make_pair(Literal::Or, "or"),
+    std::make_pair(Literal::And, "and"),
+    std::make_pair(Literal::Eval, "eval"),
+    )
+
 } // namespace Moonlight::Primitives

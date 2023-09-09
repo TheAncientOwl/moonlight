@@ -67,4 +67,11 @@ MOONLIGHT_PRIMITIVE(QueryType,
     View = 12
 )
 
+MOONLIGHT_PRIMITIVE(BooleanOperators,
+    Undefined = 0,
+    Or = 1,
+    And = 2,
+    Eval = 3
+)
+
 } // namespace Moonlight::Primitives

@@ -80,4 +80,15 @@ TEST(PrimitivesTest, QueryType)
     ASSERT_EQ(Literal::View, to_literal(to_string(Literal::View)));
 }
 
+TEST(PrimitivesTest, BooleanOperators)
+{
+    using namespace BooleanOperators;
+    using Literal = BooleanOperators::Literal;
+
+    ASSERT_EQ(Literal::Undefined, to_literal(to_string(Literal::Undefined)));
+    ASSERT_EQ(Literal::Or, to_literal(to_string(Literal::Or)));
+    ASSERT_EQ(Literal::And, to_literal(to_string(Literal::And)));
+    ASSERT_EQ(Literal::Eval, to_literal(to_string(Literal::Eval)));
+}
+
 } // namespace Moonlight::Primitives
