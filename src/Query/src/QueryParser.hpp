@@ -11,15 +11,13 @@
         QueryObject parse(std::string_view query) const override; \
     }
 
-#define QUERY_PARSER_CLASS_IMPL(Specialization, \
- QueryPrefix) \
+#define QUERY_PARSER_CLASS_IMPL(Specialization, QueryPrefix) \
     const char* Specialization ## Parser::queryPrefix() const { return QueryPrefix; }; \
     QueryObject Specialization ## Parser::parse(std::string_view query) const
 
 
 #define PLAIN_QUERY_OBJECT QueryObject query_obj{}
-#define QUERY_OBJECT(name, \
- type) \
+#define QUERY_OBJECT(name, type) \
     QueryObject query_obj = QueryObject::make<QueryData::type>(); \
     auto& name = query_obj.get<QueryData::type>();
 #define RETURN_QUERY_OBJECT return query_obj
