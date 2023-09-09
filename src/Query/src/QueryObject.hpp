@@ -35,7 +35,8 @@ private: // fields
         Delete,
         Update,
         Select,
-        View
+        View,
+        Insert
     > m_data;
 
     template<typename T>

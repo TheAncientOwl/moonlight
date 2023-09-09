@@ -27,5 +27,6 @@ MAP_QUERY_DATA_TO_ENUM(Delete, Delete)
 MAP_QUERY_DATA_TO_ENUM(Update, Update)
 MAP_QUERY_DATA_TO_ENUM(Select, Select)
 MAP_QUERY_DATA_TO_ENUM(View, View)
+MAP_QUERY_DATA_TO_ENUM(Insert, Insert)
 
 } // namespace Moonlight::ParsedQuery

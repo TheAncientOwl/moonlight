@@ -139,4 +139,11 @@ struct View : public Select
     bool replace{ false };
 };
 
+struct Insert
+{
+    std::string structure;
+    std::vector<std::string> fields;
+    std::vector<std::string> values;
+};
+
 } // namespace Moonlight::ParsedQuery

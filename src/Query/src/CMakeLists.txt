@@ -16,6 +16,7 @@ add_library(MoonlightQuery SHARED
     helpers/UpdateParser.cpp
     helpers/SelectParser.cpp
     helpers/ViewParser.cpp
+    helpers/InsertParser.cpp
 )
 
 target_link_libraries(MoonlightQuery PRIVATE

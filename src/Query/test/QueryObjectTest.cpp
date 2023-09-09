@@ -20,6 +20,7 @@ TEST(QueryDataTest, MakeObjects)
     ASSERT_MAKE_QUERY_OBJECT(Update, Update);
     ASSERT_MAKE_QUERY_OBJECT(Select, Select);
     ASSERT_MAKE_QUERY_OBJECT(View, View);
+    ASSERT_MAKE_QUERY_OBJECT(Insert, Insert);
 }
 
 } // namespace Moonlight::ParsedQuery
