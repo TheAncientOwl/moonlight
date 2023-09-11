@@ -7,7 +7,7 @@
 
 #define MOONLIGHT_PRIMITIVE_CONVERTOR(name, ...) \
 namespace name { \
-    Implementation::LiteralToStringMap<Literal> map{ { \
+    const Implementation::LiteralToStringMap<Literal> map{ { \
         __VA_ARGS__ \
     } };\
     std::string to_string(Literal literal) { return map.findByLiteral(literal); } \
@@ -28,8 +28,8 @@ public:
 
 public:
     LiteralToStringMap(container data);
-    std::string findByLiteral(Literal literal);
-    Literal findByString(std::string str);
+    std::string findByLiteral(Literal literal) const;
+    Literal findByString(std::string str) const;
 
 private:
     container m_data;
@@ -41,7 +41,7 @@ LiteralToStringMap<Literal>::LiteralToStringMap(LiteralToStringMap<Literal>::con
 {}
 
 template<typename Literal>
-std::string LiteralToStringMap<Literal>::findByLiteral(Literal literal)
+std::string LiteralToStringMap<Literal>::findByLiteral(Literal literal) const
 {
     const auto it = std::find_if(m_data.begin(), m_data.end(),
         [literal](const auto& value) {
@@ -55,7 +55,7 @@ std::string LiteralToStringMap<Literal>::findByLiteral(Literal literal)
 }
 
 template<typename Literal>
-Literal LiteralToStringMap<Literal>::findByString(std::string str)
+Literal LiteralToStringMap<Literal>::findByString(std::string str) const
 {
     std::transform(str.begin(), str.end(), str.begin(), tolower);
 
