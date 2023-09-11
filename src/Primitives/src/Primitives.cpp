@@ -7,11 +7,13 @@
 
 #define MOONLIGHT_PRIMITIVE_CONVERTOR(name, ...) \
 namespace name { \
-    const Implementation::LiteralToStringMap<Literal> map{ { \
-        __VA_ARGS__ \
-    } };\
-    std::string to_string(Literal literal) { return map.findByLiteral(literal); } \
-    Literal to_literal(std::string str) { return map.findByString(str); } \
+    namespace Internal { \
+        const Implementation::LiteralToStringMap<Literal> map{ { \
+            __VA_ARGS__ \
+        } };\
+    } \
+    std::string to_string(Literal literal) { return Internal::map.findByLiteral(literal); } \
+    Literal to_literal(std::string str) { return Internal::map.findByString(str); } \
 }
 
 namespace Moonlight::Primitives {
