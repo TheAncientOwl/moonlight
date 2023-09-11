@@ -37,7 +37,7 @@ std::vector<std::string> extractInherits(std::string_view& query)
 ParsedQuery::Field parseField(std::string_view field)
 {
     using namespace FieldParsers;
-    static HierarchyMap<IFieldParser, FIELD_PARSERS> s_parsers{};
+    static HierarchySet<IFieldParser, FIELD_PARSERS> s_parsers{};
 
     const auto parser_ptr = s_parsers.findIf([field](auto& field_parser) -> bool {
         bool is_match = field_parser.match(std::string(field));

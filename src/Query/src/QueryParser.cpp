@@ -12,7 +12,7 @@ using namespace Implementation;
 
 QueryObject parseQuery(std::string_view query)
 {
-    static const HierarchyMap<IQueryParser, QUERY_PARSERS> s_parsers{};
+    static const HierarchySet<IQueryParser, QUERY_PARSERS> s_parsers{};
 
     trim(query);
     const auto parser_ptr = s_parsers.findIf([query](const auto& parser) -> bool {
