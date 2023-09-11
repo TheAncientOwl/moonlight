@@ -106,3 +106,8 @@
 
 #define EXPECT_VIEW_EQ(obj1, obj2) \
     static_assert(false, "NOT IMPLEMENTED YET")
+
+#define EXPECT_INSERT_EQ(obj1, obj2) \
+    EXPECT_EQ(obj1.structure, obj2.structure); \
+    EXPECT_EQ(obj1.fields, obj2.fields); \
+    EXPECT_EQ(obj1.values, obj2.values)

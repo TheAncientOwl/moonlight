@@ -73,7 +73,8 @@ QUERY_PARSER_CLASS_DEFINITION(Insert);
     DeleteParser, \
     UpdateParser, \
     SelectParser, \
-    ViewParser
+    ViewParser, \
+    InsertParser
 
 } // namespace Implementation
 

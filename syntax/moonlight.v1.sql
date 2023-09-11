@@ -140,17 +140,17 @@ select {
 view {
     replace: boolean;
     ...select
-}
+};
 
 -- 12. INSERT
 insert into {
     structure: StructureName;
     fields: [ field1, field2, field3 ]; -- Optional, if missing all fields are inserted
     values: [ value1, value2, value3 ];
-}
+};
 
 insert into {
     structure: StructureName;
     fields: [ field1, field2, field3, new_field is String[15] @default("empty") ]; -- Only for documents
-    values: [ value1, value2, value3 ]
-}
+    values: [ value1, value2, value3, "value,4" ]
+};

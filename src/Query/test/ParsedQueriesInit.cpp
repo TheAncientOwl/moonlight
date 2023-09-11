@@ -257,4 +257,19 @@ SelectInit& SelectInit::order_by(const std::vector<OrderBy>& v)
 
 ViewInit::ViewInit() : base_t{} {}
 
+
+InsertInit::InsertInit() : base_t{} {}
+InsertInit& InsertInit::structure(const std::string& v)
+{
+    return base_t::structure = v, *this;
+}
+InsertInit& InsertInit::fields(const std::vector<std::string>& v)
+{
+    return base_t::fields = v, *this;
+}
+InsertInit& InsertInit::values(const std::vector<std::string>& v)
+{
+    return base_t::values = v, *this;
+}
+
 } // namespace Moonlight::ParsedQuery::Init

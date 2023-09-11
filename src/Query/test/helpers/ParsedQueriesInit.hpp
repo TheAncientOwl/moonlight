@@ -182,4 +182,14 @@ struct ViewInit : public View
     // TODO: implement
 };
 
+struct InsertInit : public Insert
+{
+    using base_t = Insert;
+    InsertInit();
+
+    InsertInit& structure(const std::string& v);
+    InsertInit& fields(const std::vector<std::string>& v);
+    InsertInit& values(const std::vector<std::string>& v);
+};
+
 } // namespace Moonlight::ParsedQuery::Init
