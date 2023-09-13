@@ -1,4 +1,4 @@
-#include "../QueryParser.hpp"
+#include "common/QueryParser.hpp"
 
 #include "Utils/src/Utils.hpp"
 
@@ -9,17 +9,18 @@ using namespace std::literals;
 
 namespace {
 
-constexpr auto c_query_prefix{ "view" };
+constexpr auto c_query_prefix{ "drop" };
 
 } // Anonymous namespace
 
-QUERY_PARSER_CLASS_IMPL(View, c_query_prefix)
+QUERY_PARSER_CLASS_IMPL(Drop, c_query_prefix)
 {
-    QUERY_OBJECT(obj, View);
+    QUERY_OBJECT(obj, Drop);
 
     cleanupQuery(query, c_query_prefix);
 
-    // TODO: implement View parser...
+    obj.name = extractIdentifier(query, "structure");
+    obj.cascade = extractBoolean(query, "cascade");
 
     RETURN_QUERY_OBJECT;
 }

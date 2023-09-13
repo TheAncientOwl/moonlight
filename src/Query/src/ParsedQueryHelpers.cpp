@@ -1,4 +1,4 @@
-#include "../ParsedQueries.hpp"
+#include "common/ParsedQueries.hpp"
 
 namespace Moonlight::ParsedQuery::Helpers {
 

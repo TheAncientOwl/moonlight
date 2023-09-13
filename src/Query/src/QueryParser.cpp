@@ -1,4 +1,4 @@
-#include "QueryParser.hpp"
+#include "common/QueryParser.hpp"
 
 #include "Utils/src/Utils.hpp"
 

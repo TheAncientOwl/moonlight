@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "QueryParser.hpp"
+#include "common/QueryParser.hpp"
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 

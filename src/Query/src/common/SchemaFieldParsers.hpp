@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ParsedQueries.hpp"
+#include "ParsedQueries.hpp"
 
 #include <regex>
 #include <string>

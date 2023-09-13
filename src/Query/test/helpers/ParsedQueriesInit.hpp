@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../src/ParsedQueries.hpp"
+#include "../src/common/ParsedQueries.hpp"
 
 namespace Moonlight::ParsedQuery::Init {
 

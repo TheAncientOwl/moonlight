@@ -1,4 +1,4 @@
-#include "QueryObject.hpp"
+#include "common/QueryObject.hpp"
 
 #define MAP_QUERY_DATA_TO_ENUM(ParsedQuery, Enum) \
     template <> const EQueryType \

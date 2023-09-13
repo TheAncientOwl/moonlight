@@ -1,6 +1,6 @@
-#include "../QueryParser.hpp"
+#include "common/QueryParser.hpp"
 
-#include "SchemaFieldParsers.hpp"
+#include "common/SchemaFieldParsers.hpp"
 
 #include "Utils/src/Utils.hpp"
 

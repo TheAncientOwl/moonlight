@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../src/ParsedQueries.hpp"
+#include "../src/common/ParsedQueries.hpp"
 
 #define EXPECT_DROP_EQ(obj1, obj2) \
     EXPECT_EQ(obj1.name, obj2.name);\

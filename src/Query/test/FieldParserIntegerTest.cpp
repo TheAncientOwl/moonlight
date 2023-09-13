@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../src/helpers/SchemaFieldParsers.hpp"
+#include "../src/common/SchemaFieldParsers.hpp"
 
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
