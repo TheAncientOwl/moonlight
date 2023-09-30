@@ -75,62 +75,62 @@ Literal LiteralToStringMap<Literal>::findByString(std::string_view str) const
 } // namespace Implementation
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(StructureType,
-    std::make_pair(Literal::Undefined, "undefined"),
-    std::make_pair(Literal::Table, "table"),
-    std::make_pair(Literal::Document, "document")
+    { Literal::Undefined, "undefined" },
+    { Literal::Table, "table" },
+    { Literal::Document, "document" }
 )
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(StructureRenameType,
-    std::make_pair(Literal::Undefined, "undefined"),
-    std::make_pair(Literal::Structure, "structure"),
-    std::make_pair(Literal::Field, "field"),
-    std::make_pair(Literal::Database, "database")
+    { Literal::Undefined, "undefined" },
+    { Literal::Structure, "structure" },
+    { Literal::Field, "field" },
+    { Literal::Database, "database" }
 )
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(DatabaseOperationType,
-    std::make_pair(Literal::Undefined, "undefined"),
-    std::make_pair(Literal::Create, "create"),
-    std::make_pair(Literal::Drop, "drop"),
-    std::make_pair(Literal::Backup, "backup")
+    { Literal::Undefined, "undefined" },
+    { Literal::Create, "create" },
+    { Literal::Drop, "drop" },
+    { Literal::Backup, "backup" }
 )
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(DataType,
-    std::make_pair(Literal::Undefined, "undefined"),
-    std::make_pair(Literal::String, "string"),
-    std::make_pair(Literal::Boolean, "boolean"),
-    std::make_pair(Literal::Decimal, "decimal"),
-    std::make_pair(Literal::Integer, "integer"),
-    std::make_pair(Literal::DateTime, "datetime"),
-    std::make_pair(Literal::Reference, "reference")
+    { Literal::Undefined, "undefined" },
+    { Literal::String, "string" },
+    { Literal::Boolean, "boolean" },
+    { Literal::Decimal, "decimal" },
+    { Literal::Integer, "integer" },
+    { Literal::DateTime, "datetime" },
+    { Literal::Reference, "reference" }
 )
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(SelectSortType,
-    std::make_pair(Literal::Undefined, "undefined"),
-    std::make_pair(Literal::Asc, "asc"),
-    std::make_pair(Literal::Desc, "desc")
+    { Literal::Undefined, "undefined" },
+    { Literal::Asc, "asc" },
+    { Literal::Desc, "desc" }
 )
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(QueryType,
-    std::make_pair(Literal::Undefined, "undefined"),
-    std::make_pair(Literal::Schema, "schena"),
-    std::make_pair(Literal::Create, "create"),
-    std::make_pair(Literal::Migrate, "migrate"),
-    std::make_pair(Literal::Drop, "drop"),
-    std::make_pair(Literal::Delete, "delete"),
-    std::make_pair(Literal::Update, "update"),
-    std::make_pair(Literal::Database, "database"),
-    std::make_pair(Literal::Rename, "rename"),
-    std::make_pair(Literal::Select, "select"),
-    std::make_pair(Literal::Insert, "insert"),
-    std::make_pair(Literal::Index, "index"),
-    std::make_pair(Literal::View, "view")
+    { Literal::Undefined, "undefined" },
+    { Literal::Schema, "schena" },
+    { Literal::Create, "create" },
+    { Literal::Migrate, "migrate" },
+    { Literal::Drop, "drop" },
+    { Literal::Delete, "delete" },
+    { Literal::Update, "update" },
+    { Literal::Database, "database" },
+    { Literal::Rename, "rename" },
+    { Literal::Select, "select" },
+    { Literal::Insert, "insert" },
+    { Literal::Index, "index" },
+    { Literal::View, "view" }
 )
 
 MOONLIGHT_PRIMITIVE_CONVERTOR(BooleanOperators,
-    std::make_pair(Literal::Undefined, "undefined"),
-    std::make_pair(Literal::Or, "or"),
-    std::make_pair(Literal::And, "and"),
-    std::make_pair(Literal::Eval, "eval"),
+    { Literal::Undefined, "undefined" },
+    { Literal::Or, "or" },
+    { Literal::And, "and" },
+    { Literal::Eval, "eval" },
     )
 
 } // namespace Moonlight::Primitives
