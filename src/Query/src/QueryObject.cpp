@@ -4,11 +4,11 @@
     template <> const EQueryType \
     QueryObject::ParsedQueryToEnumMap<ParsedQuery>::value = EQueryType::Enum;
 
-namespace Moonlight::ParsedQuery {
+namespace Moonlight::Parser::Objects {
 
 using EQueryType = Primitives::EQueryType;
 
-Primitives::EQueryType Moonlight::ParsedQuery::QueryObject::type() const
+EQueryType QueryObject::type() const
 {
     return m_type;
 }
@@ -29,4 +29,4 @@ MAP_QUERY_DATA_TO_ENUM(Select, Select)
 MAP_QUERY_DATA_TO_ENUM(View, View)
 MAP_QUERY_DATA_TO_ENUM(Insert, Insert)
 
-} // namespace Moonlight::ParsedQuery
+} // namespace Moonlight::Parser::Objects

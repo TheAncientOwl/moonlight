@@ -6,7 +6,7 @@
 
 #include <array>
 
-namespace Moonlight::QueryParser::Implementation {
+namespace Moonlight::Parser::Implementation {
 
 using namespace Utils;
 using namespace std::literals;
@@ -34,7 +34,7 @@ std::vector<std::string> extractInherits(std::string_view& query)
     return out;
 }
 
-ParsedQuery::Field parseField(std::string_view field)
+Objects::Field parseField(std::string_view field)
 {
     using namespace FieldParsers;
     static HierarchySet<IFieldParser, FIELD_PARSERS> s_parsers{};
@@ -61,12 +61,12 @@ ParsedQuery::Field parseField(std::string_view field)
     return parsed_field;
 }
 
-std::vector<ParsedQuery::Field> extractFields(std::string_view& query)
+std::vector<Objects::Field> extractFields(std::string_view& query)
 {
 
     const auto fields{ extractList(query, "fields", EParserModifier::EscapeQuotes) };
 
-    std::vector<ParsedQuery::Field> out{};
+    std::vector<Objects::Field> out{};
     out.reserve(fields.size());
 
     for (const auto field : fields)
@@ -118,4 +118,4 @@ QUERY_PARSER_CLASS_IMPL(Schema, c_query_prefix)
     RETURN_QUERY_OBJECT;
 }
 
-} // namespace Moonlight::QueryParser::Implementation
+} // namespace Moonlight::Parser::Implementation

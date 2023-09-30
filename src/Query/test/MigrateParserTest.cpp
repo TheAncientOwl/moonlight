@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(MigrateParserTest, parseSuccess01)
@@ -23,7 +24,7 @@ TEST(MigrateParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Migrate>();
 
-    const Migrate expected = Init::MigrateInit{}
+    const Migrate expected = MigrateInit{}
         .structure_name("StructureName")
         .new_schema("NewSchemaName")
         .mappings({
@@ -47,7 +48,7 @@ TEST(MigrateParserTest, parseSuccess02)
 
     const auto out = parseQuery(query).get<Migrate>();
 
-    const Migrate expected = Init::MigrateInit{}
+    const Migrate expected = MigrateInit{}
         .structure_name("StructureName")
         .new_schema("NewSchemaName")
         .mappings({
@@ -71,7 +72,7 @@ TEST(MigrateParserTest, parseSuccess03)
 
     const auto out = parseQuery(query).get<Migrate>();
 
-    const Migrate expected = Init::MigrateInit{}
+    const Migrate expected = MigrateInit{}
         .structure_name("StructureName")
         .new_schema("NewSchemaName")
         .mappings({
@@ -314,4 +315,4 @@ TEST(MigrateParserTest, parseThrow16)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::Tests
+} // namespace Moonlight::Parser::Implementation::Tests

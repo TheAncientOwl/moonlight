@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(DatabaseParserTest, parseSuccess01)
@@ -18,7 +19,7 @@ TEST(DatabaseParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Database>();
 
-    const Database expected = Init::DatabaseInit{}
+    const Database expected = DatabaseInit{}
         .type(Primitives::EDatabaseOperationType::Create)
         .name("DatabaseName");
 
@@ -34,7 +35,7 @@ TEST(DatabaseParserTest, parseSuccess02)
 
     const auto out = parseQuery(query).get<Database>();
 
-    const Database expected = Init::DatabaseInit{}
+    const Database expected = DatabaseInit{}
         .type(Primitives::EDatabaseOperationType::Create)
         .name("DatabaseName");
 
@@ -50,7 +51,7 @@ TEST(DatabaseParserTest, parseSuccess03)
 
     const auto out = parseQuery(query).get<Database>();
 
-    const Database expected = Init::DatabaseInit{}
+    const Database expected = DatabaseInit{}
         .type(Primitives::EDatabaseOperationType::Drop)
         .name("DatabaseName");
 
@@ -66,7 +67,7 @@ TEST(DatabaseParserTest, parseSuccess04)
 
     const auto out = parseQuery(query).get<Database>();
 
-    const Database expected = Init::DatabaseInit{}
+    const Database expected = DatabaseInit{}
         .type(Primitives::EDatabaseOperationType::Drop)
         .name("DatabaseName");
 
@@ -84,11 +85,11 @@ TEST(DatabaseParserTest, parseSuccess05)
 
     const auto out = parseQuery(query).get<Database>();
 
-    const Database expected = Init::DatabaseInit{}
+    const Database expected = DatabaseInit{}
         .type(Primitives::EDatabaseOperationType::Backup)
         .name("DatabaseName")
         .backup_metadata(
-            Init::DatabaseBackupMetadataInit{}
+            DatabaseBackupMetadataInit{}
             .disk_path(R"("/home/user/lunardb-backup")")
             .with_differential(true)
         );
@@ -107,11 +108,11 @@ TEST(DatabaseParserTest, parseSuccess06)
 
     const auto out = parseQuery(query).get<Database>();
 
-    const Database expected = Init::DatabaseInit{}
+    const Database expected = DatabaseInit{}
         .type(Primitives::EDatabaseOperationType::Backup)
         .name("DatabaseName")
         .backup_metadata(
-            Init::DatabaseBackupMetadataInit{}
+            DatabaseBackupMetadataInit{}
             .disk_path(R"("/home/user/lunardb-backup")")
             .with_differential(true)
         );
@@ -130,11 +131,11 @@ TEST(DatabaseParserTest, parseSuccess07)
 
     const auto out = parseQuery(query).get<Database>();
 
-    const Database expected = Init::DatabaseInit{}
+    const Database expected = DatabaseInit{}
         .type(Primitives::EDatabaseOperationType::Backup)
         .name("DatabaseName")
         .backup_metadata(
-            Init::DatabaseBackupMetadataInit{}
+            DatabaseBackupMetadataInit{}
             .disk_path(R"("/home/user/lunardb-backup")")
             .with_differential(false)
         );
@@ -153,11 +154,11 @@ TEST(DatabaseParserTest, parseSuccess08)
 
     const auto out = parseQuery(query).get<Database>();
 
-    const Database expected = Init::DatabaseInit{}
+    const Database expected = DatabaseInit{}
         .type(Primitives::EDatabaseOperationType::Backup)
         .name("DatabaseName")
         .backup_metadata(
-            Init::DatabaseBackupMetadataInit{}
+            DatabaseBackupMetadataInit{}
             .disk_path(R"("/home/user/lunardb-backup")")
             .with_differential(false)
         );
@@ -219,4 +220,4 @@ TEST(DatabaseParserTest, parseThrow05)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} //namespace Moonlight::QueryParser::Implementation::Tests
+} //namespace Moonlight::Parser::Implementation::Tests

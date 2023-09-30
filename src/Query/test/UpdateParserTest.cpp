@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(UpdateParserTest, parseSuccess01)
@@ -24,14 +25,14 @@ TEST(UpdateParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Update>();
 
-    const Update expected = Init::UpdateInit{}
+    const Update expected = UpdateInit{}
         .name("StructureName")
         .set({
-            Init::SetClauseItemInit{}.field("field1").expression("field1 * 1.5 + 2"),
-            Init::SetClauseItemInit{}.field("field2").expression("3"),
-            Init::SetClauseItemInit{}.field("field3").expression(R"(" some ,string")")
+            SetClauseItemInit{}.field("field1").expression("field1 * 1.5 + 2"),
+            SetClauseItemInit{}.field("field2").expression("3"),
+            SetClauseItemInit{}.field("field3").expression(R"(" some ,string")")
             })
-        .where(Init::WhereClauseInit{}.content("rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9 or rid = 120"));
+        .where(WhereClauseInit{}.content("rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9 or rid = 120"));
 
     EXPECT_UPDATE_EQ(out, expected);
 }
@@ -112,4 +113,4 @@ TEST(UpdateParserTest, parseThrow05)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::Tests
+} // namespace Moonlight::Parser::Implementation::Tests

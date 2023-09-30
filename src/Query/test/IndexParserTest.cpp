@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(IndexParserTest, parseSuccess01)
@@ -21,7 +22,7 @@ TEST(IndexParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Index>();
 
-    const Index expected = Init::IndexInit{}
+    const Index expected = IndexInit{}
         .on_structure("SomeStructure")
         .name("Field1Field2Index")
         .on_fields({ "field1", "field2" })
@@ -42,7 +43,7 @@ TEST(IndexParserTest, parseSuccess02)
 
     const auto out = parseQuery(query).get<Index>();
 
-    const Index expected = Init::IndexInit{}
+    const Index expected = IndexInit{}
         .on_structure("SomeStructure")
         .name("Field1Field2Index")
         .on_fields({ "field1", "field2" })
@@ -63,7 +64,7 @@ TEST(IndexParserTest, parseSuccess03)
 
     const auto out = parseQuery(query).get<Index>();
 
-    const Index expected = Init::IndexInit{}
+    const Index expected = IndexInit{}
         .on_structure("SomeStructure")
         .name("Field1Field2Index")
         .on_fields({ "field1", "field2", "field3", "field4" })
@@ -84,7 +85,7 @@ TEST(IndexParserTest, parseSuccess04)
 
     const auto out = parseQuery(query).get<Index>();
 
-    const Index expected = Init::IndexInit{}
+    const Index expected = IndexInit{}
         .on_structure("SomeStructure")
         .name("Field1Field2Index")
         .on_fields({ "field1", "field2", "field3", "field4" })
@@ -145,4 +146,4 @@ TEST(IndexParserTest, parseThrow04)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::Tests
+} // namespace Moonlight::Parser::Implementation::Tests

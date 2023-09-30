@@ -6,7 +6,7 @@
 #include <optional>
 #include <vector>
 
-namespace Moonlight::ParsedQuery {
+namespace Moonlight::Parser::Objects {
 
 struct Drop
 {
@@ -146,4 +146,4 @@ struct Insert
     std::vector<std::string> values;
 };
 
-} // namespace Moonlight::ParsedQuery
+} // namespace Moonlight::Parser::Objects

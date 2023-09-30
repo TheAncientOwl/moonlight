@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(CreateParserTest, parseSuccess01)
@@ -21,7 +22,7 @@ TEST(CreateParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Create>();
 
-    const Create expected = Init::CreateInit{}
+    const Create expected = CreateInit{}
         .name("StructureName")
         .type(Primitives::EStructureType::Table)
         .schema("SchemaName")
@@ -42,7 +43,7 @@ TEST(CreateParserTest, parseSuccess02)
 
     const auto out = parseQuery(query).get<Create>();
 
-    const Create expected = Init::CreateInit{}
+    const Create expected = CreateInit{}
         .name("StructureName")
         .type(Primitives::EStructureType::Document)
         .schema("SchemaName")
@@ -63,7 +64,7 @@ TEST(CreateParserTest, parseSuccess03)
 
     const auto out = parseQuery(query).get<Create>();
 
-    const Create expected = Init::CreateInit{}
+    const Create expected = CreateInit{}
         .name("StructureName")
         .type(Primitives::EStructureType::Document)
         .schema("SchemaName")
@@ -84,7 +85,7 @@ TEST(CreateParserTest, parseSuccess04)
 
     const auto out = parseQuery(query).get<Create>();
 
-    const Create expected = Init::CreateInit{}
+    const Create expected = CreateInit{}
         .name("StructureName")
         .type(Primitives::EStructureType::Document)
         .schema("SchemaName")
@@ -105,7 +106,7 @@ TEST(CreateParserTest, parseSuccess05)
 
     const auto out = parseQuery(query).get<Create>();
 
-    const Create expected = Init::CreateInit{}
+    const Create expected = CreateInit{}
         .name("StructureName")
         .type(Primitives::EStructureType::Table)
         .schema("SchemaName")
@@ -188,4 +189,4 @@ TEST(CreateParserTest, parseThrow06)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::Tests
+} // namespace Moonlight::Parser::Implementation::Tests

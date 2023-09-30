@@ -2,7 +2,7 @@
 
 #include "Utils/src/Utils.hpp"
 
-namespace Moonlight::QueryParser::Implementation {
+namespace Moonlight::Parser::Implementation {
 
 using namespace Utils;
 using namespace std::literals;
@@ -23,7 +23,7 @@ Primitives::EStructureRenameType extractRenameType(std::string_view& query)
  *
  * @param obj object representation of a Rename query
  */
-void validateRenameObject(const ParsedQuery::Rename& obj)
+void validateRenameObject(const Objects::Rename& obj)
 {
     switch (obj.type)
     {
@@ -113,4 +113,4 @@ QUERY_PARSER_CLASS_IMPL(Rename, c_query_prefix)
     RETURN_QUERY_OBJECT;
 }
 
-} // namespace Moonlight::QueryParser::Implementation
+} // namespace Moonlight::Parser::Implementation

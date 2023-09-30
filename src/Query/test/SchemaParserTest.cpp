@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 using dtype = Primitives::EDataType;
@@ -51,30 +52,30 @@ TEST(SchemaParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Schema>();
 
-    const Schema expected = Init::SchemaInit{}
+    const Schema expected = SchemaInit{}
         .name("SchemaName")
         .inherits({ "SchemaName1", "SchemaName2" })
         .fields({
-            Init::FieldInit{}.name("field_11").data_type(dtype::Boolean).metadata("false"),
-            Init::FieldInit{}.name("field_12").data_type(dtype::DateTime).metadata("now"),
-            Init::FieldInit{}.name("field_13").data_type(dtype::String).size(15).metadata(R"("empty")"),
-            Init::FieldInit{}.name("field_14").data_type(dtype::Integer).size(8).metadata("14"),
-            Init::FieldInit{}.name("field_15").data_type(dtype::Decimal).size(8).metadata("3.14"),
-            Init::FieldInit{}.name("field_16").data_type(dtype::Reference).metadata("OtherSchemaName"),
+            FieldInit{}.name("field_11").data_type(dtype::Boolean).metadata("false"),
+            FieldInit{}.name("field_12").data_type(dtype::DateTime).metadata("now"),
+            FieldInit{}.name("field_13").data_type(dtype::String).size(15).metadata(R"("empty")"),
+            FieldInit{}.name("field_14").data_type(dtype::Integer).size(8).metadata("14"),
+            FieldInit{}.name("field_15").data_type(dtype::Decimal).size(8).metadata("3.14"),
+            FieldInit{}.name("field_16").data_type(dtype::Reference).metadata("OtherSchemaName"),
 
-            Init::FieldInit{}.name("field_21").data_type(dtype::Boolean).nullable(true).metadata("false"),
-            Init::FieldInit{}.name("field_22").data_type(dtype::DateTime).nullable(true).metadata("now"),
-            Init::FieldInit{}.name("field_23").data_type(dtype::String).size(15).nullable(true).metadata(R"("empty")"),
-            Init::FieldInit{}.name("field_24").data_type(dtype::Integer).size(8).nullable(true).metadata("14"),
-            Init::FieldInit{}.name("field_25").data_type(dtype::Decimal).size(8).nullable(true).metadata("3.14"),
-            Init::FieldInit{}.name("field_26").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName"),
+            FieldInit{}.name("field_21").data_type(dtype::Boolean).nullable(true).metadata("false"),
+            FieldInit{}.name("field_22").data_type(dtype::DateTime).nullable(true).metadata("now"),
+            FieldInit{}.name("field_23").data_type(dtype::String).size(15).nullable(true).metadata(R"("empty")"),
+            FieldInit{}.name("field_24").data_type(dtype::Integer).size(8).nullable(true).metadata("14"),
+            FieldInit{}.name("field_25").data_type(dtype::Decimal).size(8).nullable(true).metadata("3.14"),
+            FieldInit{}.name("field_26").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName"),
 
-            Init::FieldInit{}.name("field_31").data_type(dtype::Boolean).nullable(true),
-            Init::FieldInit{}.name("field_32").data_type(dtype::DateTime).nullable(true),
-            Init::FieldInit{}.name("field_33").data_type(dtype::String).size(15).nullable(true),
-            Init::FieldInit{}.name("field_34").data_type(dtype::Integer).size(8).nullable(true),
-            Init::FieldInit{}.name("field_35").data_type(dtype::Decimal).size(8).nullable(true),
-            Init::FieldInit{}.name("field_36").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName")
+            FieldInit{}.name("field_31").data_type(dtype::Boolean).nullable(true),
+            FieldInit{}.name("field_32").data_type(dtype::DateTime).nullable(true),
+            FieldInit{}.name("field_33").data_type(dtype::String).size(15).nullable(true),
+            FieldInit{}.name("field_34").data_type(dtype::Integer).size(8).nullable(true),
+            FieldInit{}.name("field_35").data_type(dtype::Decimal).size(8).nullable(true),
+            FieldInit{}.name("field_36").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName")
             })
         .restrictions({
                 R"(field3 like "*@*.*")",
@@ -125,30 +126,30 @@ TEST(SchemaParserTest, parseSuccess02)
 
     const auto out = parseQuery(query).get<Schema>();
 
-    const Schema expected = Init::SchemaInit{}
+    const Schema expected = SchemaInit{}
         .name("SchemaName")
         .inherits({})
         .fields({
-            Init::FieldInit{}.name("field_11").data_type(dtype::Boolean).metadata("false"),
-            Init::FieldInit{}.name("field_12").data_type(dtype::DateTime).metadata("now"),
-            Init::FieldInit{}.name("field_13").data_type(dtype::String).size(15).metadata(R"("empty")"),
-            Init::FieldInit{}.name("field_14").data_type(dtype::Integer).size(8).metadata("14"),
-            Init::FieldInit{}.name("field_15").data_type(dtype::Decimal).size(8).metadata("3.14"),
-            Init::FieldInit{}.name("field_16").data_type(dtype::Reference).metadata("OtherSchemaName"),
+            FieldInit{}.name("field_11").data_type(dtype::Boolean).metadata("false"),
+            FieldInit{}.name("field_12").data_type(dtype::DateTime).metadata("now"),
+            FieldInit{}.name("field_13").data_type(dtype::String).size(15).metadata(R"("empty")"),
+            FieldInit{}.name("field_14").data_type(dtype::Integer).size(8).metadata("14"),
+            FieldInit{}.name("field_15").data_type(dtype::Decimal).size(8).metadata("3.14"),
+            FieldInit{}.name("field_16").data_type(dtype::Reference).metadata("OtherSchemaName"),
 
-            Init::FieldInit{}.name("field_21").data_type(dtype::Boolean).nullable(true).metadata("false"),
-            Init::FieldInit{}.name("field_22").data_type(dtype::DateTime).nullable(true).metadata("now"),
-            Init::FieldInit{}.name("field_23").data_type(dtype::String).size(15).nullable(true).metadata(R"("empty")"),
-            Init::FieldInit{}.name("field_24").data_type(dtype::Integer).size(8).nullable(true).metadata("14"),
-            Init::FieldInit{}.name("field_25").data_type(dtype::Decimal).size(8).nullable(true).metadata("3.14"),
-            Init::FieldInit{}.name("field_26").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName"),
+            FieldInit{}.name("field_21").data_type(dtype::Boolean).nullable(true).metadata("false"),
+            FieldInit{}.name("field_22").data_type(dtype::DateTime).nullable(true).metadata("now"),
+            FieldInit{}.name("field_23").data_type(dtype::String).size(15).nullable(true).metadata(R"("empty")"),
+            FieldInit{}.name("field_24").data_type(dtype::Integer).size(8).nullable(true).metadata("14"),
+            FieldInit{}.name("field_25").data_type(dtype::Decimal).size(8).nullable(true).metadata("3.14"),
+            FieldInit{}.name("field_26").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName"),
 
-            Init::FieldInit{}.name("field_31").data_type(dtype::Boolean).nullable(true),
-            Init::FieldInit{}.name("field_32").data_type(dtype::DateTime).nullable(true),
-            Init::FieldInit{}.name("field_33").data_type(dtype::String).size(15).nullable(true),
-            Init::FieldInit{}.name("field_34").data_type(dtype::Integer).size(8).nullable(true),
-            Init::FieldInit{}.name("field_35").data_type(dtype::Decimal).size(8).nullable(true),
-            Init::FieldInit{}.name("field_36").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName")
+            FieldInit{}.name("field_31").data_type(dtype::Boolean).nullable(true),
+            FieldInit{}.name("field_32").data_type(dtype::DateTime).nullable(true),
+            FieldInit{}.name("field_33").data_type(dtype::String).size(15).nullable(true),
+            FieldInit{}.name("field_34").data_type(dtype::Integer).size(8).nullable(true),
+            FieldInit{}.name("field_35").data_type(dtype::Decimal).size(8).nullable(true),
+            FieldInit{}.name("field_36").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName")
             })
         .restrictions({
                 R"(field3 like "*@*.*")",
@@ -192,30 +193,30 @@ TEST(SchemaParserTest, parseSuccess05)
 
     const auto out = parseQuery(query).get<Schema>();
 
-    const Schema expected = Init::SchemaInit{}
+    const Schema expected = SchemaInit{}
         .name("SchemaName")
         .inherits({})
         .fields({
-            Init::FieldInit{}.name("field_11").data_type(dtype::Boolean).metadata("false"),
-            Init::FieldInit{}.name("field_12").data_type(dtype::DateTime).metadata("now"),
-            Init::FieldInit{}.name("field_13").data_type(dtype::String).size(15).metadata(R"("empty")"),
-            Init::FieldInit{}.name("field_14").data_type(dtype::Integer).size(8).metadata("14"),
-            Init::FieldInit{}.name("field_15").data_type(dtype::Decimal).size(8).metadata("3.14"),
-            Init::FieldInit{}.name("field_16").data_type(dtype::Reference).metadata("OtherSchemaName"),
+            FieldInit{}.name("field_11").data_type(dtype::Boolean).metadata("false"),
+            FieldInit{}.name("field_12").data_type(dtype::DateTime).metadata("now"),
+            FieldInit{}.name("field_13").data_type(dtype::String).size(15).metadata(R"("empty")"),
+            FieldInit{}.name("field_14").data_type(dtype::Integer).size(8).metadata("14"),
+            FieldInit{}.name("field_15").data_type(dtype::Decimal).size(8).metadata("3.14"),
+            FieldInit{}.name("field_16").data_type(dtype::Reference).metadata("OtherSchemaName"),
 
-            Init::FieldInit{}.name("field_21").data_type(dtype::Boolean).nullable(true).metadata("false"),
-            Init::FieldInit{}.name("field_22").data_type(dtype::DateTime).nullable(true).metadata("now"),
-            Init::FieldInit{}.name("field_23").data_type(dtype::String).size(15).nullable(true).metadata(R"("empty")"),
-            Init::FieldInit{}.name("field_24").data_type(dtype::Integer).size(8).nullable(true).metadata("14"),
-            Init::FieldInit{}.name("field_25").data_type(dtype::Decimal).size(8).nullable(true).metadata("3.14"),
-            Init::FieldInit{}.name("field_26").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName"),
+            FieldInit{}.name("field_21").data_type(dtype::Boolean).nullable(true).metadata("false"),
+            FieldInit{}.name("field_22").data_type(dtype::DateTime).nullable(true).metadata("now"),
+            FieldInit{}.name("field_23").data_type(dtype::String).size(15).nullable(true).metadata(R"("empty")"),
+            FieldInit{}.name("field_24").data_type(dtype::Integer).size(8).nullable(true).metadata("14"),
+            FieldInit{}.name("field_25").data_type(dtype::Decimal).size(8).nullable(true).metadata("3.14"),
+            FieldInit{}.name("field_26").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName"),
 
-            Init::FieldInit{}.name("field_31").data_type(dtype::Boolean).nullable(true),
-            Init::FieldInit{}.name("field_32").data_type(dtype::DateTime).nullable(true),
-            Init::FieldInit{}.name("field_33").data_type(dtype::String).size(15).nullable(true),
-            Init::FieldInit{}.name("field_34").data_type(dtype::Integer).size(8).nullable(true),
-            Init::FieldInit{}.name("field_35").data_type(dtype::Decimal).size(8).nullable(true),
-            Init::FieldInit{}.name("field_36").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName")
+            FieldInit{}.name("field_31").data_type(dtype::Boolean).nullable(true),
+            FieldInit{}.name("field_32").data_type(dtype::DateTime).nullable(true),
+            FieldInit{}.name("field_33").data_type(dtype::String).size(15).nullable(true),
+            FieldInit{}.name("field_34").data_type(dtype::Integer).size(8).nullable(true),
+            FieldInit{}.name("field_35").data_type(dtype::Decimal).size(8).nullable(true),
+            FieldInit{}.name("field_36").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName")
             })
         .restrictions({});
 
@@ -262,30 +263,30 @@ TEST(SchemaParserTest, parseSuccess06)
 
     const auto out = parseQuery(query).get<Schema>();
 
-    const Schema expected = Init::SchemaInit{}
+    const Schema expected = SchemaInit{}
         .name("SchemaName")
         .inherits({ "SchemaName1", "SchemaName2" })
         .fields({
-            Init::FieldInit{}.name("field_11").data_type(dtype::Boolean).metadata("false"),
-            Init::FieldInit{}.name("field_12").data_type(dtype::DateTime).metadata("now"),
-            Init::FieldInit{}.name("field_13").data_type(dtype::String).size(15).metadata(R"("em,pty")"),
-            Init::FieldInit{}.name("field_14").data_type(dtype::Integer).size(8).metadata("14"),
-            Init::FieldInit{}.name("field_15").data_type(dtype::Decimal).size(8).metadata("3.14"),
-            Init::FieldInit{}.name("field_16").data_type(dtype::Reference).metadata("OtherSchemaName"),
+            FieldInit{}.name("field_11").data_type(dtype::Boolean).metadata("false"),
+            FieldInit{}.name("field_12").data_type(dtype::DateTime).metadata("now"),
+            FieldInit{}.name("field_13").data_type(dtype::String).size(15).metadata(R"("em,pty")"),
+            FieldInit{}.name("field_14").data_type(dtype::Integer).size(8).metadata("14"),
+            FieldInit{}.name("field_15").data_type(dtype::Decimal).size(8).metadata("3.14"),
+            FieldInit{}.name("field_16").data_type(dtype::Reference).metadata("OtherSchemaName"),
 
-            Init::FieldInit{}.name("field_21").data_type(dtype::Boolean).nullable(true).metadata("false"),
-            Init::FieldInit{}.name("field_22").data_type(dtype::DateTime).nullable(true).metadata("now"),
-            Init::FieldInit{}.name("field_23").data_type(dtype::String).size(15).nullable(true).metadata(R"("em;pty")"),
-            Init::FieldInit{}.name("field_24").data_type(dtype::Integer).size(8).nullable(true).metadata("14"),
-            Init::FieldInit{}.name("field_25").data_type(dtype::Decimal).size(8).nullable(true).metadata("3.14"),
-            Init::FieldInit{}.name("field_26").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName"),
+            FieldInit{}.name("field_21").data_type(dtype::Boolean).nullable(true).metadata("false"),
+            FieldInit{}.name("field_22").data_type(dtype::DateTime).nullable(true).metadata("now"),
+            FieldInit{}.name("field_23").data_type(dtype::String).size(15).nullable(true).metadata(R"("em;pty")"),
+            FieldInit{}.name("field_24").data_type(dtype::Integer).size(8).nullable(true).metadata("14"),
+            FieldInit{}.name("field_25").data_type(dtype::Decimal).size(8).nullable(true).metadata("3.14"),
+            FieldInit{}.name("field_26").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName"),
 
-            Init::FieldInit{}.name("field_31").data_type(dtype::Boolean).nullable(true),
-            Init::FieldInit{}.name("field_32").data_type(dtype::DateTime).nullable(true),
-            Init::FieldInit{}.name("field_33").data_type(dtype::String).size(15).nullable(true),
-            Init::FieldInit{}.name("field_34").data_type(dtype::Integer).size(8).nullable(true),
-            Init::FieldInit{}.name("field_35").data_type(dtype::Decimal).size(8).nullable(true),
-            Init::FieldInit{}.name("field_36").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName")
+            FieldInit{}.name("field_31").data_type(dtype::Boolean).nullable(true),
+            FieldInit{}.name("field_32").data_type(dtype::DateTime).nullable(true),
+            FieldInit{}.name("field_33").data_type(dtype::String).size(15).nullable(true),
+            FieldInit{}.name("field_34").data_type(dtype::Integer).size(8).nullable(true),
+            FieldInit{}.name("field_35").data_type(dtype::Decimal).size(8).nullable(true),
+            FieldInit{}.name("field_36").data_type(dtype::Reference).nullable(true).metadata("OtherSchemaName")
             })
         .restrictions({
                 R"(field3 like "*@*.*")",
@@ -478,4 +479,4 @@ TEST(SchemaParserTest, parseThrow06)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::Tests
+} // namespace Moonlight::Parser::Implementation::Tests

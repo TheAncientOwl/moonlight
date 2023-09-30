@@ -2,11 +2,11 @@
 
 #include "../src/common/ParsedQueries.hpp"
 
-namespace Moonlight::ParsedQuery::Init {
+namespace Moonlight::Parser::Objects::Init {
 
 struct DropInit : public Drop
 {
-    using base_t = ParsedQuery::Drop;
+    using base_t = Drop;
     DropInit();
 
     DropInit& name(const std::string& v);
@@ -192,4 +192,4 @@ struct InsertInit : public Insert
     InsertInit& values(const std::vector<std::string>& v);
 };
 
-} // namespace Moonlight::ParsedQuery::Init
+} // namespace Moonlight::Parser::Objects::Init

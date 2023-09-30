@@ -2,7 +2,7 @@
 
 #include "Utils/src/Utils.hpp"
 
-namespace Moonlight::QueryParser::Implementation {
+namespace Moonlight::Parser::Implementation {
 
 using namespace Utils;
 using namespace std::literals;
@@ -31,7 +31,7 @@ QUERY_PARSER_CLASS_IMPL(Database, c_query_prefix)
 
     if (obj.type == Primitives::EDatabaseOperationType::Backup)
     {
-        ParsedQuery::DatabaseBackupMetadata metadata{};
+        Objects::DatabaseBackupMetadata metadata{};
 
         metadata.disk_path = extractValue(query, "to_disk");
         metadata.with_differential = extractBoolean(query, "with_differential");
@@ -42,4 +42,4 @@ QUERY_PARSER_CLASS_IMPL(Database, c_query_prefix)
     RETURN_QUERY_OBJECT;
 }
 
-} // namespace Moonlight::QueryParser::Implementation
+} // namespace Moonlight::Parser::Implementation

@@ -2,7 +2,7 @@
 
 #include "Utils/src/Utils.hpp"
 
-namespace Moonlight::QueryParser::Implementation {
+namespace Moonlight::Parser::Implementation {
 
 using namespace Utils;
 using namespace std::literals;
@@ -11,11 +11,11 @@ namespace {
 
 constexpr auto c_query_prefix{ "update" };
 
-std::vector<ParsedQuery::SetClauseItem> extractSetClause(std::string_view& query)
+std::vector<Objects::SetClauseItem> extractSetClause(std::string_view& query)
 {
     const auto items = extractList(query, "set", EParserModifier::EscapeQuotes);
 
-    std::vector<ParsedQuery::SetClauseItem> out{};
+    std::vector<Objects::SetClauseItem> out{};
     out.reserve(items.size());
 
     for (const auto item : items)
@@ -65,9 +65,9 @@ QUERY_PARSER_CLASS_IMPL(Update, c_query_prefix)
 
     obj.name = extractIdentifier(query, "structure");
     obj.set = extractSetClause(query);
-    obj.where = ParsedQuery::Helpers::parseWhereClause(extractValue(query, "where", EParserModifier::EscapeQuotes));
+    obj.where = Objects::Helpers::parseWhereClause(extractValue(query, "where", EParserModifier::EscapeQuotes));
 
     RETURN_QUERY_OBJECT;
 }
 
-} // namespace Moonlight::QueryParser::Implementation
+} // namespace Moonlight::Parser::Implementation

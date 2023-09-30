@@ -5,7 +5,7 @@
 #include <array>
 #include <memory>
 
-namespace Moonlight::QueryParser {
+namespace Moonlight::Parser {
 
 using namespace Utils;
 using namespace Implementation;
@@ -33,4 +33,4 @@ IQueryParser::~IQueryParser() {}
 
 } // namespace Implementation
 
-} // namespace Moonlight::QueryParser
+} // namespace Moonlight::Parser

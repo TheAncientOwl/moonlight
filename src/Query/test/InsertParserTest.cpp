@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(DeleteParserTest, parseSuccess01)
@@ -20,7 +21,7 @@ TEST(DeleteParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Insert>();
 
-    const Insert expected = Init::InsertInit{}
+    const Insert expected = InsertInit{}
         .structure("StructureName")
         .fields({
             "field1",
@@ -46,7 +47,7 @@ TEST(DeleteParserTest, parseSuccess02)
 
     const auto out = parseQuery(query).get<Insert>();
 
-    const Insert expected = Init::InsertInit{}
+    const Insert expected = InsertInit{}
         .structure("StructureName")
         .fields({
             "field1",
@@ -74,7 +75,7 @@ TEST(DeleteParserTest, parseSuccess03)
 
     const auto out = parseQuery(query).get<Insert>();
 
-    const Insert expected = Init::InsertInit{}
+    const Insert expected = InsertInit{}
         .structure("StructureName")
         .fields({})
         .values({
@@ -145,4 +146,4 @@ TEST(DeleteParserTest, parseThrow05)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::Tests
+} // namespace Moonlight::Parser::Implementation::Tests

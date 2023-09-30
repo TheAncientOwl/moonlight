@@ -1,6 +1,6 @@
 #include "helpers/ParsedQueriesInit.hpp"
 
-namespace Moonlight::ParsedQuery::Init {
+namespace Moonlight::Parser::Objects::Init {
 
 DropInit::DropInit() : base_t{} {}
 DropInit& DropInit::name(const std::string& v)
@@ -272,4 +272,4 @@ InsertInit& InsertInit::values(const std::vector<std::string>& v)
     return base_t::values = v, *this;
 }
 
-} // namespace Moonlight::ParsedQuery::Init
+} // namespace Moonlight::Parser::Objects::Init

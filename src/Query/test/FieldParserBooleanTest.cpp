@@ -5,9 +5,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests {
+namespace Moonlight::Parser::Implementation::FieldParsers::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(FieldParserBooleanTest, parseSuccess01)
@@ -19,7 +20,7 @@ TEST(FieldParserBooleanTest, parseSuccess01)
 
     const auto out = parser.parse();
 
-    ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("false")
@@ -39,7 +40,7 @@ TEST(FieldParserBooleanTest, parseSuccess02)
 
     const auto out = parser.parse();
 
-    ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("true")
@@ -59,7 +60,7 @@ TEST(FieldParserBooleanTest, parseSuccess03)
 
     const auto out = parser.parse();
 
-    ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("false")
@@ -79,7 +80,7 @@ TEST(FieldParserBooleanTest, parseSuccess04)
 
     const auto out = parser.parse();
 
-    ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("true")
@@ -99,7 +100,7 @@ TEST(FieldParserBooleanTest, parseSuccess05)
 
     const auto out = parser.parse();
 
-    ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata(std::nullopt)
@@ -118,7 +119,7 @@ TEST(FieldParserBooleanTest, parseSuccess06)
 
     const auto out = parser.parse();
 
-    ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("false")
@@ -138,7 +139,7 @@ TEST(FieldParserBooleanTest, parseSuccess07)
 
     const auto out = parser.parse();
 
-    ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Boolean)
         .metadata("false")
@@ -223,4 +224,4 @@ TEST(FieldParserBooleanTest, parseSuccessThrow01)
     EXPECT_THROW({ parser.parse(); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests
+} // namespace Moonlight::Parser::Implementation::FieldParsers::Tests

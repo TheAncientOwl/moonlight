@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(RenameParserTest, parseSuccess01)
@@ -20,7 +21,7 @@ TEST(RenameParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Rename>();
 
-    const Rename expected = Init::RenameInit{}
+    const Rename expected = RenameInit{}
         .type(Primitives::EStructureRenameType::Structure)
         .old_name("StructureNameOld")
         .new_name("StructureNameNew");
@@ -39,7 +40,7 @@ TEST(RenameParserTest, parseSuccess02)
 
     const auto out = parseQuery(query).get<Rename>();
 
-    const Rename expected = Init::RenameInit{}
+    const Rename expected = RenameInit{}
         .type(Primitives::EStructureRenameType::Database)
         .old_name("StructureNameOld")
         .new_name("StructureNameNew");
@@ -58,7 +59,7 @@ TEST(RenameParserTest, parseSuccess03)
 
     const auto out = parseQuery(query).get<Rename>();
 
-    const Rename expected = Init::RenameInit{}
+    const Rename expected = RenameInit{}
         .type(Primitives::EStructureRenameType::Field)
         .old_name("StructureName.old_field")
         .new_name("StructureName.new_field");
@@ -77,7 +78,7 @@ TEST(RenameParserTest, parseSuccess04)
 
     const auto out = parseQuery(query).get<Rename>();
 
-    const Rename expected = Init::RenameInit{}
+    const Rename expected = RenameInit{}
         .type(Primitives::EStructureRenameType::Structure)
         .old_name("StructureNameOld")
         .new_name("StructureNameNew");
@@ -96,7 +97,7 @@ TEST(RenameParserTest, parseSuccess05)
 
     const auto out = parseQuery(query).get<Rename>();
 
-    const Rename expected = Init::RenameInit{}
+    const Rename expected = RenameInit{}
         .type(Primitives::EStructureRenameType::Database)
         .old_name("StructureNameOld")
         .new_name("StructureNameNew");
@@ -115,7 +116,7 @@ TEST(RenameParserTest, parseSuccess06)
 
     const auto out = parseQuery(query).get<Rename>();
 
-    const Rename expected = Init::RenameInit{}
+    const Rename expected = RenameInit{}
         .type(Primitives::EStructureRenameType::Field)
         .old_name("StructureName.old_field")
         .new_name("StructureName.new_field");
@@ -324,4 +325,4 @@ TEST(RenameParserTest, parseThrow17)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::Tests
+} // namespace Moonlight::Parser::Implementation::Tests

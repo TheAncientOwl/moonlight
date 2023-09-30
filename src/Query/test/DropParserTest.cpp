@@ -4,9 +4,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::Tests {
+namespace Moonlight::Parser::Implementation::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(DropParserTest, parseSuccess01)
@@ -20,7 +21,7 @@ TEST(DropParserTest, parseSuccess01)
 
     const auto out = parseQuery(query).get<Drop>();
 
-    const Drop expected = Init::DropInit{}
+    const Drop expected = DropInit{}
         .name("StructureName")
         .cascade(true);
 
@@ -38,7 +39,7 @@ TEST(DropParserTest, parseSuccess02)
 
     const auto out = parseQuery(query).get<Drop>();
 
-    const Drop expected = Init::DropInit{}
+    const Drop expected = DropInit{}
         .name("StructureName")
         .cascade(false);
 
@@ -56,7 +57,7 @@ TEST(DropParserTest, parseSuccess03)
 
     const auto out = parseQuery(query).get<Drop>();
 
-    const Drop expected = Init::DropInit{}
+    const Drop expected = DropInit{}
         .name("StructureName")
         .cascade(true);
 
@@ -74,7 +75,7 @@ TEST(DropParserTest, parseSuccess04)
 
     const auto out = parseQuery(query).get<Drop>();
 
-    const Drop expected = Init::DropInit{}
+    const Drop expected = DropInit{}
         .name("StructureName")
         .cascade(true);
 
@@ -146,4 +147,4 @@ TEST(DropParserTest, parseThrow06)
     EXPECT_THROW({ parseQuery(query); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::Tests
+} // namespace Moonlight::Parser::Implementation::Tests

@@ -4,7 +4,7 @@
 
 #include <variant>
 
-namespace Moonlight::ParsedQuery {
+namespace Moonlight::Parser::Objects {
 
 class QueryObject
 {
@@ -44,13 +44,13 @@ private: // fields
 };
 
 template<typename Data>
-inline Data& Moonlight::ParsedQuery::QueryObject::get()
+inline Data& QueryObject::get()
 {
     return std::get<Data>(m_data);
 }
 
 template<typename Data>
-inline const Data& Moonlight::ParsedQuery::QueryObject::get() const
+inline const Data& QueryObject::get() const
 {
     return std::get<Data>(m_data);
 }
@@ -65,4 +65,4 @@ QueryObject QueryObject::make()
     return obj;
 }
 
-} // namespace Moonlight::ParsedQuery
+} // namespace Moonlight::Parser::Objects

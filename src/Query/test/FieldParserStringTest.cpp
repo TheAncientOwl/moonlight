@@ -5,9 +5,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests {
+namespace Moonlight::Parser::Implementation::FieldParsers::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(FieldParserStringTest, parseSuccess01)
@@ -19,7 +20,7 @@ TEST(FieldParserStringTest, parseSuccess01)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -38,7 +39,7 @@ TEST(FieldParserStringTest, parseSuccess02)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -57,7 +58,7 @@ TEST(FieldParserStringTest, parseSuccess03)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -76,7 +77,7 @@ TEST(FieldParserStringTest, parseSuccess04)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -95,7 +96,7 @@ TEST(FieldParserStringTest, parseSuccess05)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -114,7 +115,7 @@ TEST(FieldParserStringTest, parseSuccess06)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -133,7 +134,7 @@ TEST(FieldParserStringTest, parseSuccess07)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -152,7 +153,7 @@ TEST(FieldParserStringTest, parseSuccess08)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -172,7 +173,7 @@ TEST(FieldParserStringTest, parseSuccess09)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::String)
         .size(15)
@@ -235,4 +236,4 @@ TEST(FieldParserStringTest, parseThrow02)
     EXPECT_THROW({ parser.parse(); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests
+} // namespace Moonlight::Parser::Implementation::FieldParsers::Tests

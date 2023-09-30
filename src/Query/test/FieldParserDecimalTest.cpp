@@ -5,9 +5,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests {
+namespace Moonlight::Parser::Implementation::FieldParsers::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(FieldParserDecimalTest, parseSuccess01)
@@ -19,7 +20,7 @@ TEST(FieldParserDecimalTest, parseSuccess01)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(8)
@@ -38,7 +39,7 @@ TEST(FieldParserDecimalTest, parseSuccess02)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(16)
@@ -57,7 +58,7 @@ TEST(FieldParserDecimalTest, parseSuccess03)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(32)
@@ -76,7 +77,7 @@ TEST(FieldParserDecimalTest, parseSuccess04)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(64)
@@ -95,7 +96,7 @@ TEST(FieldParserDecimalTest, parseSuccess05)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(8)
@@ -114,7 +115,7 @@ TEST(FieldParserDecimalTest, parseSuccess06)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(16)
@@ -133,7 +134,7 @@ TEST(FieldParserDecimalTest, parseSuccess07)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(32)
@@ -152,7 +153,7 @@ TEST(FieldParserDecimalTest, parseSuccess08)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(64)
@@ -171,7 +172,7 @@ TEST(FieldParserDecimalTest, parseSuccess09)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(8)
@@ -190,7 +191,7 @@ TEST(FieldParserDecimalTest, parseSuccess10)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(16)
@@ -209,7 +210,7 @@ TEST(FieldParserDecimalTest, parseSuccess11)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(32)
@@ -228,7 +229,7 @@ TEST(FieldParserDecimalTest, parseSuccess12)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(64)
@@ -247,7 +248,7 @@ TEST(FieldParserDecimalTest, parseSuccess13)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(8)
@@ -266,7 +267,7 @@ TEST(FieldParserDecimalTest, parseSuccess14)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(8)
@@ -286,7 +287,7 @@ TEST(FieldParserDecimalTest, parseSuccess15)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Decimal)
         .size(8)
@@ -339,4 +340,4 @@ TEST(FieldParserDecimalTest, parseThrow01)
     EXPECT_THROW({ parser.parse(); }, std::runtime_error);
 }
 
-} // namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests
+} // namespace Moonlight::Parser::Implementation::FieldParsers::Tests

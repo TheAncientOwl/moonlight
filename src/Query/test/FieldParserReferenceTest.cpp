@@ -5,9 +5,10 @@
 #include "helpers/ParsedQueriesInit.hpp"
 #include "helpers/ParsedQueriesCompare.hpp"
 
-namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests {
+namespace Moonlight::Parser::Implementation::FieldParsers::Tests {
 
-using namespace ParsedQuery;
+using namespace Objects;
+using namespace Objects::Init;
 using namespace std::literals;
 
 TEST(FieldParserReferenceTest, parseSuccess01)
@@ -19,7 +20,7 @@ TEST(FieldParserReferenceTest, parseSuccess01)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Reference)
         .size(std::nullopt)
@@ -39,7 +40,7 @@ TEST(FieldParserReferenceTest, parseSuccess02)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Reference)
         .size(std::nullopt)
@@ -59,7 +60,7 @@ TEST(FieldParserReferenceTest, parseSuccess03)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Reference)
         .size(std::nullopt)
@@ -80,7 +81,7 @@ TEST(FieldParserReferenceTest, parseSuccess04)
 
     const auto out = parser.parse();
 
-    const ParsedQuery::Field expected = Init::FieldInit{}
+    const Field expected = FieldInit{}
         .name("some_field")
         .data_type(Primitives::EDataType::Reference)
         .size(std::nullopt)
@@ -105,4 +106,4 @@ TEST(FieldParserReferenceTest, parseThrow01)
     // Cannot throw
 }
 
-} // namespace Moonlight::QueryParser::Implementation::FieldParsers::Tests
+} // namespace Moonlight::Parser::Implementation::FieldParsers::Tests

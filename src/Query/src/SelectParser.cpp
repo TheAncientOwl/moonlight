@@ -5,7 +5,7 @@
 #include <regex>
 #include <functional>
 
-namespace Moonlight::QueryParser::Implementation {
+namespace Moonlight::Parser::Implementation {
 
 using namespace Utils;
 using namespace std::literals;
@@ -14,11 +14,11 @@ namespace {
 
 constexpr auto c_query_prefix{ "select" };
 
-ParsedQuery::Alias parseStructureAlias(std::string seq)
+Objects::Alias parseStructureAlias(std::string seq)
 {
     static const std::regex s_regex(R"((\w+)\s+as\s+(\w+))", std::regex_constants::icase);
 
-    ParsedQuery::Alias out{};
+    Objects::Alias out{};
 
     std::smatch match{};
     if (std::regex_match(seq, match, s_regex))
@@ -39,12 +39,12 @@ ParsedQuery::Alias parseStructureAlias(std::string seq)
     return out;
 }
 
-ParsedQuery::Alias parseFieldAlias(std::string seq)
+Objects::Alias parseFieldAlias(std::string seq)
 {
     static const std::regex s_regex(R"((\w+\.\w+)\s+as\s+(\w+))", std::regex_constants::icase);
     static const std::regex s_field_regex(R"(\w+\.\w+)", std::regex_constants::icase);
 
-    ParsedQuery::Alias out{};
+    Objects::Alias out{};
 
     std::smatch match{};
     if (std::regex_match(seq, match, s_regex))
@@ -65,11 +65,11 @@ ParsedQuery::Alias parseFieldAlias(std::string seq)
     return out;
 }
 
-ParsedQuery::Join parseJoin(std::string seq)
+Objects::Join parseJoin(std::string seq)
 {
     static const std::regex s_regex(R"((\w+)\s*=>\s*(\w+)\s+on\s+(\w+))", std::regex_constants::icase);
 
-    ParsedQuery::Join out{};
+    Objects::Join out{};
 
     std::smatch match{};
     if (std::regex_match(seq, match, s_regex))
@@ -86,7 +86,7 @@ ParsedQuery::Join parseJoin(std::string seq)
     return out;
 }
 
-ParsedQuery::OrderBy parseOrderBy(std::string seq)
+Objects::OrderBy parseOrderBy(std::string seq)
 {
     static const std::regex s_field_regex(R"(\w+\.\w+)", std::regex_constants::icase);
 
@@ -109,7 +109,7 @@ ParsedQuery::OrderBy parseOrderBy(std::string seq)
         throw std::runtime_error("Missing sort type @ '"s + seq + "'"s);
     }
 
-    ParsedQuery::OrderBy out{};
+    Objects::OrderBy out{};
 
     out.field = field;
     out.type = Primitives::SelectSortType::to_literal(std::string(type));
@@ -146,13 +146,13 @@ QUERY_PARSER_CLASS_IMPL(Select, c_query_prefix)
 
     cleanupQuery(query, c_query_prefix);
 
-    obj.from = extractAndParseList<ParsedQuery::Alias>(query, "from", parseStructureAlias);
-    obj.fields = extractAndParseList<ParsedQuery::Alias>(query, "fields", parseFieldAlias);
-    obj.join = extractAndParseList<ParsedQuery::Join>(query, "join", parseJoin);
-    obj.where = ParsedQuery::Helpers::parseWhereClause(extractValue(query, "where"));
-    obj.order_by = extractAndParseList<ParsedQuery::OrderBy>(query, "order_by", parseOrderBy);
+    obj.from = extractAndParseList<Objects::Alias>(query, "from", parseStructureAlias);
+    obj.fields = extractAndParseList<Objects::Alias>(query, "fields", parseFieldAlias);
+    obj.join = extractAndParseList<Objects::Join>(query, "join", parseJoin);
+    obj.where = Objects::Helpers::parseWhereClause(extractValue(query, "where"));
+    obj.order_by = extractAndParseList<Objects::OrderBy>(query, "order_by", parseOrderBy);
 
     RETURN_QUERY_OBJECT;
 }
 
-} // namespace Moonlight::QueryParser::Implementation
+} // namespace Moonlight::Parser::Implementation
