@@ -1,9 +1,11 @@
 #include "Primitives.hpp"
 
 #include <cctype>
-#include <algorithm>
 #include <stdexcept>
 #include <vector>
+#include <string_view>
+
+#include "Utils/src/Utils.hpp"
 
 #define MOONLIGHT_PRIMITIVE_CONVERTOR(name, ...) \
 namespace name { \
@@ -12,8 +14,8 @@ namespace name { \
             __VA_ARGS__ \
         } };\
     } \
-    std::string to_string(Literal literal) { return Internal::map.findByLiteral(literal); } \
-    Literal to_literal(std::string str) { return Internal::map.findByString(str); } \
+    std::string_view to_string(Literal literal) { return Internal::map.findByLiteral(literal); } \
+    Literal to_literal(std::string_view str) { return Internal::map.findByString(str); } \
 }
 
 namespace Moonlight::Primitives {
@@ -26,12 +28,12 @@ class LiteralToStringMap
 public:
     static_assert(std::is_enum<Literal>());
 
-    using container = std::vector<std::pair<Literal, std::string>>;
+    using container = std::vector<std::pair<Literal, std::string_view>>;
 
 public:
     LiteralToStringMap(container data);
-    std::string findByLiteral(Literal literal) const;
-    Literal findByString(std::string str) const;
+    std::string_view findByLiteral(Literal literal) const;
+    Literal findByString(std::string_view str) const;
 
 private:
     container m_data;
@@ -43,7 +45,7 @@ LiteralToStringMap<Literal>::LiteralToStringMap(LiteralToStringMap<Literal>::con
 {}
 
 template<typename Literal>
-std::string LiteralToStringMap<Literal>::findByLiteral(Literal literal) const
+std::string_view LiteralToStringMap<Literal>::findByLiteral(Literal literal) const
 {
     const auto it = std::find_if(m_data.begin(), m_data.end(),
         [literal](const auto& value) {
@@ -57,13 +59,11 @@ std::string LiteralToStringMap<Literal>::findByLiteral(Literal literal) const
 }
 
 template<typename Literal>
-Literal LiteralToStringMap<Literal>::findByString(std::string str) const
+Literal LiteralToStringMap<Literal>::findByString(std::string_view str) const
 {
-    std::transform(str.begin(), str.end(), str.begin(), tolower);
-
     const auto it = std::find_if(m_data.begin(), m_data.end(),
         [&str](const auto& value) {
-            return value.second == str;
+            return Utils::equalsIgnoreCase(value.second, str);
         });
 
     if (it == m_data.end())
