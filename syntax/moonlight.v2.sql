@@ -41,7 +41,7 @@ select from Students
     if (exams.grade < 5 and lower(exams.name) like "*_advanced") then
     fields [ name, year, exams.grade, exams.name ];
 
-select from Students::Exams
+select from Students::exams
     if (grade < 5) then
     fields [ name, date, grade, Students.some_field, Students.name, Students.birth_date ];
 
@@ -74,6 +74,10 @@ select from StructureName
     if (rid = 11 or (rid >= 2 and 5 <= rid or some_field < 5000) or rid = 9  or rid = 120) then
     fields [ field1, field2, ..., fieldx ]
     order by [ field1 asc, field2 desc, ..., field_z desc ];
+
+select from StructureName::*arrayField*
+    if ( conditions... ) then
+    fields [ fields from arrayField..., StructureName::fields from StructureName ]
 
 -- 7. INSERT
 insert into Professors values [
