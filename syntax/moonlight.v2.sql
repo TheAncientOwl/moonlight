@@ -1,7 +1,7 @@
 default types:
     String, Boolean, DateTime,
     Integer, Integer8, Integer16, Integer32, Integer64,
-    Decimal, Decimal8, Decimal16, Decimal32, Decimal64
+    Float, Float8, Float16, Float32, Float64
 
 -- <TYPES_DEMO>
 type Address {
@@ -12,7 +12,7 @@ type Address {
 type Exam {
     name: String;
     date: DateTime;
-    grade: Decimal;
+    grade: Float;
 }
 
 type Person {
@@ -28,7 +28,7 @@ type Student inherits Person {
 }
 
 type Professor inherits Person {
-    salary: Decimal;
+    salary: Float;
 }
 -- </TYPES_DEMO>
 
