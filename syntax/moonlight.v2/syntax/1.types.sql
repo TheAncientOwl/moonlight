@@ -1,3 +1,30 @@
+-- --------------------------------------------------------------------------------- --
+-- 1. Syntax
+-- --------------------------------------------------------------------------------- --
+
+-- @brief type
+type TypeName {
+    field1: Type;
+    field2: Type?;
+    field3: ArrayOf<Type>;
+};
+
+primitives:
+    String, Boolean, DateTime,
+    Integer, Integer8, Integer16, Integer32, Integer64,
+    Float, Float8, Float16, Float32, Float64
+
+defaults:
+    String: ""
+    Boolean: false
+    DateTime: now()
+    Integer: 0
+    Float: 0
+
+-- --------------------------------------------------------------------------------- --
+-- 2. Usage
+-- --------------------------------------------------------------------------------- --
+
 type Person {
     firstName: String;
     lastName: String;
@@ -59,7 +86,7 @@ type OrderedProduct {
     product: Product;
     price: Float;
     amount: Integer;
-}
+};
 
 type Order {
     date: DateTime;
